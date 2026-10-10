@@ -1,0 +1,8 @@
+{
+  "model": "openai/gpt-image-2.5-sunburst",
+  "parameters": {
+    "aspect_ratio": "3:2",
+    "quality": "high"
+  },
+  "timeout_seconds": 300
+}
