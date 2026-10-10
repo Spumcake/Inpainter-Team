@@ -1,6 +1,6 @@
 # AGENTS.md — Simple Sketch
 
-Simple Sketch is a desktop app for sketching and annotating on an infinite vector canvas with a pressure-sensitive stylus. It is a native Rust program using egui through eframe, with Iconoir toolbar icons. Scope and acceptance are in `.project/documents/development/tasks.md`.
+Simple Sketch is a desktop app for sketching and annotating with a pressure-sensitive stylus on an infinite vector surface of canvas objects, shapes, and text. It is a native Rust program using egui through eframe, with Iconoir toolbar icons. Scope and acceptance are in `.project/documents/development/tasks.md`.
 
 **Language:** English for code, comments, documentation, logs, commit messages, and generation prompts.
 
@@ -8,7 +8,7 @@ Simple Sketch is a desktop app for sketching and annotating on an infinite vecto
 
 Read this file, the current milestone in `.project/documents/development/plan.md`, and the relevant items in `.project/documents/development/todo.md`. The coordinator also reads the latest three audits in `.project/documents/development/audits/` and the latest entry in `.project/documents/development/diary/`, if any. Workers read their assignment and only the context it links.
 
-Before a change, read the related criteria in `tasks.md` and the contracts in `.project/documents/development/systems.md`. Before visual work, read `INTERFACE.md` and `.project/renders/ui/ui.png`. Intent is in `.project/documents/PITCH.md`. A missing plan or todo does not authorize creating one.
+Before a change, read the related criteria in `tasks.md` and the contracts in `.project/documents/development/systems.md`. Before visual work, read `INTERFACE.md` and the renders it lists in `.project/renders/ui/`. Intent is in `.project/documents/PITCH.md`. A missing plan or todo does not authorize creating one.
 
 ## 2. Scope and autonomy
 
@@ -18,7 +18,9 @@ Work toward the authorized outcome. Resolve routine choices inside that scope. S
 
 The coordinator assigns bounded work and integrates the results. Independent work can run together once shared contracts are settled, with one writer per file. Workers return the result, the checks they ran, and any blocker.
 
-The app repository is `vector-sketch` at https://github.com/Spumcake/vector-sketch. Its bare clone is `src/vector-sketch/worktrees/.bare`. Local `dev` is checked out at `src/vector-sketch/worktrees/dev` on `697f231`, and the stroke slice there is uncommitted. GitHub has no commits. Concurrent writers each get a `work-<name>` worktree from that same `dev` commit. Project documents stay in this team repository, which has no remote and no commits.
+The app repository is `vector-sketch` at https://github.com/Spumcake/vector-sketch. Its bare clone is `src/vector-sketch/worktrees/.bare`. Local `dev` is checked out at `src/vector-sketch/worktrees/dev` on `7920c85`, the same commit as `origin/dev`. Concurrent writers each get a `work-<name>` worktree from that same `dev` commit. Project documents stay in this team repository, at https://github.com/Spumcake/vs-team.
+
+The app is data driven. A tool, command, shortcut, property, or panel section is an entry in the registries and property schema that `systems.md` describes. The toolbar, panel, outliner, menus, and hover text are built from those entries. Do not hard-code a label, icon, key, or per-tool widget, and reuse an existing section before adding one.
 
 ## 4. Plans and records
 
@@ -26,12 +28,12 @@ The plan is the milestone order. The todo list is the current queue. The coordin
 
 ## 5. Verification
 
-The first journey is a blank sketch: draw a smoothed pressure-sensitive stroke, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. Commands are in `tasks.md`. Check levels are in `.project/documents/development/testing.md`. Use the tests skill when writing, changing, or reviewing tests. Cover the failure that matters. Report what was checked and what was not.
+The first journey is a new sketch: draw a smoothed pressure-sensitive stroke on Canvas 1, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. Commands are in `tasks.md`. Check levels are in `.project/documents/development/testing.md`. Use the tests skill when writing, changing, or reviewing tests. Cover the failure that matters. Report what was checked and what was not.
 
-A preview judges the window against `INTERFACE.md`. A unit test judges session rules. Do not snapshot meshes or treat the reference drawing as built-in content. Commits happen only when the user asks, and only the branch-manager changes Git state. No hook or workflow is installed. Verification runs a requested acceptance journey and does not repeat the unit suite as a routine. Document-only work needs no application run.
+A preview judges the window against `INTERFACE.md`. A unit test judges session, document, registry, and schema rules. Do not snapshot meshes or treat the reference drawing as built-in content. Commits happen only when the user asks, and only the branch-manager changes Git state. No hook or workflow is installed. Verification runs a requested acceptance journey and does not repeat the unit suite as a routine. Document-only work needs no application run.
 
 ## 6. Boundaries
 
 Stay with the dependencies named in `systems.md`. Do not add Electron, Tauri, a web target, accounts, sync, or collaboration, and do not fork another application. Saving uses the private snapshot contract there. Do not invent a published file format.
 
-Keep secrets out of version control. Do not push, tag, or recommend a release. No release version is agreed. The existing desktop render is the visual reference.
+Keep secrets out of version control. Do not push, tag, or recommend a release. No release version is agreed. The renders listed in `INTERFACE.md` are the visual reference.

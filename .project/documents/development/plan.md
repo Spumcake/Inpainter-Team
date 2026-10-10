@@ -1,17 +1,25 @@
 # Simple Sketch plan
 
-The pictured shell is committed on `dev` as `7920c85`, on top of published `bc987c4`, and is not pushed. A window check met [SS-5](tasks.md), and a later review polished it ([polish audit](audits/2026-10-10T21-01-28Z-shell-review-and-polish.md)). The previous plan is [archived](archive/2026-10-10T16-22-05Z-shell-plan/plan.md).
+The interface now covers canvas objects whose palette colors are layers, a properties panel, a Layers outliner with groups, and filled shapes and styled text. `dev` is `7920c85`, also on `origin/dev`, with the stroke canvas, the pictured shell, and the Wayland pen path. It still has the earlier flat mark list, so the work below starts by replacing that model. The previous plan is [archived](archive/2026-10-10T22-48-33Z-object-model/plan.md).
 
-## Pictured shell
+## Document tree and registries
 
-The window follows [ui.png](../../renders/ui/ui.png). The three icons after the swatches stay as drawn, and their actions are not named. The far right is zoom in, zoom out, and one button that toggles the maximized state. [INTERFACE.md](../../../INTERFACE.md) and [systems.md](systems.md) record that.
+This comes first, because every later milestone edits the objects it defines. The mark list becomes the object tree from [systems.md](systems.md), and a new sketch starts with Canvas 1 and the default palette. Toolbar labels, icons, shortcuts, and hover text come from the tool and command registries. The pen becomes the brush, New sketch and Fit are wired, and the swatches show the highlighted canvas's palette. What a person sees barely changes, and drawing, erasing, undo, tabs, and the pen path keep working. It is complete when [SS-1](tasks.md), [SS-2](tasks.md), [SS-3](tasks.md), and [SS-5](tasks.md) hold on the new model, with SS-8's layer order and color restyling covered by tests.
 
-The shell is usable around the canvas that already draws and erases. A new sketch is empty. Each tab keeps its own marks, view, and history. Tool, color, and size stay when the tab changes. Closing the only clean blank does nothing. The shape, text, and select buttons are visible and wait. The three unnamed icons do nothing. Open and Save wait until snapshots exist. Closing the window asks once for each dirty sketch.
+## Properties panel
 
-The window check is in [testing.md](testing.md). The record is [the shell audit](audits/2026-10-10T17-59-54Z-pictured-shell.md). Per-tab selection was not exercised in the window. The session tests cover marks, camera, and history staying with the tab.
+The schema, the panel, and the preferences store come next, starting with the brush, eraser, and color subjects, which reuse each other's sections. Palette editing, dashed and flat-cap ink, stabilization, and the pressure curve arrive here. It is complete when [SS-8](tasks.md) and [SS-9](tasks.md) hold for those subjects.
 
-## Later marks and saving
+## Select, outliner, and groups
 
-Shapes, then text, then selection and the in-app clipboard, then private snapshots. Clipboard stays a later slice and is not a toolbar group. Those milestones stay broad until each one is the current slice. This shell does not start them.
+Selection, transforms, the select tool's context actions, and the Layers outliner come after the panel, because Layers is a panel subject. New canvas, group, and ungroup arrive here. It is complete when [SS-10](tasks.md) holds except the clipboard.
 
-The three icons after the swatches still have no named action. The Wayland pen path is committed, and pressure on the XP-Pen is still the owner's check. [systems.md](systems.md) still describes the `dev` checkout as missing, and [AGENTS.md](../../../AGENTS.md) still names the empty root. Both are stale: `dev` is published.
+## Shapes and text
+
+Shapes with `kurbo`, then text with Inter bundled. These two can proceed side by side once select has landed, with one writer for the shared document file. This is complete when [SS-6](tasks.md) holds and their tool and object panels work.
+
+## Clipboard and saving
+
+The clipboard completes SS-10. Snapshots and preferences persistence complete [SS-7](tasks.md) once every object kind exists, so the snapshot schema is written once.
+
+No release version is agreed, so this plan does not include a candidate. Pen pressure on the owner's XP-Pen is still unchecked on a device.
