@@ -20,7 +20,7 @@ Visible ink is derived. The outline polygon, the polygon difference, and the tes
 
 The canvas maps pointers and gestures onto session commands and paints meshes. Toolbar, tab, and menu widgets send the same commands. They hold no second copy of marks, history, or cameras.
 
-Dependency direction: `main` → canvas and chrome → session → `perfect_freehand`, `i_overlay`, and `earcutr`. The session does not depend on egui.
+Dependency direction: `main` → canvas and chrome → session → `perfect_freehand`, `i_overlay`, and `earcutr`. The canvas also uses `src/tablet.rs` → `octotablet` for stylus input. The session does not depend on egui or the tablet.
 
 Accepted stack: a native Rust binary, egui via eframe, Iconoir for toolbar icons. Electron, Tauri, and a fork of another drawing application are out. No accounts, sync, or collaboration.
 
@@ -33,6 +33,7 @@ Planned app repository: `vector-sketch`. The bare clone and its origin URL, `htt
 - `src/sketch.rs` — marks, transforms, erase attachments, selection, camera, the one history.
 - `src/canvas.rs` — pointer mapping and mesh painting.
 - `src/main.rs` — eframe entry.
+- `src/tablet.rs` — stylus input beside eframe. It turns tablet events into egui pointer events and per-sample pressure.
 - Later slices add `src/toolbar.rs`, `src/tabs.rs`, and `src/store.rs`. They call the session. They do not introduce a second document model.
 
 The team repository keeps this file. The app repository holds only the app.
@@ -106,7 +107,7 @@ With a selection, clicking a swatch recolors those marks in one step and becomes
 
 ### Clipboard, tabs, and closing
 
-The clipboard is in-app and belongs to the session. Toolbar order is copy, paste, cut. Copy is available when the selection is non-empty and copies those marks, including attachments and relative positions. Cut copies and then deletes them in one step. Paste adds duplicates on the active sketch, selects only those duplicates, and is one step. The first paste offsets by `(16, 16)` document units from the copied marks. Each further paste adds another `(16, 16)` from the copied marks. New ids are minted. A control with nothing to do waits.
+The clipboard is in-app and belongs to the session. It is a later slice, not a toolbar group in the shell. Copy is available when the selection is non-empty and copies those marks, including attachments and relative positions. Cut copies and then deletes them in one step. Paste adds duplicates on the active sketch, selects only those duplicates, and is one step. The first paste offsets by `(16, 16)` document units from the copied marks. Each further paste adds another `(16, 16)` from the copied marks. New ids are minted. A control with nothing to do waits.
 
 Selection is per sketch: the set of mark ids last chosen by a click, shift-click, or marquee on visible ink. Clicking empty visible area clears it. Shift-click toggles one mark. A marquee selects marks whose visible ink it crosses. Shift-drag adds those marks. The box shown is the bounds of the selection’s visible ink. Dragging a selected mark moves the selection. Corner handles scale from the opposite corner. Slice 1 stores the set and leaves it empty. The select tool is a later slice.
 
@@ -124,7 +125,7 @@ Save overwrites that id and clears the dirty flag. The id was minted when the sk
 
 Camera is restored from the snapshot. Panning or zooming alone does not dirty the sketch. The next save stores the camera anyway.
 
-The grid is a guide. It pans and zooms with the camera. Its spacing is 32 document units. Marks are stored where they are drawn, not snapped.
+The grid is a guide. It pans and zooms with the camera. Its spacing is 24 document units. Marks are stored where they are drawn, not snapped.
 
 ## Main flow and failures
 
@@ -136,7 +137,9 @@ The eraser uses the same begin and sample path and ignores pressure for its widt
 
 Failure stays inside one command. Invalid input does not append a sample. A short pen stroke and a miss erase do not enter history. A history step adds, removes, or updates whole marks, or adds and removes whole attachments. The process is single-threaded.
 
-Platform force is outside the session. The canvas may read `egui::Event::Touch.force` when egui supplies it. `PointerState` has no pressure field. If a platform delivers pressure or an eraser-end only as a winit tablet event that egui does not forward, the canvas observes that event beside eframe. That is application code. Until force arrives, stored pressure is `None` and the outline uses `1.0`.
+Platform force is outside the session. The canvas may read `egui::Event::Touch.force` when egui supplies it. `PointerState` has no pressure field. eframe 0.36.2 resolves winit 0.30.13, which delivers a Linux tablet pen as a mouse without pressure.
+
+On Wayland, `src/tablet.rs` connects `octotablet` to the window's display. While a pen is in range, its pointer events replace any the compositor sends. Contact becomes a primary press and lift becomes a release. Each pose drawn while touching becomes one sample with its own pressure. While its eraser end touches, the eraser tool is used, and the previous tool returns on lift. An idle window repaints every 100 ms so a pen coming into range is noticed. Elsewhere, including X11 sessions, the connection is unsupported and stored pressure is `None`, so the outline uses `1.0`.
 
 ## Environments and integration
 
@@ -150,6 +153,7 @@ Local preview is a native eframe window from the app worktree, desktop only. Do 
 - **`perfect_freehand` 0.1.1** (crates.io, 2026-01-27), **MIT**. Builds the pen and eraser outlines. It does not own sketches, erase attachments, or rendering. Fit limits: version 0.1, about 1,272 downloads and one dependent at fetch time; outlines can be concave or self-intersecting. Set the options in the contract above. The Rust `Default` was not executed.
 - **`i_overlay` 9.0.1** (docs.rs), **MIT OR Apache-2.0**. Floating-point polygon difference of the ink outline minus the eraser outlines, including self-intersections and holes, which its docs state it supports. Use default features only, without the multithreading feature. Its Cargo.toml lists MSRV 1.88 and edition 2024, which sits under eframe’s 1.95. Not compiled here. This is the smallest checked library that clips ink to the eraser path. A centerline test is not a substitute.
 - **`earcutr` 0.5.0** (crates.io listing, 2025-05-29), **ISC**. Fills the difference, which can be concave and can contain holes. `Shape::convex_polygon` is the wrong fill. Use the `Result`.
+- **`octotablet` 0.1.0** (crates.io), **MIT**. Reads the Wayland tablet protocol for pen position, pressure, and tool type. Only the `wayland-tablet-unstable-v2` feature is enabled; Windows Ink stays off until it can be tested. The app uses a patched copy in `vendor/octotablet` through `[patch.crates-io]`. The patch caps the bound protocol version at the one compiled in. Without it, a compositor offering tablet version 2 broke the shared Wayland connection and closed the window. The patch is described in `vendor/octotablet/PATCHED.md`. Its X11 support is not implemented upstream.
 
 Left out of the stroke and erase path:
 
@@ -183,7 +187,7 @@ Assign these to **task-operations**. This document does not assign them.
 
 1. **Stroke model and infinite canvas.** Prerequisite: the bare clone at `src/vector-sketch/worktrees/.bare` and its origin `https://github.com/Spumcake/vector-sketch` already exist. `src/vector-sketch/worktrees/dev` does not. The branch-manager adds that checkout on branch `dev` from `origin/main` only after `main` has a commit. Do not clone the repository again. Exclusive ownership of the new crate: `Cargo.toml`, `src/lib.rs`, `src/session.rs`, `src/sketch.rs`, `src/canvas.rs`, `src/main.rs`. Delivers pen drawing, the diameter rules, polygon-difference erase attachments, the one history with pen and erase steps, and the camera gestures and fit rules above. Before any toolbar exists, it also binds P for the pen, E for the eraser, Ctrl or Cmd+Z for undo, Ctrl or Cmd+Shift+Z and Ctrl or Cmd+Y for redo, and Ctrl or Cmd+0 for fit. The mark and history types include the later variants. Slice 1 does not construct them and does not deliver shape tools, text editing, selection behavior, clipboard, tab chrome, the menu, or save and open. Nothing else proceeds in this crate until these types have landed.
 
-2. **Toolbar, tabs, and menu**, after slice 1, one writer for `main.rs`. New files: `src/toolbar.rs`, `src/tabs.rs`. Iconoir via `iconflow` feature `pack-iconoir`. Mounts swatches, copy, paste, cut, undo, redo, the tool buttons, size, zoom in, zoom out, and fit. The right-hand group is those three zoom controls only. The menu items are New sketch, Open, Save, Rename, and Close. Open and Save call the store once that slice exists; until then those two controls wait.
+2. **Toolbar, tabs, and menu**, after slice 1, one writer for `main.rs`. New files: `src/toolbar.rs`, `src/tabs.rs`. Iconoir via `iconflow` feature `pack-iconoir`. Mounts the pictured shell: swatches, the three icons drawn after the swatches, undo, redo, the tool buttons, size, zoom in, zoom out, and one button that toggles the maximized state. Those three icons have no actions in this slice, because the owner did not name them. The shell does not mount copy, paste, or cut. The far right is zoom in, zoom out, and that maximize toggle, which replaces the maximize controls in the picture. The menu items are New sketch, Open, Save, Rename, and Close. Open and Save call the store once that slice exists; until then those two controls wait.
 
 3. **Shapes, then text, then select and clipboard**, in that order. Each edits `sketch.rs` and the canvas, so they do not run beside another writer of those files.
 
@@ -199,7 +203,9 @@ Assign these to **task-operations**. This document does not assign them.
 - An erase is one operation against existing marks the path crosses. Ink inside that path disappears. The rest remains. Samples and ids stay. Later marks keep their ink. The attachment moves with the mark. Undo restores the hidden ink. Hit testing uses visible ink. A fully hidden mark remains. The clip is polygon difference.
 - Slice 1’s history steps are one committed pen stroke or one erase. The same history holds the later gesture steps. Pan and zoom are not history.
 - A sole clean blank’s close waits. Closing any other last sketch leaves a new blank. The app does not quit and does not refuse forever. Unsaved changes ask once per sketch.
-- Clipboard is in-app: copy, paste, cut. Paste offsets the duplicate and selects it.
+- In-app clipboard behavior remains for a later slice: copy, paste, and cut. Paste offsets the duplicate and selects it. The shell toolbar does not mount those actions.
+- The three icons after the swatches are drawn as in the picture and have no actions in the shell slice. The owner did not name them.
+- The far right of the toolbar is zoom in, zoom out, and one button that toggles the maximized state. That toggle replaces the maximize controls in the picture. It is the owner's decision.
 - Menu items are New sketch, Open, Save, Rename, and Close.
 - Shapes are unfilled outlines. Shift constrains them. Text is one plain single-line sans-serif label. Selection is a bounding box that moves, scales, marquees, and deletes whole objects.
 - The repository name is `vector-sketch`.
@@ -213,7 +219,7 @@ These are not separate interface questions. They fix numbers the interface left 
 - Paste steps by `(16, 16)` document units from the copied marks.
 - A nudge is 1 document unit, or 8 with Shift.
 - Text em size is `8 * size` document units.
-- Grid spacing is 32 document units.
+- Grid spacing is 24 document units.
 - The private snapshot is versioned JSON, one file per `SketchId`, in the platform user-data directory for Simple Sketch.
 
 Nothing in the first-version behavior still needs a user decision before slice 1. The bare clone at `src/vector-sketch/worktrees/.bare` and its origin `https://github.com/Spumcake/vector-sketch` already exist. `dev` is added at `src/vector-sketch/worktrees/dev` from `origin/main` only after `main` has a commit.

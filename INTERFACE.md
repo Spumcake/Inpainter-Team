@@ -13,21 +13,21 @@ The app opens on **Sketch**, an infinite grid with one blank document. The journ
 
 ## Presentation
 
-The accepted appearance is the supplied desktop overview, [ui.png](.project/renders/ui/ui.png). It was inspected and is the reference for the shell. The render does not draw the menu, selection box, text caret, save confirmation, or empty canvas. The clipboard group is read as copy, paste, then cut.
+The accepted appearance is the supplied desktop overview, [ui.png](.project/renders/ui/ui.png). It was inspected and is the reference for the shell. The render does not draw the menu, selection box, text caret, save confirmation, or empty canvas. The three icons after the color swatches stay as drawn, and their actions are not named.
 
-The window is light and compact. A white title bar carries a small orange pencil and the words Simple Sketch, with minimize, maximize, and close at the right. Below that, a pale bar holds a menu button, document tabs, and a new-tab button. A second pale bar is the toolbar: color, clipboard, undo and redo, tools, stroke size, then zoom. Icons are simple dark line icons, matching the reference. The selected tool sits on a light gray rounded rectangle. The rest of the window is the canvas, white with a light square grid in even intervals. The grid pans and zooms with the drawing. It is a guide only, and marks are placed where the pointer draws them.
+The window is light and compact. A white title bar carries a small orange pencil and the words Simple Sketch, with minimize, maximize, and close at the right. Below that, a pale bar holds a menu button, document tabs, and a new-tab button. A second pale bar is the toolbar: color, three icons whose actions are not named, undo and redo, tools, stroke size, then zoom in, zoom out, and one button that toggles the maximized state. Icons are simple dark line icons, matching the reference. The selected tool sits on a light gray rounded rectangle. The rest of the window is the canvas, white with a light square grid in even intervals. The grid pans and zooms with the drawing. It is a guide only, and marks are placed where the pointer draws them.
 
 The ink in the reference — the handwritten title, the figure, the red note, the solids, the flowchart, and the landscape — is sample drawing. New sketches start empty.
 
 Toolbar groups are separated by a thin vertical gap, in this order:
 
 - Color swatches, left to right: black, red, orange, yellow, green, cyan, blue, purple, pink, light gray, gray. The current color is drawn larger, with a thin dark ring and a sliver of toolbar showing between the fill and the ring, so the mark stays visible on black. The others stay small filled circles in a fixed order.
-- Copy, paste, and cut, then undo and redo.
+- Three icons follow the color swatches and stay as drawn. Their actions are not named. Undo and redo follow them.
 - Pen, eraser, select, rectangle, ellipse, line, and text.
 - The word Size, a slider, and the current size as a number. The pictured value is 3, which is also the default.
-- Zoom in, zoom out, and fit.
+- Zoom in, zoom out, and one button that toggles the maximized state.
 
-Hovering a control shows its name: the color name, Copy, Paste, Cut, Undo, Redo, Pen, Eraser, Select, Rectangle, Ellipse, Line, Text, Zoom in, Zoom out, Fit, or Menu.
+Hovering a named control shows its name: the color name, Undo, Redo, Pen, Eraser, Select, Rectangle, Ellipse, Line, Text, Zoom in, Zoom out, or Menu. The three icons after the color swatches have no named action. The button after zoom out toggles the maximized state.
 
 ## Sketch
 
@@ -47,7 +47,7 @@ The rectangle, ellipse, and line tools drag an unfilled outline in the current c
 
 The size slider runs from 1 to 32 in whole steps, default 3. The number beside it shows the value and can be clicked to type a replacement, which is clamped into that range. Size is the stroke width stored with the mark, in canvas units. Zoom changes how thick it looks on screen and leaves the stored width as it was. The slider sets the width of the next pen stroke, eraser path, and shape outline, and the size of the next text label. Marks already on the canvas keep their width. With a selection, clicking a swatch recolors those marks and becomes the current color.
 
-Copy, cut, and paste use an in-app clipboard of sketch marks. Copy is available when something is selected. Cut copies and then deletes those objects. Paste puts a duplicate on the active sketch, slightly offset from the source so it is visible, and selects the duplicate. Repeated paste keeps offsetting. When copy, cut, paste, undo, or redo has nothing to do, its icon is drawn lighter and the control waits. The reference shows them at full strength on a canvas that already has marks.
+Copy, cut, and paste use an in-app clipboard of sketch marks. Copy is available when something is selected. Cut copies and then deletes those objects. Paste puts a duplicate on the active sketch, slightly offset from the source so it is visible, and selects the duplicate. Repeated paste keeps offsetting. Copy, cut, and paste are keyboard shortcuts, not toolbar icons. When undo or redo has nothing to do, its icon is drawn lighter and the control waits. The reference shows those icons at full strength on a canvas that already has marks.
 
 Each committed gesture is one undo step: a pen stroke, a shape, a text label, an erase, a move, a scale, a recolor, a deletion, a paste, or a cut. A new committed gesture clears redo. Undo and redo belong to the active sketch. Panning and zooming leave that history unchanged.
 
