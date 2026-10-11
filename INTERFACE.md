@@ -34,7 +34,7 @@ The ink in the renders is sample drawing; a new sketch has none. The renders do 
 
 ## Presentation
 
-The window is light and compact. A white title bar carries a small orange pencil and the words Simple Sketch, with minimize, maximize, and close at the right. The title bar stays light on a dark desktop. Below it, a pale bar holds a menu button, document tabs, and a new-tab button. The active tab is white and joins the white toolbar beneath it; inactive tabs are a step grayer. The rest of the window is the canvas: a near-white surface with a faint square grid that pans and zooms with the drawing. The grid is a guide.
+The window is light and compact. A title bar carries a small orange pencil and the words Simple Sketch, with minimize, maximize, and close at the right. It follows the desktop's light or dark theme, so it is white in the renders and dark on a dark desktop. The rest of the window stays light. Below it, a pale bar holds a menu button, document tabs, and a new-tab button. The active tab is white and joins the white toolbar beneath it; inactive tabs are a step grayer. The rest of the window is the canvas: a near-white surface with a faint square grid that pans and zooms with the drawing. The grid is a guide.
 
 Toolbar groups are separated by thin vertical dividers, in this order:
 

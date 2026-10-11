@@ -159,7 +159,7 @@ The panel subject is one of: a tool, by `ToolId`; a palette color, by canvas and
 
 The clipboard holds deep copies of whole subtrees. A copied canvas brings its palette, strokes, and erases. Paste inserts copies at the root top with new ids, offset by `(16, 16)` from the source, then another `(16, 16)` on each repeat, and selects them. Copy waits with nothing selected.
 
-A clean sketch has only its starting canvas, with no strokes, the default palette unchanged, its first color active, and the generated name, and has never been saved. Closing the only sketch when it is clean does nothing. Closing any other last sketch ends with a new sketch. A sketch with changes since its last save, or with an edited name, asks once: Save, Discard, or Cancel, with the behavior in INTERFACE. Quitting asks once per such sketch, in tab order. A completed rename dirties the sketch and is not an undo step.
+A clean sketch has only its starting canvas, with no strokes, the default palette unchanged, and the generated name, and has never been saved. Which color is active does not matter, because the active color is not a change to the sketch. Closing the only sketch when it is clean does nothing. Closing any other last sketch ends with a new sketch. A sketch with changes since its last save, or with an edited name, asks once: Save, Discard, or Cancel, with the behavior in INTERFACE. Quitting asks once per such sketch, in tab order. A completed rename dirties the sketch and is not an undo step.
 
 ### Preferences and storage
 
