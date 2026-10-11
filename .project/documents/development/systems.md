@@ -221,10 +221,10 @@ Do not snapshot meshes, test the sample drawings, or test label strings and icon
 Assign these to **task-operations**. This document does not assign them. Each slice keeps the earlier journeys working.
 
 1. **Document tree and registries.** Replace the mark list with the object tree, canvases, and palette layers, keeping erase, camera, tabs, and the tablet path. Add the tool and command registries and drive the toolbar, shortcuts, and hover text from them. A new sketch gets Canvas 1. Rename the pen to Brush, on B. Wire New sketch and Fit; Open and Save wait. Swatches come from the highlighted canvas. Size binds per tool. Add the generic history steps.
-2. **Schema and panel.** Add the property schema and `Inspect` components; the panel with tool and color subjects, F4, and right-click; the preferences store; palette editing (edit, duplicate and delete from the color page's menu, and move by dragging swatches); dashed and flat-cap ink; stabilization; and the pressure-curve control.
-3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers subject with the selection's sections. Outliner rows with eye, lock, rename, and drag. New canvas, group, and ungroup.
-4. **Shapes** with `kurbo`: fill, stroke, dash, corner radius, constrain, and snap.
-5. **Text**, with Inter bundled.
+2. **Schema and panel.** Add the property schema and `Inspect` components; the panel with tool and color pages, F4, and right-click; the preferences store; palette editing (edit, duplicate and delete from the color page's menu, and move by dragging swatches); dashed and flat-cap ink; stabilization; and the pressure-curve control. The panel chrome is the one in `INTERFACE.md`: the edge tab, no Properties header, no close button, and no tool-name and description card.
+3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers page with the selection's sections. Outliner rows with eye, lock, rename, and drag. New canvas, group, and ungroup. The Layers page uses that same chrome, even though its render still draws a header and a close button.
+4. **Shapes** with `kurbo`: fill, stroke, dash, corner radius, constrain, and snap. Their pages use the same panel chrome, even where their renders still draw a Properties header, a close button, or a tool-name card.
+5. **Text**, with Inter bundled. Its page uses that same chrome.
 6. **Clipboard.**
 7. **Snapshots**, after every object kind exists, so the schema is written once.
 
