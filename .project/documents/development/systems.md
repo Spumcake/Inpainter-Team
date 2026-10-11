@@ -32,7 +32,7 @@ Planned, replacing the mark list rather than adding a second model:
 - `registry.rs` — tool and command tables, and shortcut dispatch.
 - `defaults.rs` — built-in data: the default palette, presets, the font list, and tool defaults.
 - `panel.rs` — the generic properties panel.
-- `widgets.rs` — the controls the toolbar and panel share: slider, switch, number and text fields, dropdown, and segmented choice, in one palette.
+- `widgets.rs` — the controls the toolbar and panel share: slider, switch, number and text fields, dropdown, and segmented choice, in one palette. Panel controls take `Scale::PANEL` (0.875), and the panel scales its own spacing by it. The outliner's rows are drawn at a quarter above full size, with 15-point names. The slider is one size everywhere: the toolbar's Size slider is drawn at the panel's scale, and its rail is snapped to whole device pixels so every slider's line is the same thickness. `menu_rows` draws the rows of every menu at full size: the sketch menu, the select tool's action menus, a section's menu, and the outliner's row menus. A menu is as wide as its longest label plus equal insets, with a minimum width.
 - `outliner.rs` — the Layers tree.
 - `prefs.rs` and `store.rs` — the preferences file and the sketch snapshots.
 
@@ -40,9 +40,11 @@ Planned, replacing the mark list rather than adding a second model:
 
 **Properties.** A `PropId` names every editable value. A `PropDesc` gives its label, its kind, and its default. The kinds are toggle; number (with min, max, step, unit, and a display format such as a percentage); color; choice (labels and optional icons, drawn as a dropdown or segmented buttons); curve; font family; and text. A `SectionDesc` is a titled list of `PropId`s. Sections are shared: Stroke appears for the rectangle, ellipse, and line, and Behavior for the brush and eraser. Each style component implements `Inspect` once: it lists its properties, gets a value, and sets a value. Setting validates and clamps there, and nowhere else.
 
+**Row menus.** The outliner's right-click menus are registry tables of `RowActionDef` (action and label): the canvas row has Rename canvas and Make palette default, a group row has Rename group, and a color row has Rename.
+
 **Tools.** A `ToolDef` gives the id, label, icon, shortcut, availability (always, or needs a highlighted canvas), panel sections, the property the Size control binds to, context actions, and what it creates.
 
-**Commands.** A `CommandDef` gives the id, label, icon, shortcut, an enabled rule, and the session command it runs. The commands are new sketch, open, save, rename, close, undo, redo, cut, copy, paste, delete, nudges, zoom in, zoom out, fit, zoom to selection, maximize, new canvas, group, ungroup, bring forward, send backward, the three aligns, the three rotations, the two flips, and the panel toggle.
+**Commands.** A `CommandDef` gives the id, label, icon, shortcut, an enabled rule, and the session command it runs. The commands are new sketch, open, save, rename, close, undo, redo, cut, copy, paste, delete, nudges, zoom in, zoom out, fit, zoom to selection, maximize, new canvas, group, ungroup, bring forward, send backward, bring to front, send to back, the three aligns, the three rotations, the two flips, and the panel toggle.
 
 **Panel.** The panel renderer takes a subject, resolves it to sections, and draws each property by its kind. It has no per-tool code. With several objects selected, it shows the sections they all have, and a property whose values differ reads as mixed.
 
@@ -51,7 +53,8 @@ Planned, replacing the mark list rather than adding a second model:
 Tests check the tables themselves:
 - no two commands or tools share a shortcut;
 - every `PropId` in a section is readable through the `Inspect` of each subject that lists that section;
-- every icon name resolves.
+- every icon name resolves in Iconoir or is listed in `DRAWN_ICONS`. The brush icon is drawn by the toolbar, because Iconoir has none. A name ending in `-solid` is the icon's filled style, as Iconoir's site names it, and a name in `TURNED_ICONS` is another icon turned by quarter turns: Flip vertical is Iconoir's flip turned once.
+- the select tool's context actions are one undivided list, `select_actions`, of buttons and menus; every arranging command is in it, and zoom to selection is not but has a shortcut.
 
 ## Data and contracts
 
@@ -69,7 +72,7 @@ Fit frames the union of world bounds of visible objects with a 24-unit margin, o
 
 A sketch's objects form a tree under an implicit root. Children are ordered top to bottom, and earlier children paint above later ones. Every node has `id`, `name`, `visible`, `locked`, a 2D affine `transform` (a `kurbo::Affine`), and a kind:
 
-- **Canvas** — `padding` (0..=128, default 16) and `palette`, an ordered list of at least one color layer.
+- **Canvas** — `padding` (0..=128, default 16, not edited in the UI) and `palette`, an ordered list of at least one color layer.
 - **Rectangle** — local `min` and `max`, `corner_radius` (0..=64), `fill`, and `stroke`.
 - **Ellipse** — local `min` and `max`, `fill`, and `stroke`.
 - **Line** — local `start` and `end`, and `stroke`.
@@ -97,7 +100,7 @@ The brush and the eraser each have their own dynamics in the session. A stroke s
 
 **Layer ink.** A stroke's visible ink is its outline minus the union of its erase outlines (`i_overlay`, non-zero). A layer's ink is the union of its strokes' visible ink, tessellated by `earcutr`, and painted once with the layer's rgb and opacity. Overlaps within a layer therefore do not darken. A canvas paints its visible layers from last to first under its world transform. A failed difference, union, or tessellation draws nothing for that stroke or layer that frame and keeps the data.
 
-**Bounding box.** A canvas's box is the union of its visible layers' visible ink bounds, expanded by `padding` on every side, in canvas-local space. With no visible ink it has no box and is not hit on the canvas.
+**Bounding box.** Each layer's derived mesh keeps the convex hull of its visible ink. A canvas's world box is the bounds of those hull points after the canvas's transform, so a rotation does not inflate it, expanded by `padding` along each world axis scaled by the transform's stretch on that axis. Selection, hit testing, and fit use this box. With no visible ink it has no box and is not hit on the canvas.
 
 **Brush availability.** The brush and eraser are available when the selection is exactly one canvas, and that canvas and its ancestors are visible and unlocked. The brush also needs the active color visible and unlocked. When the selection stops being one canvas while either tool is current, the current tool becomes select. A brush commit with fewer than two samples writes no history.
 
@@ -134,7 +137,7 @@ Text is laid out with an egui `LayoutJob` at paint time, cached by content, styl
 
 ### Selection and transforms
 
-Selection is a set of `NodeId`s per sketch. A canvas click picks the topmost visible, unlocked root-level node whose ink, fill, or text box is under the pointer. The outliner can pick a node at any depth. The selection box is the union of selected nodes' world bounds. Corner drags scale about the opposite corner, and Shift keeps the aspect. The rotation handle rotates about the box center, and Shift snaps to 15 degrees. Nudges are 1 unit, or 8 with Shift. Align left, center, and right move each selected node horizontally to the selection's left edge, center, or right edge. Rotate applies 90 degrees clockwise, 90 degrees counterclockwise, or 180 degrees about the box center. Flip scales by −1 on x or y about the box center. Group inserts a new group at the topmost selected node's position, with the selected nodes in their current order. Selection changes are not undo steps.
+Selection is a set of `NodeId`s per sketch. A canvas click picks the topmost visible, unlocked root-level node whose ink, fill, or text box is under the pointer. The outliner can pick a node at any depth. The selection box is the union of selected nodes' world bounds. Corner drags scale about the opposite corner, and Shift keeps the aspect. Edge-midpoint drags scale one axis about the opposite edge's midpoint, and Shift applies that scale to both axes. The rotation handle rotates about the box center, and Shift snaps to 15 degrees. Nudges are 1 unit, or 8 with Shift. Align left, center, and right move each selected node horizontally to the selection's left edge, center, or right edge. Rotate applies 90 degrees clockwise, 90 degrees counterclockwise, or 180 degrees about the box center. Flip scales by −1 on x or y about the box center. Group inserts a new group at the topmost selected node's position, with the selected nodes in their current order. Selection changes are not undo steps.
 
 ### History
 
@@ -206,7 +209,7 @@ Unit tests sit on the session and document. The egui-frame harness in `canvas.rs
 - Palette layers: a color earlier in the palette paints above later ones. Moving a color changes paint order and nothing else. Editing a color's size, dash, or cap changes the outline and leaves samples. Opacity overlaps within a layer do not stack.
 - Availability: the brush and eraser need exactly one visible, unlocked canvas. The brush also needs a visible, unlocked active color. Losing the highlight switches to select.
 - Eraser: it hides ink only inside its outline, never centerline extras. It affects only the highlighted canvas's visible, unlocked layers, and never shapes or text. Later strokes keep full ink. Undo restores. Moving the canvas moves the hidden ink.
-- Canvas box: ink bounds plus padding. No visible ink means no box and no hit.
+- Canvas box: transformed ink hull bounds plus padding. No visible ink means no box and no hit. A 45-degree rotation of round ink does not widen the box.
 - Tree: group then ungroup keeps world positions. Transforms never rewrite geometry or samples. Hidden or locked ancestors stop picking.
 - History: every step kind round-trips through undo and redo. A new step clears redo. Camera, selection, active color, tool settings, and the panel stay out of history.
 - Schema: setting a value clamps to its range. Mixed values are reported for a multi-selection. The registry checks listed under Data-driven core.
@@ -222,7 +225,7 @@ Assign these to **task-operations**. This document does not assign them. Each sl
 
 1. **Document tree and registries.** Replace the mark list with the object tree, canvases, and palette layers, keeping erase, camera, tabs, and the tablet path. Add the tool and command registries and drive the toolbar, shortcuts, and hover text from them. A new sketch gets Canvas 1. Rename the pen to Brush, on B. Wire New sketch and Fit; Open and Save wait. Swatches come from the highlighted canvas. Size binds per tool. Add the generic history steps.
 2. **Schema and panel.** Add the property schema and `Inspect` components; the panel with tool and color pages, F4, and right-click; the preferences store; palette editing (edit, duplicate and delete from the color page's menu, and move by dragging swatches); dashed and flat-cap ink; stabilization; and the pressure-curve control. The panel chrome is the one in `INTERFACE.md`: the edge tab, no Properties header, no close button, and no tool-name and description card.
-3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers page with the selection's sections. Outliner rows with eye, lock, rename, and drag. New canvas, group, and ungroup. The Layers page uses that same chrome, even though its render still draws a header and a close button.
+3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers page with the selection's sections. Outliner rows with eye, lock, double-click rename, right-click row menus, and drag. New canvas in the toolbar, group, and ungroup. The Layers page uses that same chrome, even though its render still draws a header and a close button.
 4. **Shapes** with `kurbo`: fill, stroke, dash, corner radius, constrain, and snap. Their pages use the same panel chrome, even where their renders still draw a Properties header, a close button, or a tool-name card.
 5. **Text**, with Inter bundled. Its page uses that same chrome.
 6. **Clipboard.**

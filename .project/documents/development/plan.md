@@ -1,15 +1,19 @@
 # Simple Sketch plan
 
-The brush, eraser, and color panel is committed on `dev` as `4398ea6`, on top of `6210d8e`, and is not pushed. A window check met this slice, and a later review corrected and restyled it ([review audit](audits/2026-10-11T15-07-46Z-properties-panel-review.md)). The previous plan is [archived](archive/2026-10-11T01-21-03Z-properties-panel/plan.md).
+Selection and the Layers outliner are committed on `dev` as `5567860`, not pushed. A window check met the journey, review fixes followed it ([audit](audits/2026-10-11T16-31-33Z-selection-layers.md)), and the owner's review reshaped the outliner, toolbar, and handles ([review audit](audits/2026-10-11T19-54-52Z-selection-layers-review.md)). The previous plan is [archived](archive/2026-10-11T15-32-10Z-selection-outliner/plan.md).
 
-## Brush, eraser, and color panel
+## Selection and the Layers outliner
 
-F4 and the edge tab open and close the panel, and the canvas narrows while it is open. The panel has no Properties header and no tool-name and description card. Right-clicking a tool opens that tool's page without changing the current tool. Right-clicking a swatch opens that color. The brush page sets the preset, pressure, the curve, and smoothing, stabilization, and streamline. The next stroke keeps those settings. The eraser page has the same controls and its own size. The color page edits the color, including dashes and flat caps, and can move, duplicate, or delete it. The last color stays. That page was first built partly from the wrong render. It is now rebuilt from `color-property-ui.png`, as [INTERFACE.md](../../../INTERFACE.md) describes, with moving done by dragging swatches. A finished color edit is one undo step. Brush and eraser settings are kept for the next time the app opens.
+With the select tool, a person can pick a canvas by its ink, then move, scale, rotate, nudge, or delete it. Undo restores that change and leaves the stroke samples alone. A second canvas and a group take the same actions. The Size slot becomes the context actions, one row of toolbar buttons: bring to front, forward, backward, and to back, align, group, ungroup, and Rotate and Flip menus. Zoom to selection is Shift+2. F4 or the edge tab opens Layers on the same chrome as the brush page. The list shows the sketch from top to bottom, with an eye, a lock, in-place rename, a right-click menu, and drag, and a canvas expands to its colors. A canvas's menu can make its palette the default. New canvas, in the toolbar before the brush, adds an empty canvas at the top and highlights it, so the next stroke lands there. An empty canvas has no box and is reached from the list.
 
-The window check is in [testing.md](testing.md). The record is [the panel audit](audits/2026-10-11T01-53-00Z-properties-panel.md). Flat cap, duplicate, hiding or locking a color, and settings after a restart were not checked in the window.
+The window check is in [testing.md](testing.md). Drawing, erasing, and the brush, eraser, and color pages still work. Shapes, text, and copy, cut, and paste stay later. Dragging a row into or out of a group is still unwired.
 
 ## Later
 
-Selection and the Layers outliner, then shapes and text, then the clipboard and snapshots. Each stays broad until it is the current slice. Shape, text, and Layers pages wait with those tools, and they use the same panel chrome: the edge tab, and no Properties header, close button, or tool-name and description card, even where a render still draws those. Saving a palette as the default waits with the canvas's own properties.
+Shapes and text can proceed together now that this slice is committed, then the clipboard, then snapshots. Related shades stays undefined. The XP-Pen check remains the owner's.
 
-The XP-Pen check remains the owner's.
+## Still open
+
+A row drag reorders siblings. Moving a node into or out of a group by dragging still has no drop rule, so that gesture waits. The build followed the sentences already written for the other points: a marquee selects the group; the last canvas can be deleted; handles use the near-black accent. Those are not new decisions. The select row does not fit the default 1280-point window and scrolls; whether to widen the window or tighten the toolbar is the owner's.
+
+The opening of [systems.md](systems.md) still describes the flat mark list at `7920c85`. This slice starts from `4398ea6`.

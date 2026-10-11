@@ -1,8 +1,9 @@
 # Simple Sketch todos
 
-The previous list is [archived](archive/2026-10-11T01-21-03Z-properties-panel/todo.md).
+The previous list is [archived](archive/2026-10-11T15-32-10Z-selection-outliner/todo.md).
 
-- [x] The brush, eraser, and color panel is built. Drawing, erasing, and tabs still work. See [the panel audit](audits/2026-10-11T01-53-00Z-properties-panel.md).
-- [x] The open panel was compared with the brush, eraser, and color renders. The result is in [testing.md](testing.md).
-- [x] The color page is rebuilt from [color-property-ui.png](../../renders/ui/color-property-ui.png) alone, the panel shares the toolbar's controls, accent, and Inter typeface, and it opens without a title bar, with an edge tab to toggle it. Committed as `4398ea6` and not pushed. See [the review audit](audits/2026-10-11T15-07-46Z-properties-panel-review.md).
+- [x] Selection, transforms, the context actions, and the Layers list are committed on `dev` as `5567860`. Drawing, erasing, and the color page still work. See [the audit](audits/2026-10-11T16-31-33Z-selection-layers.md) and [the review](audits/2026-10-11T19-54-52Z-selection-layers-review.md).
+- [x] The window journey passed: pick, move, group, hide, and the Layers chrome. The result is in [testing.md](testing.md).
+- [ ] Say which pointer position moves a row into or out of a group. Sibling reorder works. The cross-parent drag waits on that rule.
+- [ ] Decide how the select row fits the default 1280-point window: a wider window, a tighter toolbar, or scrolling.
 - [ ] Test pen pressure on the XP-Pen when more of the app is in hand. Thinning, alignment, the eraser end, and the hover cursor are still unchecked. See [the pressure audit](audits/2026-10-10T15-48-17Z-wayland-pen-pressure.md).
