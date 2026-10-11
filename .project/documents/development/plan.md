@@ -1,19 +1,26 @@
 # Simple Sketch plan
 
-Selection and the Layers outliner are committed on `dev` as `5567860`, not pushed. A window check met the journey, review fixes followed it ([audit](audits/2026-10-11T16-31-33Z-selection-layers.md)), and the owner's review reshaped the outliner, toolbar, and handles ([review audit](audits/2026-10-11T19-54-52Z-selection-layers-review.md)). The previous plan is [archived](archive/2026-10-11T15-32-10Z-selection-outliner/plan.md).
+Rectangles, ellipses, and lines are in the dirty `dev` worktree on top of `5567860`, and are not committed. A window check met the journey after a rebuild ([audit](audits/2026-10-11T21-10-38Z-shapes.md)). The previous plan is [archived](archive/2026-10-11T20-08-05Z-shapes/plan.md).
 
-## Selection and the Layers outliner
+## Rectangles, ellipses, and lines
 
-With the select tool, a person can pick a canvas by its ink, then move, scale, rotate, nudge, or delete it. Undo restores that change and leaves the stroke samples alone. A second canvas and a group take the same actions. The Size slot becomes the context actions, one row of toolbar buttons: bring to front, forward, backward, and to back, align, group, ungroup, and Rotate and Flip menus. Zoom to selection is Shift+2. F4 or the edge tab opens Layers on the same chrome as the brush page. The list shows the sketch from top to bottom, with an eye, a lock, in-place rename, a right-click menu, and drag, and a canvas expands to its colors. A canvas's menu can make its palette the default. New canvas, in the toolbar before the brush, adds an empty canvas at the top and highlights it, so the next stroke lands there. An empty canvas has no box and is reached from the list.
+A person can drag with the rectangle, ellipse, or line tool and release to place that shape at the top of the sketch. Escape during the drag cancels it. The shape keeps the fill, stroke, dash, and corner radius it was given. Later edits to the tool leave it alone. Fill starts off, so the first shape is an outline. The Size slider sets the next stroke width. F4 opens that tool's page on the same chrome as the brush page. With the select tool, the shape can be picked by its fill or its stroke, moved, and deleted. The eraser leaves it alone. Undo removes the shape, or restores a later edit to it.
 
-The window check is in [testing.md](testing.md). Drawing, erasing, and the brush, eraser, and color pages still work. Shapes, text, and copy, cut, and paste stay later. Dragging a row into or out of a group is still unwired.
+The window check is in [testing.md](testing.md). Drawing, erasing, and the brush, eraser, and color pages still work. Text stays the next slice.
 
 ## Later
 
-Shapes and text can proceed together now that this slice is committed, then the clipboard, then snapshots. Related shades stays undefined. The XP-Pen check remains the owner's.
+Text, then the clipboard, then snapshots. Each stays broad until it is the current slice. Related shades stays undefined. The XP-Pen check remains the owner's. The select row still overflows a 1280-point window, and a row drag still has no rule for moving a node into or out of a group.
 
-## Still open
+## Readings used
 
-A row drag reorders siblings. Moving a node into or out of a group by dragging still has no drop rule, so that gesture waits. The build followed the sentences already written for the other points: a marquee selects the group; the last canvas can be deleted; handles use the near-black accent. Those are not new decisions. The select row does not fit the default 1280-point window and scrolls; whether to widen the window or tighten the toolbar is the owner's.
+The documents did not fix these, and the build used one reading of each so a drag could be tried. They are not new decisions:
 
-The opening of [systems.md](systems.md) still describes the flat mark list at `7920c85`. This slice starts from `4398ea6`.
+- The press stays put. A square or circle uses the greater of the width and height. Snap moves the press and the pointer onto the grid first, then that constraint runs. A line keeps its length and steps by 45 degrees.
+- A drag that does not move adds nothing.
+- Names are Rectangle N, Ellipse N, and Line N, on the same rule as Group N.
+- Constrain proportions and Snap to grid stay on the tool page. A selected shape shows Fill, Stroke, and Shape style.
+- Releasing the drag does not select the new shape.
+- Fill starts off. Turned on, it is light red `#FCA5A5` at 40%, from systems.
+
+The opening of [systems.md](systems.md) still describes the flat mark list at `7920c85`. This slice starts from `5567860`.
