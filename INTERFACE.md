@@ -20,7 +20,8 @@ The renders in `.project/renders/ui/` are the accepted appearance:
 - [brush-property-ui.png](.project/renders/ui/brush-property-ui.png) and [eraser-tool-property-ui.png](.project/renders/ui/eraser-tool-property-ui.png) — the brush and eraser properties.
 - [square-tool-property-ui.png](.project/renders/ui/square-tool-property-ui.png) and [circle-tool-property-ui.png](.project/renders/ui/circle-tool-property-ui.png) — the rectangle and ellipse properties.
 - [text-tool-property.png](.project/renders/ui/text-tool-property.png) — the text properties.
-- [color-property-ui.png](.project/renders/ui/color-property-ui.png) and [extra-color-properties-ui.png](.project/renders/ui/extra-color-properties-ui.png) — one palette color's properties.
+- [color-property-ui.png](.project/renders/ui/color-property-ui.png) — one palette color's properties. This render alone defines the color page.
+- [update/brush-property-ui.png](.project/renders/ui/update/brush-property-ui.png), [update/eraser-property-ui.png](.project/renders/ui/update/eraser-property-ui.png), and [update/color-property-ui.png](.project/renders/ui/update/color-property-ui.png) — the panel as the owner accepted it on 2026-10-11: no title bar or subject card, the edge tab, and the shared controls. Where these and the older property renders differ, these hold.
 - [selected-object-and-outliner-ui.png](.project/renders/ui/selected-object-and-outliner-ui.png) — the select tool, its context actions, and the Layers outliner.
 
 The ink in the renders is sample drawing; a new sketch has none. The renders do not draw the sketch menu, the text caret, the save confirmation, an empty canvas, or the canvas bounding box. Where a render and this document differ, this document holds. These render details are not adopted:
@@ -29,7 +30,9 @@ The ink in the renders is sample drawing; a new sketch has none. The renders do 
 - The square and circle renders omit the text tool from the toolbar.
 - Brush "Pressure affects flow" and eraser "Pressure affects opacity" are not in the first version.
 - The shape renders list Constrain proportions twice. It appears once.
-- The color renders' Join control and its Use for stroke and Use for fill toggles are not adopted. Freehand ink has no joins, and palette colors belong to canvas strokes only.
+- The property renders draw a Properties title, a close button, and a subject card at the top of the panel. These are not adopted: the panel opens on its first section, with a tab to show and hide it, as in the `update/` renders.
+- The color render's Join control and its third Cap option are not adopted. Brush ink is outlined with round joins and round or flat caps, and those two controls would need a different outline builder.
+- [extra-color-properties-ui.png](.project/renders/ui/extra-color-properties-ui.png) is kept as a possible future layout for more color settings. It is not part of the first version, and nothing in this document is drawn from it.
 - Rendered values, such as the shape fill at 40% or a font size of 36, are examples, not defaults. Sizes are given under Size below, and the other defaults are technical choices in [systems.md](.project/documents/development/systems.md).
 
 ## Presentation
@@ -45,9 +48,9 @@ Toolbar groups are separated by thin vertical dividers, in this order:
 - The word Size, a slider, and the current value as a number, on one row. With the select tool, its context actions take this place.
 - Zoom out, zoom in, fit, and one button that toggles the maximized state, at the far end.
 
-Icons are simple dark line icons from Iconoir. The current tool sits on a light gray rounded square. A control with nothing to do is drawn lighter and waits. Hovering a control shows its name and shortcut.
+Text is set in Inter: regular weight for labels and values, semibold for headings and the panel title. The one accent is near-black, the color of the Size slider's knob and fill; sliders, switches that are on, the pressure curve, and chosen segments use it, and nothing in the window uses a blue accent. Icons are simple dark line icons from Iconoir. The current tool sits on a light gray rounded square. A control with nothing to do is drawn lighter and waits. Hovering a control shows its name and shortcut.
 
-The properties panel is a white column on the right, below the toolbar, with a hairline at its left edge. Its header has a title, a close button, and a subject card: an icon, the subject's name, and one line saying what the settings affect. Sections follow, each with a small bold heading. Controls are toggles, sliders paired with a number field, color wells, dropdowns, and segmented buttons, as in the renders. The canvas narrows while the panel is open. It does not slide under it.
+The properties panel is a white column on the right, below the toolbar, with a hairline at its left edge. It has no title bar, close button, or subject card: it opens on its first section, and each section has a small bold heading. A small white tab with a chevron sits at the panel's left edge, near its top, and joins the panel. While the panel is closed, the same tab sits at the canvas's right edge. Clicking it shows or hides the panel; its chevron points the way the panel will move. Controls are toggles, sliders paired with a number field, color wells, dropdowns, and segmented buttons, as in the renders. The canvas narrows while the panel is open. It does not slide under it. Every row sits on one grid: a muted label in a fixed column, then the control, then, for a number, its value in a field at the right edge. Values, text, dropdowns, and segmented choices sit in white fields with a faint border and rounded corners, with their text left-aligned. Sliders match the toolbar's Size slider. Sections are separated by a hairline.
 
 ## Sketch
 
@@ -65,7 +68,7 @@ A canvas object holds freehand ink. It has no fixed size: its bounding box is al
 
 Each canvas has its own palette, an ordered list of colors. Each color is a layer of that canvas. A color owns its name, its value, its opacity, its stroke size, its dash style (solid or dashed), its cap (round or flat), and whether it is visible and locked. Strokes drawn in a color take all of those from it, so editing a color changes every stroke drawn in it. A color's strokes paint above the strokes of every color after it in the palette. Within one color, newer strokes are above older ones. A color's opacity applies to the layer as a whole, so its overlapping strokes do not darken each other.
 
-Clicking a swatch makes that color active on the highlighted canvas. Each canvas remembers its own active color. Choosing a color does not change strokes already drawn. Right-clicking a swatch opens the properties panel on that color. The palette is sorted by dragging its color rows in the outliner, or with Move up and Move down in the color's properties. The swatch order follows at once.
+Clicking a swatch makes that color active on the highlighted canvas. Each canvas remembers its own active color. Choosing a color does not change strokes already drawn. Right-clicking a swatch opens the properties panel on that color. The palette is sorted by dragging a swatch along the toolbar and dropping it in its new place; a drag that stays within the swatch is still a click. Dragging color rows in the outliner sorts it the same way. Duplicate and Delete are in the color page's menu, described under Properties panel.
 
 A new canvas gets a copy of the default palette. The default palette is black, red, orange, yellow, green, blue, purple, pink, and light gray, in that order, each at size 3, full opacity, solid, with round caps. Black is the top layer. A canvas's properties can save its palette as the default for canvases created later. Editing a color, adding one, removing one, and sorting the palette are changes to the sketch. A canvas always keeps at least one color.
 
@@ -107,15 +110,15 @@ Text uses the tool's font family, font size, bold, italic, underline, color, opa
 
 ## Properties panel
 
-The panel opens and closes with F4 and with its close button. Right-clicking a tool button opens the panel on that tool's properties without changing the current tool. Right-clicking a swatch opens it on that color. While the panel is open and the current tool changes, the panel follows the new tool.
+The panel opens and closes with F4 and with its tab. Right-clicking a tool button opens the panel on that tool's properties without changing the current tool. Right-clicking a swatch opens it on that color. While the panel is open and the current tool changes, the panel follows the new tool.
 
-The panel shows one subject, named in its header:
+The panel shows one subject, which decides its sections:
 
 - **Tool: Brush.** Preset, Dynamics (Pressure affects size), Pressure curve, and Behavior (Smoothing, Stabilization, Streamline).
 - **Tool: Eraser.** Preset, Size, Dynamics (Pressure affects size), Pressure curve, and Behavior, with the same controls as the brush.
 - **Tool: Rectangle**, **Tool: Ellipse**, and **Tool: Line.** Fill (on or off, color, opacity) for rectangles and ellipses; Stroke (color, width, opacity); Shape style (solid or dashed, and corner radius for rectangles); Constrain proportions; and Snap to grid.
 - **Tool: Text.** Text (font family, font size, bold, italic, underline), Color and appearance (color, opacity, background fill and its color), Layout (alignment, line height, letter spacing), and Behavior (all caps, auto-size, wrap text).
-- **Color.** Color (name, hex, a color model of RGB, HSL, or HSV with its three sliders, and opacity), Stroke (size, solid or dashed, round or flat cap), Layer (visible, locked, Move up, Move down), Related shades, and Duplicate and Delete. Duplicate adds a copy directly below. Delete removes the color and its strokes and is unavailable on a canvas's last color.
+- **Selected Color**, as in [color-property-ui.png](.project/renders/ui/color-property-ui.png). Its sections are Color (a color well, Name, and Hex), Stroke (Size and Opacity), and Stroke Style (Style, Solid or Dashed, as a dropdown, and Cap, Round or Flat, as segmented buttons). Clicking the color well opens a color picker. A menu button at the right end of the Color heading opens a small menu like the sketch menu, with Duplicate and Delete. Duplicate adds a copy directly below the color. Delete removes the color and its strokes, and is drawn lighter on a canvas's last color. Hiding and locking a color are on its row in the outliner.
 - **Layers**, with the select tool. The outliner, and under it the selection's own settings. A shape or text object shows the same sections as its tool. A canvas shows its name, its padding, and Save palette as default. With several objects selected, only the sections they share are shown, and a value that differs between them reads as mixed until it is set.
 
 Tool settings are defaults for the next mark. They belong to the window, are kept between sessions, and are not undo steps. Settings of an object or a palette color change the sketch, and each finished edit is one undo step. A slider drag counts as one edit when it is released. Color wells offer the highlighted canvas's palette colors as quick choices. Choosing one copies the value.

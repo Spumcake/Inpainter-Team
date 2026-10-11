@@ -32,6 +32,7 @@ Planned, replacing the mark list rather than adding a second model:
 - `registry.rs` — tool and command tables, and shortcut dispatch.
 - `defaults.rs` — built-in data: the default palette, presets, the font list, and tool defaults.
 - `panel.rs` — the generic properties panel.
+- `widgets.rs` — the controls the toolbar and panel share: slider, switch, number and text fields, dropdown, and segmented choice, in one palette.
 - `outliner.rs` — the Layers tree.
 - `prefs.rs` and `store.rs` — the preferences file and the sketch snapshots.
 
@@ -39,7 +40,7 @@ Planned, replacing the mark list rather than adding a second model:
 
 **Properties.** A `PropId` names every editable value. A `PropDesc` gives its label, its kind, and its default. The kinds are toggle; number (with min, max, step, unit, and a display format such as a percentage); color; choice (labels and optional icons, drawn as a dropdown or segmented buttons); curve; font family; and text. A `SectionDesc` is a titled list of `PropId`s. Sections are shared: Stroke appears for the rectangle, ellipse, and line, and Behavior for the brush and eraser. Each style component implements `Inspect` once: it lists its properties, gets a value, and sets a value. Setting validates and clamps there, and nowhere else.
 
-**Tools.** A `ToolDef` gives the id, label, icon, shortcut, description line, availability (always, or needs a highlighted canvas), panel sections, the property the Size control binds to, context actions, and what it creates.
+**Tools.** A `ToolDef` gives the id, label, icon, shortcut, availability (always, or needs a highlighted canvas), panel sections, the property the Size control binds to, context actions, and what it creates.
 
 **Commands.** A `CommandDef` gives the id, label, icon, shortcut, an enabled rule, and the session command it runs. The commands are new sketch, open, save, rename, close, undo, redo, cut, copy, paste, delete, nudges, zoom in, zoom out, fit, zoom to selection, maximize, new canvas, group, ungroup, bring forward, send backward, the three aligns, the three rotations, the two flips, and the panel toggle.
 
@@ -155,6 +156,8 @@ Paste, cut, delete, group, ungroup, align, and multi-object edits are batches. R
 
 The panel subject is one of: a tool, by `ToolId`; a palette color, by canvas and `ColorId`; or Layers. Changing the current tool sets the subject to that tool, and to Layers for select. Right-clicking a tool button sets that tool as the subject without changing the current tool. Right-clicking a swatch sets that color. Editing a tool subject changes session tool settings and saves preferences. Editing a color, or a selected object under Layers, records a set-properties step.
 
+The color subject's sections follow `color-property-ui.png` only: Color (well, name, hex), Stroke (size, opacity), and Stroke Style (dash, cap). It has no RGB, HSL, or HSV sliders, related shades, usage toggles, join, or layer controls. Its header menu runs the duplicate-color and delete-color commands. Delete removes the layer and its strokes as one step, and is disabled on a canvas's last color. A swatch dragged along the toolbar past another swatch records one move-color step on release. A press that does not become a drag is a click.
+
 ### Clipboard, tabs, and closing
 
 The clipboard holds deep copies of whole subtrees. A copied canvas brings its palette, strokes, and erases. Paste inserts copies at the root top with new ids, offset by `(16, 16)` from the source, then another `(16, 16)` on each repeat, and selects them. Copy waits with nothing selected.
@@ -191,7 +194,7 @@ Local preview is a native eframe window from the app worktree, desktop only, wit
 - **`iconflow` 2.1.0**, MIT, feature `pack-iconoir`. Compiles and runs with eframe 0.36.2.
 - **`kurbo`**, Apache-2.0 OR MIT. To be added in the shapes slice for affine transforms, shape paths, stroke expansion with dashes, caps, and joins, and flattening. Version 0.13.1 was read on 2026-10-09; the version is pinned when it is first compiled. It does not replace `perfect_freehand` for pressure strokes.
 - **`serde` and `serde_json`**, plus a platform user-data directory crate, for preferences and snapshots. Versions are not fetched; they are pinned in the slice that first needs them.
-- **Inter** font files, SIL Open Font License 1.1, bundled for text.
+- **Inter** 4.001, SIL Open Font License 1.1, as one variable font in the app's `assets/fonts` with its license. It is the typeface for all interface text: weight 400 for body text and 600 for headings, chosen through the font's `wght` axis. Text objects will use it too.
 
 No tree-view, color-picker, or inspector crate: the outliner, color controls, and curve editor are built from the schema and egui primitives.
 
@@ -218,7 +221,7 @@ Do not snapshot meshes, test the sample drawings, or test label strings and icon
 Assign these to **task-operations**. This document does not assign them. Each slice keeps the earlier journeys working.
 
 1. **Document tree and registries.** Replace the mark list with the object tree, canvases, and palette layers, keeping erase, camera, tabs, and the tablet path. Add the tool and command registries and drive the toolbar, shortcuts, and hover text from them. A new sketch gets Canvas 1. Rename the pen to Brush, on B. Wire New sketch and Fit; Open and Save wait. Swatches come from the highlighted canvas. Size binds per tool. Add the generic history steps.
-2. **Schema and panel.** Add the property schema and `Inspect` components; the panel with tool and color subjects, F4, and right-click; the preferences store; palette editing (edit, duplicate, delete, move); dashed and flat-cap ink; stabilization; and the pressure-curve control.
+2. **Schema and panel.** Add the property schema and `Inspect` components; the panel with tool and color subjects, F4, and right-click; the preferences store; palette editing (edit, duplicate and delete from the color page's menu, and move by dragging swatches); dashed and flat-cap ink; stabilization; and the pressure-curve control.
 3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers subject with the selection's sections. Outliner rows with eye, lock, rename, and drag. New canvas, group, and ungroup.
 4. **Shapes** with `kurbo`: fill, stroke, dash, corner radius, constrain, and snap.
 5. **Text**, with Inter bundled.
