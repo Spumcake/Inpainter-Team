@@ -1,6 +1,6 @@
 # Simple Sketch plan
 
-Tool palettes and the owner's follow-up review are committed on `dev` as `533bfa3`, two commits ahead of `origin/dev` ([audit](audits/2026-10-12T02-52-06Z-tool-palettes.md)). Text is at `ae8a9aa`, with its window checks in [testing.md](testing.md). Rectangles, ellipses, and lines are at `94ad2c9`. The previous plan is [archived](archive/2026-10-11T22-25-12Z-text/plan.md).
+The owner's review of the toolbar and text is committed on `dev` as `0c1d3b7`, three commits ahead of `origin/dev` ([audit](audits/2026-10-12T18-37-26Z-toolbar-and-text-review.md)). Tool palettes are at `533bfa3` ([audit](audits/2026-10-12T02-52-06Z-tool-palettes.md)). Text is at `ae8a9aa`, with its window checks in [testing.md](testing.md). Rectangles, ellipses, and lines are at `94ad2c9`. The previous plan is [archived](archive/2026-10-11T22-25-12Z-text/plan.md).
 
 ## Text
 
@@ -12,7 +12,9 @@ This needs the shapes slice already on `dev`. One worker builds it, because the 
 
 **Tool palettes**, slice 6 in [systems.md](systems.md), are committed as `533bfa3`, together with the owner's review that followed: right-click menus with Properties, an object page, back rows, and the brush and eraser staying chosen. Claude Code built them, because the owner wants fixes and updates handled there rather than by the Cursor team. The model is in [INTERFACE.md](../../../INTERFACE.md) under Palettes and Size. The same change fixes editing text in place: the panel now shows the text being edited.
 
-Then the clipboard, then snapshots. Each stays broad until it is the current slice. Related shades stays undefined. The XP-Pen check remains the owner's. The select row still overflows a 1280-point window, and a row drag still has no rule for moving a node into or out of a group. The shape-drag readings in the previous plan are still not owner decisions.
+**The owner's review of the toolbar and text** is committed as `0c1d3b7`, built by Claude Code over many short rounds. Text gained a box shaped by edge handles, vertical alignment, and a Border color; with the text tool the toolbar changes the text it is working on; text has no rotate or flip. Every tool outlines what it works on, and the toolbar scrolls. The rules are in [INTERFACE.md](../../../INTERFACE.md) under Text editing, Selection, and the toolbar. None of it has been tried in a live window.
+
+Then the clipboard, then snapshots. Each stays broad until it is the current slice. Related shades stays undefined. The XP-Pen check remains the owner's. A toolbar wider than the window now scrolls with the wheel or a drag, and a row drag still has no rule for moving a node into or out of a group. The shape-drag readings in the previous plan are still not owner decisions.
 
 ## Open decisions
 
