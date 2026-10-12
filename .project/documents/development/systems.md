@@ -8,9 +8,9 @@ Current fact: the app repository `vector-sketch` (https://github.com/Spumcake/ve
 
 One native process. `eframe` owns the window and the egui frame. The **session** owns all document and window state. Widgets send session commands and hold no second copy.
 
-The **session** (the window) owns the open sketches in tab order, the active sketch, the current tool, the properties panel's open state and subject, every tool's settings, and the in-app clipboard. Tool settings are loaded from and saved to the preferences store.
+The **session** (the window) owns the open sketches in tab order, the active sketch, the current tool, the properties panel's open state and subject, every tool's settings, and the in-app clipboard. A tool's settings include its palette, and the brush's settings include its active color. Tool settings are loaded from and saved to the preferences store.
 
-Each **sketch** owns its identity, display name, object tree, selection, camera, undo stack, and redo stack. Each **canvas** in it also owns its active color. Those are not shared across tabs.
+Each **sketch** owns its identity, display name, object tree, selection, camera, undo stack, and redo stack. Those are not shared across tabs. A canvas does not own an active color; the brush does.
 
 **Registries and the property schema** are static data. They describe every tool, command, property, and panel section once. The toolbar, shortcuts, hover text, menus, context menus, panel, and outliner are built from them. Adding a tool or a property means adding a registry or schema entry, not a widget.
 
@@ -30,7 +30,7 @@ Planned, replacing the mark list rather than adding a second model:
 - `ink.rs` — outlines, erase differences, layer unions, shape strokes and fills, tessellation, and the caches. Most of today's derived-ink code in `sketch.rs` moves here.
 - `schema.rs` — property ids, descriptors, sections, and the `Inspect` implementations of each style component.
 - `registry.rs` — tool and command tables, and shortcut dispatch.
-- `defaults.rs` — built-in data: the default palette, presets, the font list, and tool defaults.
+- `defaults.rs` — built-in data: each tool's starting palette, presets, the font list, and tool defaults.
 - `panel.rs` — the generic properties panel.
 - `widgets.rs` — the controls the toolbar and panel share: slider, switch, number and text fields, dropdown, and segmented choice, in one palette. Panel controls take `Scale::PANEL` (0.875), and the panel scales its own spacing by it. The outliner's rows are drawn at a quarter above full size, with 15-point names. The slider is one size everywhere: the toolbar's Size slider is drawn at the panel's scale, and its rail is snapped to whole device pixels so every slider's line is the same thickness. `menu_rows` draws the rows of every menu at full size: the sketch menu, the select tool's action menus, a section's menu, and the outliner's row menus. A menu is as wide as its longest label plus equal insets, with a minimum width.
 - `outliner.rs` — the Layers tree.
@@ -38,7 +38,7 @@ Planned, replacing the mark list rather than adding a second model:
 
 ## Data-driven core
 
-**Properties.** A `PropId` names every editable value. A `PropDesc` gives its label, its kind, and its default. The kinds are toggle; number (with min, max, step, unit, and a display format such as a percentage); color; choice (labels and optional icons, drawn as a dropdown or segmented buttons); curve; font family; and text. A `SectionDesc` is a titled list of `PropId`s. Sections are shared: Stroke appears for the rectangle, ellipse, and line, and Behavior for the brush and eraser. Each style component implements `Inspect` once: it lists its properties, gets a value, and sets a value. Setting validates and clamps there, and nowhere else.
+**Properties.** A `PropId` names every editable value. A `PropDesc` gives its label, its kind, and its default. The kinds are toggle; number (with min, max, step, unit, and a display format such as a percentage); color; choice (labels and optional icons, drawn as a dropdown or segmented buttons); curve; font family; text; and palette (the owner's colors as rows). A `SectionDesc` is a titled list of `PropId`s. Sections are shared: Palette appears for every tool with a palette and for shape and text objects, and Behavior for the brush and eraser. Each style component implements `Inspect` once: it lists its properties, gets a value, and sets a value. Setting validates and clamps there, and nowhere else.
 
 **Row menus.** The outliner's right-click menus are registry tables of `RowActionDef` (action and label): the canvas row has Rename canvas and Make palette default, a group row has Rename group, and a color row has Rename.
 
@@ -48,7 +48,7 @@ Planned, replacing the mark list rather than adding a second model:
 
 **Panel.** The panel renderer takes a subject, resolves it to sections, and draws each property by its kind. It has no per-tool code. With several objects selected, it shows the sections they all have, and a property whose values differ reads as mixed.
 
-**Built-in data** lives in `defaults.rs` as tables: the default palette, the presets, the font families, and every tool default. Preferences override tool settings and the default palette.
+**Built-in data** lives in `defaults.rs` as tables: each tool's starting palette, the presets, the font families, and every tool default. Preferences override tool settings, including tool palettes.
 
 Tests check the tables themselves:
 - no two commands or tools share a shortcut;
@@ -66,26 +66,39 @@ Fit frames the union of world bounds of visible objects with a 24-unit margin, o
 
 ### Identity
 
-`SketchId`, `NodeId`, `ColorId`, and `StrokeId` are non-zero `u64` values. Each is unique in the session and never reused, including across save and open. A new session has one sketch, Untitled 1. New tab creates Untitled N, using the smallest positive integer not used by an open tab. A new sketch contains one canvas, Canvas 1, with a copy of the default palette, highlighted, with its first color active. New canvas uses Canvas N, the smallest positive integer not used by a canvas in that sketch. Group N follows the same rule. Names may repeat.
+`SketchId`, `NodeId`, `ColorId`, and `StrokeId` are non-zero `u64` values. Each is unique in the session and never reused, including across save and open. A new session has one sketch, Untitled 1. New tab creates Untitled N, using the smallest positive integer not used by an open tab. A new sketch contains one canvas, Canvas 1, highlighted, with a copy of the brush's palette. Tool palette colors are stored in preferences with their `ColorId`s, and the session's allocator starts above every id it has loaded. New canvas uses Canvas N, the smallest positive integer not used by a canvas in that sketch. Group N follows the same rule. Names may repeat.
 
 ### Object tree
 
 A sketch's objects form a tree under an implicit root. Children are ordered top to bottom, and earlier children paint above later ones. Every node has `id`, `name`, `visible`, `locked`, a 2D affine `transform` (a `kurbo::Affine`), and a kind:
 
 - **Canvas** — `padding` (0..=128, default 16, not edited in the UI) and `palette`, an ordered list of at least one color layer.
-- **Rectangle** — local `min` and `max`, `corner_radius` (0..=64), `fill`, and `stroke`.
-- **Ellipse** — local `min` and `max`, `fill`, and `stroke`.
-- **Line** — local `start` and `end`, and `stroke`.
-- **Text** — `content` (may contain line breaks), `box_width` (`None` means auto-size), and `style`.
+- **Rectangle** — local `min` and `max`, `corner_radius` (0..=64), and a palette of Outline and Fill.
+- **Ellipse** — local `min` and `max`, and a palette of Outline and Fill.
+- **Line** — local `start` and `end`, and a palette of Stroke.
+- **Text** — `content` (may contain line breaks), `box_width` (`None` means auto-size), `style`, and a palette of Text and Background.
 - **Group** — `children`.
 
 A node's world transform is its ancestors' transforms composed with its own. A node is drawn and hit only if it and all its ancestors are visible. It is picked on the canvas only if it and its ancestors are unlocked. Geometry is never rewritten by move, scale, rotate, flip, or align; those change the transform. Ungroup composes the group's transform into each child, so world positions stay.
 
-### Canvases, palettes, and strokes
+### Palettes, canvases, and strokes
 
-A **color layer** has `id`, `name`, `rgb`, `opacity` (0..=1), `size` (1..=32), `dash` (solid or dashed), `cap` (round or flat), `visible`, `locked`, and `strokes`, oldest first. Index 0 is the top layer. A canvas's active color is a `ColorId` in its palette. It is saved with the sketch, is not an undo step, and does not dirty the sketch.
+A **palette color** has `id`, `name`, `rgb`, `opacity` (0..=1), `size` (1..=32), `dash` (solid or dashed), `cap` (round or flat), and `visible`. Every palette uses this one type, and the color page edits it through one `Inspect`. A role without a stroke (Fill, Background, Text) uses only `rgb`, `opacity`, and `visible`; the page hides the rest. `cap` applies to brush colors, canvas layers, and a line's Stroke.
 
-A **stroke** has `id`, `samples`, the `dynamics` it was drawn with, and `erases`. Samples and erase paths are in canvas-local space. A stroke has no transform of its own and no color, size, or style: it takes those from its layer.
+**Palettes by owner:**
+- Brush tool: an ordered list of at least one color, starting with the nine in `defaults.rs`. Add, duplicate, delete, and move are tool-setting changes.
+- Rectangle and ellipse tools and objects: `[Outline, Fill]`. Line: `[Stroke]`. Text: `[Text, Background]`. These roles are fixed: no add, delete, move, or rename. `visible` on Fill or Background is whether it is drawn.
+- Canvas: its layers, below.
+
+A tool palette color also has `lock_size` (default on) and `next_size` (1..=32, the slider's value while unlocked). These are tool settings. They exist on brush colors and on a shape tool's Outline or Stroke.
+
+A new object copies its tool's palette with new `ColorId`s. A canvas copies the brush's palette; a rectangle, ellipse, line, or text object copies its tool's palette. The copy is the object's own from then on.
+
+A **color layer** is a canvas palette color plus `locked`, `source` (the brush `ColorId` it was copied from, or `None`), and `strokes`, oldest first. Index 0 is the top layer.
+
+The brush's **active color** is a brush `ColorId`, a tool setting. A brush stroke goes into the highlighted canvas's layer whose `source` is the active color. If none has it, the commit is a batch that inserts a layer copied from that brush color at the bottom of the canvas's palette, with `source` set, and then adds the stroke. Make palette default replaces the brush's palette with copies of the canvas's layers, under new brush ids, and sets each of that canvas's layers' `source` to its copy. A duplicated layer has `source` `None`.
+
+A **stroke** has `id`, `samples`, the `dynamics` it was drawn with, `size` (`None` follows its layer's size; otherwise fixed, 1..=32), and `erases`. A stroke drawn while its brush color's `lock_size` is on stores `None`; otherwise it stores the slider's `next_size`. Samples and erase paths are in canvas-local space. A stroke has no transform of its own and no color or style: it takes those from its layer.
 
 A **sample** is `{ x, y, pressure }`, where `pressure` is `None` or finite in `0.0..=1.0`. Samples are kept exactly as the device reported them.
 
@@ -96,13 +109,13 @@ A **sample** is `{ x, y, pressure }`, where `pressure` is `None` or finite in `0
 
 The brush and the eraser each have their own dynamics in the session. A stroke stores a copy of the brush's dynamics at commit.
 
-**Brush outline.** Effective pressure is `1.0` when pressure is `None` or `pressure_size` is off, and `curve(pressure)` otherwise. The diameter at a sample is the layer size times the effective pressure. That is `perfect_freehand` with thinning 1 and a library size of half the layer size, as today. `smoothing / 100` and `streamline / 100` go to the library. Stabilization replaces each sample position with the mean of the last `n` positions before outlining, where `n = round(stabilization / 100 × 16)`; 0 or 1 means off. Pressures and the stored samples are unchanged. A flat cap sets the library's start and end caps off; round sets them on. Dashed splits the stabilized centerline by arc length into dashes of 3× size separated by gaps of 2× size, and outlines each dash. A layer's size, dash, or cap change redraws its strokes with the same samples.
+**Brush outline.** A stroke's size is its own `size`, or its layer's when that is `None`. Effective pressure is `1.0` when pressure is `None` or `pressure_size` is off, and `curve(pressure)` otherwise. The diameter at a sample is the stroke's size times the effective pressure. That is `perfect_freehand` with thinning 1 and a library size of half the stroke's size, as today. `smoothing / 100` and `streamline / 100` go to the library. Stabilization replaces each sample position with the mean of the last `n` positions before outlining, where `n = round(stabilization / 100 × 16)`; 0 or 1 means off. Pressures and the stored samples are unchanged. A flat cap sets the library's start and end caps off; round sets them on. Dashed splits the stabilized centerline by arc length into dashes of 3× size separated by gaps of 2× size, and outlines each dash. A layer's dash or cap change redraws its strokes with the same samples. A layer's size change redraws the strokes whose `size` is `None`.
 
 **Layer ink.** A stroke's visible ink is its outline minus the union of its erase outlines (`i_overlay`, non-zero). A layer's ink is the union of its strokes' visible ink, tessellated by `earcutr`, and painted once with the layer's rgb and opacity. Overlaps within a layer therefore do not darken. A canvas paints its visible layers from last to first under its world transform. A failed difference, union, or tessellation draws nothing for that stroke or layer that frame and keeps the data.
 
 **Bounding box.** Each layer's derived mesh keeps the convex hull of its visible ink. A canvas's world box is the bounds of those hull points after the canvas's transform, so a rotation does not inflate it, expanded by `padding` along each world axis scaled by the transform's stretch on that axis. Selection, hit testing, and fit use this box. With no visible ink it has no box and is not hit on the canvas.
 
-**Brush availability.** The brush and eraser are available when the selection is exactly one canvas, and that canvas and its ancestors are visible and unlocked. The brush also needs the active color visible and unlocked. When the selection stops being one canvas while either tool is current, the current tool becomes select. A brush commit with fewer than two samples writes no history.
+**Brush availability.** The brush and eraser are available when the selection is exactly one canvas, and that canvas and its ancestors are visible and unlocked. The brush also needs the layer it would draw into, the one whose `source` is the active brush color, to be visible and unlocked when it exists. When the selection stops being one canvas while either tool is current, the current tool becomes select. A brush commit with fewer than two samples writes no history.
 
 ### Eraser
 
@@ -112,11 +125,9 @@ On release it records one step. The step adds a copy of its path, in canvas-loca
 
 ### Shapes
 
-Shape styles are components:
-- `FillStyle` is `on`, `rgb`, and `opacity`.
-- `StrokeStyle` is `rgb`, `width` (1..=32), `opacity`, and `dash`.
+A rectangle or ellipse's Outline color gives the stroke's `rgb`, `opacity`, width (its `size`), and `dash`, and its Fill gives the fill's `rgb` and `opacity` when `visible`. A line's Stroke color gives the same, plus `cap`. A new shape copies its tool's palette; the Outline or Stroke `size` is the tool color's `size` while `lock_size` is on, or its `next_size` otherwise.
 
-Paths are built with `kurbo`: a rounded rectangle, an ellipse, or a line. The stroke is expanded with `kurbo`'s stroker, using miter joins for sharp rectangle corners, round caps for lines, and a dash pattern of 3× and 2× the width when dashed. It is flattened to 0.05 local units, resolved with `i_overlay`, and tessellated. The fill is the flattened closed path, tessellated. A shape with fill on is hit inside its fill or on its stroke ink. Without fill, it is hit only on its stroke ink.
+Paths are built with `kurbo`: a rounded rectangle, an ellipse, or a line. The stroke is expanded with `kurbo`'s stroker, using miter joins for sharp rectangle corners, the Stroke color's cap for lines, and a dash pattern of 3× and 2× the width when dashed. It is flattened to 0.05 local units, resolved with `i_overlay`, and tessellated. The fill is the flattened closed path, tessellated. A shape whose Fill is visible is hit inside its fill or on its stroke ink. Otherwise it is hit only on its stroke ink.
 
 The shape tools' Constrain proportions and Snap to grid are tool settings only. They are not stored on objects. Shift inverts Constrain proportions during a drag.
 
@@ -126,14 +137,12 @@ The shape tools' Constrain proportions and Snap to grid are tool settings only. 
 - `family`, from the shipped list;
 - `size` (8..=144, default 24, document units per em);
 - `bold`, `italic`, `underline`;
-- `rgb`, `opacity`;
-- `background`, a `FillStyle`;
 - `align` (left, center, or right);
 - `line_height` (0.8..=3.0, default 1.2);
 - `letter_spacing` (−5..=20 units, default 0);
 - `all_caps`, `wrap`.
 
-Text is laid out with an egui `LayoutJob` at paint time, cached by content, style, width, and zoom. It is drawn as a text shape rotated by the world transform's rotation and scaled by its uniform scale. Non-uniform scale and flip move and size the text box; glyphs stay upright and unmirrored. Text is hit inside its box. The shipped families are Inter, in regular, bold, italic, and bold italic, and egui's monospace face. Text is never erased.
+The glyph color and opacity come from the text's Text color, and the box fill from its Background color when `visible`. Text is laid out with an egui `LayoutJob` at paint time, cached by content, style, palette, width, and zoom. It is drawn as a text shape rotated by the world transform's rotation and scaled by its uniform scale. Non-uniform scale and flip move and size the text box; glyphs stay upright and unmirrored. Text is hit inside its box. The shipped families are Inter, in regular, bold, italic, and bold italic, and egui's monospace face. Text is never erased.
 
 ### Selection and transforms
 
@@ -146,36 +155,40 @@ One undo stack and one redo stack per sketch. Every entry is one of a small set 
 - insert subtrees at a parent and index, and its inverse, remove;
 - move nodes between parents or indexes;
 - set transforms, with before and after values;
-- set properties on a node or a color layer, with before and after `PropValue`s per `PropId`;
+- set properties on a node or on one of its palette colors, with before and after `PropValue`s per `PropId`;
 - add a stroke to a layer, and its inverse;
 - add erase paths to strokes, and its inverse;
 - insert a color layer, and its inverse, remove;
 - move a color layer within a palette;
 - replace a text object's content.
 
-Paste, cut, delete, group, ungroup, align, and multi-object edits are batches. Renames, visibility, and lock are property steps. A new step clears redo. Undo and redo of an empty stack change nothing and return an empty-history error. Camera, selection, active color, tool settings, and the panel are not history. A finished slider drag is one step.
+Paste, cut, delete, group, ungroup, align, and multi-object edits are batches. Renames, visibility, and lock are property steps. A new step clears redo. Undo and redo of an empty stack change nothing and return an empty-history error. Camera, selection, the brush's active color, tool settings and tool palettes, and the panel are not history. A finished slider drag is one step.
 
 ### Panel subject
 
-The panel subject is one of: a tool, by `ToolId`; a palette color, by canvas and `ColorId`; or Layers. Changing the current tool sets the subject to that tool, and to Layers for select. Right-clicking a tool button sets that tool as the subject without changing the current tool. Right-clicking a swatch sets that color. Editing a tool subject changes session tool settings and saves preferences. Editing a color, or a selected object under Layers, records a set-properties step.
+The panel subject is one of: a tool, by `ToolId`; a palette color, by its owner (a tool, or a node) and `ColorId`; or Layers. Changing the current tool sets the subject to that tool, and to Layers for select. Right-clicking a tool button sets that tool as the subject without changing the current tool. Right-clicking a swatch, or clicking a shape or text swatch, sets that tool color. Clicking a layer row in the outliner sets that layer. Editing a tool subject or a tool's color changes session tool settings and saves preferences. Editing a node's color, or a selected object under Layers, records a set-properties step.
 
-The color subject's sections follow `color-property-ui.png` only: Color (well, name, hex), Stroke (size, opacity), and Stroke Style (dash, cap). It has no RGB, HSL, or HSV sliders, related shades, usage toggles, join, or layer controls. Its header menu runs the duplicate-color and delete-color commands. Delete removes the layer and its strokes as one step, and is disabled on a canvas's last color. A swatch dragged along the toolbar past another swatch records one move-color step on release. A press that does not become a drag is a click.
+Every tool with a palette lists a Palette section first. It is a schema section of kind palette: rows of the owner's colors, each opening that color. A selected shape or text object shows its own Palette section.
+
+The color subject's sections follow `color-property-ui.png` only: Color (well, name, hex), Stroke (size, opacity, and `lock_size` for a tool color that has it), and Stroke Style (dash, cap), with the rows a role does not use left out. It has no RGB, HSL, or HSV sliders, related shades, usage toggles, join, or layer controls. Its header menu runs the duplicate-color and delete-color commands, for brush colors and canvas layers only. Deleting a layer removes it and its strokes as one step. Delete is disabled on a palette's last color. A brush swatch dragged along the toolbar past another swatch moves that brush color on release, as a tool setting. A press that does not become a drag is a click.
+
+**Size control.** With the brush, the slider shows the active brush color's `size` while its `lock_size` is on, drawn in that color, and its `next_size` otherwise, drawn near-black. Moving it sets `next_size` and turns `lock_size` off for that color. With a shape tool it does the same for the tool's Outline or Stroke color. With the eraser it sets the eraser size, and with text the tool's font size. It never edits the sketch.
 
 ### Clipboard, tabs, and closing
 
 The clipboard holds deep copies of whole subtrees. A copied canvas brings its palette, strokes, and erases. Paste inserts copies at the root top with new ids, offset by `(16, 16)` from the source, then another `(16, 16)` on each repeat, and selects them. Copy waits with nothing selected.
 
-A clean sketch has only its starting canvas, with no strokes, the default palette unchanged, and the generated name, and has never been saved. Which color is active does not matter, because the active color is not a change to the sketch. Closing the only sketch when it is clean does nothing. Closing any other last sketch ends with a new sketch. A sketch with changes since its last save, or with an edited name, asks once: Save, Discard, or Cancel, with the behavior in INTERFACE. Quitting asks once per such sketch, in tab order. A completed rename dirties the sketch and is not an undo step.
+A clean sketch has only its starting canvas, with no strokes, its palette as copied, and the generated name, and has never been saved. Closing the only sketch when it is clean does nothing. Closing any other last sketch ends with a new sketch. A sketch with changes since its last save, or with an edited name, asks once: Save, Discard, or Cancel, with the behavior in INTERFACE. Quitting asks once per such sketch, in tab order. A completed rename dirties the sketch and is not an undo step.
 
 ### Preferences and storage
 
-The preferences store is one versioned JSON file (`format_version` 1) in the platform user-data directory for Simple Sketch. It holds the tool settings and the default palette, and is written whenever they change. A missing or unreadable file means built-in defaults, and it is never treated as an error that stops the app.
+The preferences store is one versioned JSON file (`format_version` 1) in the platform user-data directory for Simple Sketch. It holds the tool settings, including each tool's palette with its `ColorId`s, `lock_size`, and `next_size`, and the brush's active color, and is written whenever they change. A missing or unreadable file means built-in defaults, and it is never treated as an error that stops the app.
 
-The snapshot store keeps one versioned JSON file per `SketchId` in that directory, with `format_version` 1. It holds the id, saved name, camera, the full object tree with every node's fields, palettes with their strokes, samples, dynamics, and erases, and each canvas's active color. It does not hold history, selection, the clipboard, tool settings, or the panel. Save overwrites that id and clears the dirty flag. Open behaves as INTERFACE describes. There is no published format and no format picker.
+The snapshot store keeps one versioned JSON file per `SketchId` in that directory, with `format_version` 1. It holds the id, saved name, camera, the full object tree with every node's fields, palettes with their layers' `source` ids, strokes, stroke sizes, samples, dynamics, and erases. It does not hold history, selection, the clipboard, tool settings, or the panel. Save overwrites that id and clears the dirty flag. Open behaves as INTERFACE describes. There is no published format and no format picker.
 
 ## Main flow and failures
 
-The app opens on Untitled 1 with Canvas 1 highlighted, black active, the brush current, origin centered, zoom 1, and the panel closed. A brush drag on the highlighted canvas appends canvas-local samples and commits one stroke to the active layer on release. The frame rebuilds only changed caches: the stroke's visible ink, its layer's union, and that layer's tessellation. It then paints every visible node in tree order under its world transform.
+The app opens on Untitled 1 with Canvas 1 highlighted, black active, the brush current, origin centered, zoom 1, and the panel closed. A brush drag on the highlighted canvas appends canvas-local samples and commits one stroke on release, to the layer that came from the active brush color. The frame rebuilds only changed caches: the stroke's visible ink, its layer's union, and that layer's tessellation. It then paints every visible node in tree order under its world transform.
 
 Failure stays inside one command. Invalid input does not append a sample, and a rejected command leaves the session unchanged. The process is single-threaded.
 
@@ -205,13 +218,14 @@ No tree-view, color-picker, or inspector crate: the outliner, color controls, an
 
 Unit tests sit on the session and document. The egui-frame harness in `canvas.rs` covers input that must not draw. They cover failures that would ship the wrong sketch:
 
-- Brush: pressure 1, missing pressure, and pressure size off share a diameter of the layer size; lower pressure through a linear curve is thinner. A non-linear curve changes the diameter and leaves samples unchanged. Building an outline leaves samples and ids unchanged.
-- Palette layers: a color earlier in the palette paints above later ones. Moving a color changes paint order and nothing else. Editing a color's size, dash, or cap changes the outline and leaves samples. Opacity overlaps within a layer do not stack.
-- Availability: the brush and eraser need exactly one visible, unlocked canvas. The brush also needs a visible, unlocked active color. Losing the highlight switches to select.
+- Brush: pressure 1, missing pressure, and pressure size off share a diameter of the stroke's size; lower pressure through a linear curve is thinner. A non-linear curve changes the diameter and leaves samples unchanged. Building an outline leaves samples and ids unchanged.
+- Palette layers: a color earlier in the palette paints above later ones. Moving a color changes paint order and nothing else. Editing a layer's dash or cap changes the outline and leaves samples. Editing a layer's size redraws only strokes that follow it. Opacity overlaps within a layer do not stack.
+- Tool palettes: a new canvas, shape, or text object copies its tool's palette, and later tool edits leave it alone. A stroke goes into the layer whose `source` is the active brush color, and a canvas without one gains it in the same undo step. Moving the Size slider sets `next_size`, turns `lock_size` off, and records no history; a stroke drawn then keeps that size when its layer's size changes. Make palette default relinks that canvas's layers.
+- Availability: the brush and eraser need exactly one visible, unlocked canvas. The brush also needs the layer it would draw into to be visible and unlocked when it exists. Losing the highlight switches to select.
 - Eraser: it hides ink only inside its outline, never centerline extras. It affects only the highlighted canvas's visible, unlocked layers, and never shapes or text. Later strokes keep full ink. Undo restores. Moving the canvas moves the hidden ink.
 - Canvas box: transformed ink hull bounds plus padding. No visible ink means no box and no hit. A 45-degree rotation of round ink does not widen the box.
 - Tree: group then ungroup keeps world positions. Transforms never rewrite geometry or samples. Hidden or locked ancestors stop picking.
-- History: every step kind round-trips through undo and redo. A new step clears redo. Camera, selection, active color, tool settings, and the panel stay out of history.
+- History: every step kind round-trips through undo and redo. A new step clears redo. Camera, selection, the active brush color, tool settings and palettes, and the panel stay out of history.
 - Schema: setting a value clamps to its range. Mixed values are reported for a multi-selection. The registry checks listed under Data-driven core.
 - Tabs and closing: as today, with the new clean-sketch rule.
 - Preferences: a missing or corrupt file falls back to defaults.
@@ -228,8 +242,9 @@ Assign these to **task-operations**. This document does not assign them. Each sl
 3. **Select, outliner, and groups.** Selection, handles, affine transforms, the context actions, and the Layers page with the selection's sections. Outliner rows with eye, lock, double-click rename, right-click row menus, and drag. New canvas in the toolbar, group, and ungroup. The Layers page uses that same chrome, even though its render still draws a header and a close button.
 4. **Shapes** with `kurbo`: fill, stroke, dash, corner radius, constrain, and snap. Their pages use the same panel chrome, even where their renders still draw a Properties header, a close button, or a tool-name card.
 5. **Text**, with Inter bundled. Its page uses that same chrome.
-6. **Clipboard.**
-7. **Snapshots**, after every object kind exists, so the schema is written once.
+6. **Tool palettes.** Give every creation tool its palette and the brush its active color as tool settings; copy palettes into new objects; move shape and text colors into their palettes; add the Palette section, stroke sizes, `source` links, Lock size, and the Size control that never edits the sketch. The owner set this model on 2026-10-11, after shapes and text were built.
+7. **Clipboard.**
+8. **Snapshots**, after every object kind exists, so the schema is written once.
 
 Slices 1 to 3 edit the same core files and run one at a time. Slices 4 and 5 can run beside each other once slice 3 lands, with one writer for `document.rs`.
 
@@ -244,11 +259,12 @@ Slices 1 to 3 edit the same core files and run one at a time. Slices 4 and 5 can
 - Shape outlines are flattened to 0.05 local units.
 - Defaults:
   - eraser size 8;
-  - shape stroke black at width 3, solid, at 100% opacity;
-  - shape fill off, light red `#FCA5A5` at 40% when turned on;
+  - shape Outline or Stroke black at size 3, solid, at 100% opacity, with round caps for the line;
+  - shape Fill off, light red `#FCA5A5` at 40% when turned on;
+  - text Text color black at 100%; Background off, white at 100% when turned on;
   - corner radius 0;
   - text Inter, 24 units, black, at 1.2 line height, auto-size, wrap on;
   - brush preset Round Brush: pressure on, linear curve, smoothing 50, stabilization 0, streamline 50;
   - eraser preset Round Eraser: the same, at size 8.
-- The default palette's values are today's swatch colors for black, red, orange, yellow, green, blue, purple, pink, and light gray.
+- The brush's starting palette is today's swatch colors for black, red, orange, yellow, green, blue, purple, pink, and light gray, each at size 3, full opacity, solid, round caps, with Lock size on.
 - Preferences and snapshots are versioned JSON in the platform user-data directory.
