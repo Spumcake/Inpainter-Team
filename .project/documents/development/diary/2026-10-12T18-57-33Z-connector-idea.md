@@ -1,5 +1,7 @@
 # Diagram connectors, an idea
 
+> **Note added 2026-10-12T21:29:02Z at the owner's request:** this entry records an experimental discussion. Nothing in it is a locked decision, including the items below marked "settled" or "the owner's direction." See [the Inpainter Studio discussion](2026-10-12T21-29-02Z-inpainter-studio-discussion.md).
+
 **UTC:** 2026-10-12T18:57:33Z
 **Covers:** since [the text, palettes, and review entry](2026-10-12T18-38-11Z-text-palettes-and-review.md).
 **Repositories:** Team `master` is at `a1e0fcb` (Record the diary from shapes through the toolbar and text review.), the same as `origin/master`, with this entry uncommitted. App `vector-sketch` `dev` is at `0c1d3b7` (Shape the text box and fix the owner's review of the toolbar.), the same as `origin/dev`, and clean.
