@@ -15,7 +15,7 @@ The review found these problems:
 - The toolbar rows sat about 9 pt low. `ui.horizontal` inside each scroll area started short and grew downward. The zoom group was outside the scroll area, so it looked raised.
 - The zoom group was not at the far end.
 
-The fixes, in [canvas.rs](../../../../src/vector-sketch/worktrees/dev/src/canvas.rs), [toolbar.rs](../../../../src/vector-sketch/worktrees/dev/src/toolbar.rs), and [tabs.rs](../../../../src/vector-sketch/worktrees/dev/src/tabs.rs):
+The fixes, in [canvas.rs](../../../../../src/vector-sketch/worktrees/dev/src/canvas.rs), [toolbar.rs](../../../../../src/vector-sketch/worktrees/dev/src/toolbar.rs), and [tabs.rs](../../../../../src/vector-sketch/worktrees/dev/src/tabs.rs):
 - **Colors.** Sampled from the picture: a white active tab joined to a white toolbar, gray inactive tabs, group dividers, and a light canvas at (251,251,252).
 - **Layout.** Full-height rows and fixed-size icon slots, with zoom at the far right.
 - **Owner's requests.**
@@ -34,7 +34,7 @@ The fixes, in [canvas.rs](../../../../src/vector-sketch/worktrees/dev/src/canvas
 
 The last two failed when their fix was removed. Clippy's only remaining warning in app code predates this work. Headless X11 screenshots at 1280×800 confirmed the alignment, tab styling, and colors.
 
-Not checked: the light title bar on the owner's Wayland desktop, and the zoom order, which follows the picture (zoom out, then zoom in) while [INTERFACE.md](../../../../INTERFACE.md) lists zoom in first.
+Not checked: the light title bar on the owner's Wayland desktop, and the zoom order, which follows the picture (zoom out, then zoom in) while [INTERFACE.md](../../../../../INTERFACE.md) lists zoom in first.
 
 ## Next action
 

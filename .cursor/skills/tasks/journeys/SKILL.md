@@ -36,7 +36,7 @@ Classification is a finding with evidence. It does not decide scope.
 
 ## Write the brief
 
-Adapt [the template](templates/RESEARCH.md). Honor an existing research location; otherwise save `<target>/.project/documents/development/research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md`, using the actual UTC time and a short feature name. Never overwrite an earlier brief; a later investigation of the same feature is a new brief that links the earlier one.
+Adapt [the template](templates/RESEARCH.md). Honor an existing research location; otherwise save `<target>/.project/documents/development/v1.0/research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md`, using the actual UTC time and a short feature name. Never overwrite an earlier brief; a later investigation of the same feature is a new brief that links the earlier one.
 
 Write natural prose and short lists, not tables. Aim for 600–1,200 words. The brief holds findings and sources only: no recommendations, suggestions, open questions, or proposed scope. Those return to the caller, who brings them to the owner.
 

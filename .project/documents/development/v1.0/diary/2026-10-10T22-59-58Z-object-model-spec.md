@@ -23,7 +23,7 @@ It also listed where the renders conflict with each other and with the specifica
 
 The owner then fixed the palette model. Colors own their value, stroke size, style, and layer order, and the order is sortable. Strokes live on canvas objects shown in the outliner, and each canvas has its own palette. A canvas's box is its drawn area plus padding. The brush works only on a highlighted canvas. The owner left the remaining choices to the agent.
 
-The agent made those choices and rewrote the documents. [INTERFACE.md](../../../../INTERFACE.md), [the pitch](../../PITCH.md), [systems.md](../systems.md), and [tasks.md](../tasks.md) changed, and tasks gained SS-8, SS-9, and SS-10. [testing.md](../testing.md) and [AGENTS.md](../../../../AGENTS.md) were updated too. The previous plan and queue are in [the object-model archive](../archive/2026-10-10T22-48-33Z-object-model/plan.md). The agent also corrected its own claim that the team repository had no remote.
+The agent made those choices and rewrote the documents. [INTERFACE.md](../../../../../INTERFACE.md), [the pitch](../PITCH.md), [systems.md](../systems.md), and [tasks.md](../tasks.md) changed, and tasks gained SS-8, SS-9, and SS-10. [testing.md](../testing.md) and [AGENTS.md](../../../../../AGENTS.md) were updated too. The previous plan and queue are in [the object-model archive](../archive/2026-10-10T22-48-33Z-object-model/plan.md). The agent also corrected its own claim that the team repository had no remote.
 
 ## What we learned
 

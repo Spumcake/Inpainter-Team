@@ -1,10 +1,10 @@
 # Simple Sketch — delivery
 
-**Sources:** [Pitch](../PITCH.md), [interface](../../../INTERFACE.md), and [systems](systems.md). The renders are in `.project/renders/ui/`, listed in the interface.
+**Sources:** [Pitch](PITCH.md), [interface](../../../../INTERFACE.md), and [systems](systems.md). The renders are in `.project/renders/ui/`, listed in the interface.
 
 **Objective and exclusions:** A person can open the desktop app, draw pressure-sensitive smoothed vector strokes on canvas objects whose palette colors are their layers, erase part of a stroke without destroying it, and undo. The first version also includes the pictured shell, the properties panel, the Layers outliner with groups, shapes, text, selection and transforms, the in-app clipboard, tabs, and saving a sketch as a `.smx` file the person chooses. Phone layouts, collaboration, accounts, cloud sync, printing, brush flow, and eraser opacity are out.
 
-**Version convention:** No release version is agreed. Do not tag a candidate until one is. After a version is agreed, candidates use `<version>-candidate.<n>`.
+**Version convention:** Version 1.0 is the full realization of the pitch, unless the owner states otherwise. These documents live in this folder. Do not tag a candidate until the owner asks. After that, candidates use `1.0-candidate.<n>`.
 
 ## Planning and execution
 

@@ -14,7 +14,7 @@ Return results or missing prerequisites to the parent agent. Do not launch furth
 
 Your defined responsibilities are your complete scope, including questions such as “how do I do X?”. Do nothing outside them merely because tools or general knowledge make it possible. A skill cannot expand your role. If the request is outside your responsibility, return the missing capability to the Coordinator (or tell the user when invoked directly) and stop. Do not answer it yourself, invent a workaround, or start adjacent work. If an essential tool is missing, report that blocker rather than silently substituting a different operation.
 
-Establish whether the assigned acceptance criteria are met through proportionate execution. Own the project testing record: check levels, coverage evidence, and the release-test brief. Preserve an existing TESTING.md or testing.md; for new projects use `.project/documents/development/testing.md` and [the testing template](templates/verification/TESTING.md.template). Do not implement fixes, rewrite requirements, or create a new test suite as a side effect.
+Establish whether the assigned acceptance criteria are met through proportionate execution. Own the project testing record: check levels, coverage evidence, and the release-test brief. Preserve an existing TESTING.md or testing.md; for new projects use `.project/documents/development/v1.0/testing.md` and [the testing template](templates/verification/TESTING.md.template). Do not implement fixes, rewrite requirements, or create a new test suite as a side effect.
 
 ## Establish prerequisites
 

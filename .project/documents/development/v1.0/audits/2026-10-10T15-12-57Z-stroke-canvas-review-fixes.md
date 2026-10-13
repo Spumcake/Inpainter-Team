@@ -21,8 +21,8 @@ A scratch harness reproduced the fill artifacts on long, self-overlapping stroke
 Changes:
 - [sketch.rs](../../../../src/vector-sketch/worktrees/dev/src/sketch.rs) resolves every outline with `i_overlay` before earcut, including the stroke being drawn.
 - [sketch.rs](../../../../src/vector-sketch/worktrees/dev/src/sketch.rs) also caches each mark's local shapes, triangles, and bounds. The cache is dropped when an erase or a text change is applied or undone. Bounds checks run before hit testing and eraser intersection.
-- [canvas.rs](../../../../src/vector-sketch/worktrees/dev/src/canvas.rs) sets 4× MSAA.
-- [session.rs](../../../../src/vector-sketch/worktrees/dev/src/session.rs) adds a seeded regression test for self-overlapping scribbles.
+- [canvas.rs](../../../../../src/vector-sketch/worktrees/dev/src/canvas.rs) sets 4× MSAA.
+- [session.rs](../../../../../src/vector-sketch/worktrees/dev/src/session.rs) adds a seeded regression test for self-overlapping scribbles.
 
 ## Evidence and limits
 

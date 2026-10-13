@@ -24,4 +24,4 @@ The documents left these open. The build used these readings. They are not owner
 - The recovery offer is Restore and Discard, one at a time. Discard deletes that recovery file. Discard on close does the same.
 - `sketch-1.json` and `sketch-2.json` stay in the user-data directory and are not imported.
 
-This slice starts from the dirty worktree on `c435080`. [systems.md](systems.md) still opens on the flat mark list at `7920c85`. Its storage section still says it is undecided whether declining a recovery deletes the file. The interface, and the build, delete it on Discard.
+This slice starts from the dirty worktree on `c435080`. [systems.md](systems.md) still opens on the flat mark list at `7920c85`. Discard deletes the recovery file, as the interface and the build do.

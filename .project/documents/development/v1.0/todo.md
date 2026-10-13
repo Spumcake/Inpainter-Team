@@ -7,4 +7,5 @@ The previous list is [archived](archive/2026-10-13T12-53-19Z-smx-save/todo.md).
 - [ ] Confirm or change the readings in [the plan](plan.md): the portal dialog, no shortcuts for Save As or recovery, one recovery file, the last 10 paths, the file name on the tab, and leaving `sketch-N.json` unimported.
 - [ ] Try copy, cut, and paste in the window. Release the letter before Ctrl. The steps are in the [archived list](archive/2026-10-13T01-32-29Z-snapshots/todo.md).
 - [ ] Confirm or change the clipboard readings in the [snapshots plan](archive/2026-10-13T01-32-29Z-snapshots/plan.md), and the reading that an opened sketch highlights no canvas.
-- [ ] Try the latest text in a live window, and decide the toolbar width, the group drop, and the XP-Pen check. Those stay as in the archived list.
+- [x] The owner confirmed on 2026-10-13 that the app works with the XP-Pen. See [the diary](diary/2026-10-13T16-02-37Z-xp-pen.md).
+- [ ] Try the latest text in a live window, and decide the toolbar width and the group drop. Those stay as in the archived list.

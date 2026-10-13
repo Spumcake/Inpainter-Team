@@ -2,7 +2,7 @@
 
 **UTC:** 2026-10-11T15:17:22Z
 **Covers:** since [the object-model entry](2026-10-10T22-59-58Z-object-model-spec.md).
-**Repositories:** Team `master` is at `cd52824` (Record the properties panel, its correction, and the restyle.), two commits ahead of `origin/master`, which is still at `1f48e1d`. Uncommitted on top of that are the chrome edits in [INTERFACE.md](../../../../INTERFACE.md), [plan.md](../plan.md), [systems.md](../systems.md), and [tasks.md](../tasks.md), plus this entry. App `vector-sketch` `dev` is clean at `4398ea6` (Add the properties panel for the brush, eraser, and palette colors.), two commits ahead of `origin/dev` and not pushed.
+**Repositories:** Team `master` is at `cd52824` (Record the properties panel, its correction, and the restyle.), two commits ahead of `origin/master`, which is still at `1f48e1d`. Uncommitted on top of that are the chrome edits in [INTERFACE.md](../../../../../INTERFACE.md), [plan.md](../plan.md), [systems.md](../systems.md), and [tasks.md](../tasks.md), plus this entry. App `vector-sketch` `dev` is clean at `4398ea6` (Add the properties panel for the brush, eraser, and palette colors.), two commits ahead of `origin/dev` and not pushed.
 
 ## What we did
 

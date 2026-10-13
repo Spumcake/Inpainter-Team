@@ -14,13 +14,13 @@ The review found the slice faithful to [systems.md](../systems.md). Palette laye
 - `Session::paints` appended the open stroke after every layer. The stroke also skipped the canvas transform, and a translucent color would have darkened over its own ink until release.
 - Systems required a clean sketch to have its first color active, yet said the active color does not dirty a sketch. This was the agent's earlier contradiction, and it is why the earlier audit saw a color switch ask to be kept.
 
-The fixes, in [document.rs](../../../../src/vector-sketch/worktrees/dev/src/document.rs), [session.rs](../../../../src/vector-sketch/worktrees/dev/src/session.rs), [canvas.rs](../../../../src/vector-sketch/worktrees/dev/src/canvas.rs), and [toolbar.rs](../../../../src/vector-sketch/worktrees/dev/src/toolbar.rs):
+The fixes, in [document.rs](../../../../../src/vector-sketch/worktrees/dev/src/document.rs), [session.rs](../../../../../src/vector-sketch/worktrees/dev/src/session.rs), [canvas.rs](../../../../../src/vector-sketch/worktrees/dev/src/canvas.rs), and [toolbar.rs](../../../../../src/vector-sketch/worktrees/dev/src/toolbar.rs):
 - **Live stroke.** The open stroke is mapped into canvas space and outlined as it will be committed. It paints inside its color layer, joining the layer's union when the color is translucent.
 - **Title bar.** A first attempt removed only the explicit light-theme command, and the title bar stayed light. The cause was egui's `sync_window_theme`, which copied the app's light egui theme to the window. It is now off, so winit's Wayland frame reads the desktop color scheme.
 - **Clean sketch.** It no longer depends on the active color. The rule in systems.md says so too.
 - **Toolbar.** Vertical padding dropped from 8 to 5 points.
 
-[INTERFACE.md](../../../../INTERFACE.md) now says the title bar follows the desktop theme.
+[INTERFACE.md](../../../../../INTERFACE.md) now says the title bar follows the desktop theme.
 
 ## Evidence and limits
 

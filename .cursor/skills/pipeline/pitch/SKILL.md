@@ -5,7 +5,7 @@ description: Write a short, public-readable product pitch from a few sentences o
 
 # Write a product pitch
 
-Turn the user's brief into a clear explanation of the app. Write for an ordinary person considering the product, not for agents managing a project. Use [the template](templates/PITCH.md). Honor the explicit destination or existing canonical pitch; otherwise save `<target>/.project/documents/PITCH.md`.
+Turn the user's brief into a clear explanation of the app. Write for an ordinary person considering the product, not for agents managing a project. Use [the template](templates/PITCH.md). Honor the explicit destination or existing canonical pitch. Otherwise, when the project is working toward version 1.0, save `<target>/.project/documents/development/v1.0/PITCH.md`. A project that starts from nothing is working toward version 1.0 unless the owner states otherwise. Version 1.0 is the full realization of that pitch. If the owner named another version, use that version's folder.
 
 ## Strict scope and size
 

@@ -1,6 +1,6 @@
 # Simple Sketch interface
 
-Simple Sketch is the desktop window where someone sketches and annotates with a mouse or a pressure-sensitive stylus. Product intent lives in [the pitch](.project/documents/PITCH.md). This document describes that one window: its chrome, the objects a sketch is made of, the tools that make and edit them, and the properties panel that adjusts them.
+Simple Sketch is the desktop window where someone sketches and annotates with a mouse or a pressure-sensitive stylus. Product intent lives in [the pitch](.project/documents/development/v1.0/PITCH.md). This document describes that one window: its chrome, the objects a sketch is made of, the tools that make and edit them, and the properties panel that adjusts them.
 
 ## Journey and sitemap
 
@@ -36,7 +36,7 @@ The ink in the renders is sample drawing; a new sketch has none. The renders do 
 - Older renders still draw a Properties header, a close button, and a tool-name and description card. The Layers render still draws a header and a close button. Those drawings do not override this decision, so a later page is not built from them, including the shape, text, and Layers pages that are not built yet.
 - The color render's Join control and its third Cap option are not adopted. Brush ink is outlined with round joins and round or flat caps, and those two controls would need a different outline builder.
 - [extra-color-properties-ui.png](.project/renders/ui/extra-color-properties-ui.png) is kept as a possible future layout for more color settings. It is not part of the first version, and nothing in this document is drawn from it.
-- Rendered values, such as the shape fill at 40% or a font size of 36, are examples, not defaults. Sizes are given under Size below, and the other defaults are technical choices in [systems.md](.project/documents/development/systems.md).
+- Rendered values, such as the shape fill at 40% or a font size of 36, are examples, not defaults. Sizes are given under Size below, and the other defaults are technical choices in [systems.md](.project/documents/development/v1.0/systems.md).
 
 ## Presentation
 

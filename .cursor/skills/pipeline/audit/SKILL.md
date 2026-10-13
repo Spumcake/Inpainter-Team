@@ -17,7 +17,9 @@ If asked to review document consistency, inspect the relevant sources and relati
 
 Adapt [the template](templates/AUDIT.md). Honor a target project's existing audit location or explicit destination; otherwise use the default below. The outer Resources development-notes folder is not a default for consuming projects. Obtain the actual current UTC time from the environment and create:
 
-`<target>/.project/documents/development/audits/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
+`<target>/.project/documents/development/<version>/audits/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
+
+For a project working toward version 1.0, `<version>` is `v1.0`.
 
 Create the folder when needed. Use a numeric suffix on collision; never overwrite an earlier audit. Do not create or update CHECKING.md. Preserve existing historical reports and link them if relevant. On a follow-up, create a new record linking the previous one and describe what changed.
 

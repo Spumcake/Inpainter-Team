@@ -18,8 +18,8 @@ The wrong render came from the agent's own earlier INTERFACE text, which listed 
 Duplicate and Delete moved into a menu.
 
 The code changes:
-- **Color page.** [schema.rs](../../../../src/vector-sketch/worktrees/dev/src/schema.rs) defines the page as Color, Stroke, and Stroke Style, with Duplicate and Delete in a menu. The RGB/HSL/HSV sliders, the Layer section, and Move up and Move down are gone.
-- **Shared controls.** [widgets.rs](../../../../src/vector-sketch/worktrees/dev/src/widgets.rs) holds the slider, switch, number and text fields, dropdown, and segmented choice, used by the toolbar and [panel.rs](../../../../src/vector-sketch/worktrees/dev/src/panel.rs). The blue accent is replaced by the toolbar's near-black.
+- **Color page.** [schema.rs](../../../../../src/vector-sketch/worktrees/dev/src/schema.rs) defines the page as Color, Stroke, and Stroke Style, with Duplicate and Delete in a menu. The RGB/HSL/HSV sliders, the Layer section, and Move up and Move down are gone.
+- **Shared controls.** [widgets.rs](../../../../../src/vector-sketch/worktrees/dev/src/widgets.rs) holds the slider, switch, number and text fields, dropdown, and segmented choice, used by the toolbar and [panel.rs](../../../../../src/vector-sketch/worktrees/dev/src/panel.rs). The blue accent is replaced by the toolbar's near-black.
 - **Typeface.** egui's thin default font could not do bold. Inter is bundled in `assets/fonts` with its OFL license, at weights 400 and 600 from its variable axis.
 - **Swatch sorting.** Dragging a swatch along the toolbar sorts the palette in one undo step.
 - **Panel top.** The title, close button, and subject card are gone. The color menu moved to the end of the Color heading. An edge tab on a layer above the canvas toggles the panel, and its chevron was later centered on the tab's visible inside.

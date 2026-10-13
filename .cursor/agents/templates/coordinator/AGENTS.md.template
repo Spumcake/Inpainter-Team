@@ -28,6 +28,8 @@ The coordinator uses the **audit** skill for one brief timestamped record at a m
 
 The coordinator uses the **diary** skill for a developer diary entry when the user asks for one, or accepts an offer at the end of a working session. An entry covers all work since the previous entry and the next steps intended in the discussion. It links audits rather than repeating them, and its next steps do not authorize work.
 
+A project that starts from nothing works toward version 1.0 unless the owner states otherwise. Version 1.0 is the full realization of the pitch. That version's documents, including the pitch, live under `.project/documents/development/v1.0/`. When the version's work is complete, the coordinator writes `post-mortem.md` there with the **post-mortem** skill.
+
 ## 5. Verification
 
 Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. During a slice, add no new tests; run the existing scripted suite once when the change is complete. Tests for approved behavior are written in one pass when the owner asks to commit. Do not repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.

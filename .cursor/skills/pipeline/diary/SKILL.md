@@ -15,7 +15,7 @@ Write an entry when the user asks for one. At the end of a working session that 
 
 ## Gather what happened since the previous entry
 
-Find the latest entry in `.project/documents/development/diary/` unless the project already has a canonical location. Its timestamp is the start of this entry's span. With no previous entry, cover the project from its start, briefly, and say so.
+Find the latest entry in `.project/documents/development/v1.0/diary/` unless the project already has a canonical location. For another version, use that version's folder. Its timestamp is the start of this entry's span. With no previous entry, cover the project from its start, briefly, and say so.
 
 Use only sources that already exist:
 
@@ -34,7 +34,9 @@ Close the entry with the next steps from the conversation. Distinguish what the 
 
 Adapt [the template](templates/DIARY.md). Obtain the actual current UTC time from the environment and create:
 
-`<team>/.project/documents/development/diary/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
+`<team>/.project/documents/development/<version>/diary/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
+
+For a project working toward version 1.0, `<version>` is `v1.0`.
 
 Create the folder when needed. Use a numeric suffix on collision; never overwrite or edit an earlier entry. Link the previous entry. A correction to an earlier entry goes in the new one.
 
