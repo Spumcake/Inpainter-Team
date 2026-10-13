@@ -1,11 +1,10 @@
 # Simple Sketch todos
 
-The previous list is [archived](archive/2026-10-13T00-06-49Z-clipboard/todo.md).
+The previous list is [archived](archive/2026-10-13T12-53-19Z-smx-save/todo.md).
 
-- [x] Build copy, cut, and paste on top of the objects already in the app. Session tests passed and review found no defects. See [the clipboard audit](audits/2026-10-13T00-27-06Z-clipboard.md).
-- [ ] Try copy, cut, and paste again in the Simple Sketch window. The first try did nothing because the keys never reached the command. Quit any open window, run this worktree, draw a rectangle, then Ctrl+C, Ctrl+V, Ctrl+V, Ctrl+Z, Ctrl+X, Ctrl+Z, and Ctrl+V. Release the letter before Ctrl.
-- [ ] Confirm or change the readings in [the plan](plan.md): an empty paste, a group copied with one of its children, a cut of a locked object, undo of a cut leaving the clipboard full, and Ctrl+C while typing. The build used those readings.
-- [ ] Try the latest text in a live window: typing, toolbar and panel clicks while typing, Escape, the edge handles, vertical alignment, and the Border. Only automated tests and headless screenshots have checked that review.
-- [ ] Decide whether the text toolbar should fit 1280 points. With vertical alignment it overflows and scrolls.
-- [ ] Say which pointer position moves a row into or out of a group. Sibling reorder works. The cross-parent drag waits on that rule.
-- [ ] Test pen pressure on the XP-Pen when more of the app is in hand. Thinning, alignment, the eraser end, and the hover cursor are still unchecked. See [the pressure audit](audits/2026-10-10T15-48-17Z-wayland-pen-pressure.md).
+- [x] Build save, open, and recovery. Session tests round-trip a `.smx`, and review's data-loss defects were fixed. See [the smx audit](audits/2026-10-13T14-36-28Z-smx-save.md).
+- [ ] Try that slice in the window: draw, choose Save As, quit, run it again, and Open that file. A check that stayed inside the window did not open the file dialog. Recovery is written every 10 minutes and does not change the `.smx` until you save.
+- [ ] Confirm or change the readings in [the plan](plan.md): the portal dialog, no shortcuts for Save As or recovery, one recovery file, the last 10 paths, the file name on the tab, and leaving `sketch-N.json` unimported.
+- [ ] Try copy, cut, and paste in the window. Release the letter before Ctrl. The steps are in the [archived list](archive/2026-10-13T01-32-29Z-snapshots/todo.md).
+- [ ] Confirm or change the clipboard readings in the [snapshots plan](archive/2026-10-13T01-32-29Z-snapshots/plan.md), and the reading that an opened sketch highlights no canvas.
+- [ ] Try the latest text in a live window, and decide the toolbar width, the group drop, and the XP-Pen check. Those stay as in the archived list.

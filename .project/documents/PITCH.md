@@ -38,4 +38,4 @@ The next bar holds the controls as simple line icons. The highlighted canvas's p
 
 ## The first version
 
-The first version is this desktop window. Phone layouts, shared canvases, accounts, cloud sync, export, a published file format, and printing sit outside it. An open sketch can be saved so closing it can keep the work; the storage method stays unspecified. Brush flow and eraser opacity wait for a later version. A new sketch starts with one empty canvas.
+The first version is this desktop window. It includes saving a sketch as a .smx file the person chooses. Phone layouts, shared canvases, accounts, cloud sync, export to other formats, and printing sit outside it. Brush flow and eraser opacity wait for a later version. A new sketch starts with one empty canvas.

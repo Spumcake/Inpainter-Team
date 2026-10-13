@@ -1,27 +1,27 @@
 # Simple Sketch plan
 
-Copy, cut, and paste are in the dirty `dev` worktree, on top of `0c1d3b7`. The window has not shown a paste. Snapshots stay next and are not started. The previous plan is [archived](archive/2026-10-13T00-06-49Z-clipboard/plan.md). The records are [the clipboard audit](audits/2026-10-13T00-27-06Z-clipboard.md) and [the key-path fix](audits/2026-10-13T01-07-24Z-clipboard-keys.md).
+A `.smx` file the person chooses is in the dirty `dev` worktree, on top of `c435080`. The window opened and did not save a file. The previous plan is [archived](archive/2026-10-13T12-53-19Z-smx-save/plan.md). The record is [the smx audit](audits/2026-10-13T14-36-28Z-smx-save.md).
 
-## Copy, cut, and paste
+## A sketch file
 
-A person can select a shape, a text object, a group, or a canvas and press Ctrl+C. Ctrl+V puts a duplicate at the top of the sketch, 16 units down and to the right, and selects it. The next paste steps another 16 units. A copied canvas brings its palette, strokes, and erasures. A copied group brings its children. Ctrl+X copies and then deletes, as one undo step. Undo of a paste removes the duplicates. Copy with nothing selected does nothing. The clipboard belongs to the window, so a copy in one tab pastes in another. It is not the desktop clipboard. While text is being edited, these shortcuts do not run. There are no toolbar icons for them.
+Save asks for a folder and a name ending in `.smx`. The file is JSON: the name, the view, and the objects, colors, strokes, and erasures. History, the selection, the clipboard, and tool settings stay out. The first save is Save As. Ctrl+S then writes that path. Save As moves later saves. Save a Copy writes another file and leaves Ctrl+S where it was. Open is a file dialog, with recent files in the sketch menu. A path already open is focused. A changed sketch still asks once before it closes. Save uses the path, or Save As if it was never saved. Replacing a different existing file asks first. A `.smx` path given to the program opens.
 
-One worker built it in the session and the document. Those session tests call the commands directly. In the window, egui replaced Ctrl+C, Ctrl+X, and Ctrl+V with copy, cut, and paste events and dropped the key, so the shortcuts did nothing. The frame now runs the in-app clipboard from those events. A frame test sends the same events and checks that a selected rectangle is duplicated. That test passed. The owner has not yet seen a paste after this fix. Quit any open Simple Sketch window and run the worktree again before trying.
+Every 10 minutes, a dirty sketch writes a recovery copy into a folder the app owns, next to preferences. The `.smx` stays untouched. A crash tries one more emergency copy. The next launch offers any recovery a clean save did not delete. Restore opens it still unsaved and remembers the original path. The file changes only when the person saves. A kill that leaves no chance to write keeps the last timed copy.
+
+The interface, the pitch, the systems document, and [SS-7](tasks.md) now describe this file. One worker built the path, the dialogs, and the recovery timer, because they share the session. Session tests round-trip a `.smx` and a recovery that does not write that file until the person saves. Review found five data-loss defects, and the same worker fixed them. A check that stayed inside the Simple Sketch window did not open the file dialog, so a saved drawing has not been seen coming back. The slice is ready to try.
 
 ## Later
 
-Snapshots, so Open and Save store a sketch and bring it back. That stays broad until it is the current slice. Related shades stays undefined. The XP-Pen check remains the owner's. The latest toolbar and text behavior still needs a live window. The text toolbar overflows 1280 points. A row drag still has no rule for moving a node into or out of a group. The shape-drag readings are still not owner decisions.
+A file-manager association waits. The owner's remaining checks are the clipboard, text, the toolbar width, the group drop, the shape-drag readings, and the XP-Pen. An opened sketch still highlights no canvas. Related shades stays undefined. The private-list window try is dropped, because this slice replaces that list.
 
 ## Readings used
 
 The documents left these open. The build used these readings. They are not owner decisions:
 
-- Paste with an empty clipboard does nothing.
-- A selected child of a selected group is copied once, inside the group.
-- Copy may include a locked object. Cut deletes only objects that can be changed. When nothing can be deleted, the sketch and the clipboard stay as they are.
-- Undo of a cut restores the objects and leaves the clipboard holding the copies.
-- While text is being edited, the object clipboard does not run, and highlighted words are not copied.
+- The folder picker is `rfd` 0.15.4, with the desktop portal. Save As is Ctrl+Shift+S, as the owner set on 2026-10-13; Save a Copy and the recovery offer have no shortcuts.
+- One recovery file per sketch, replaced each interval. The recent menu is the last 10 paths. Save As starts in the last folder chosen in this window, otherwise the home directory.
+- The tab shows the file name without `.smx`. Unsaved work shows a dot in place of the tab's close mark and an asterisk in the window title, as the owner set on 2026-10-13. A failed save or open shows a message with the file and the reason. There is no separate title to rename.
+- The recovery offer is Restore and Discard, one at a time. Discard deletes that recovery file. Discard on close does the same.
+- `sketch-1.json` and `sketch-2.json` stay in the user-data directory and are not imported.
 
-Undo of a paste does not rewind the repeat offset. A cut of a mixed selection copies only the objects it can delete. A locked child inside an unlocked group is copied and deleted with that group.
-
-The opening of [systems.md](systems.md) still describes the flat mark list at `7920c85`. This slice starts from `0c1d3b7`.
+This slice starts from the dirty worktree on `c435080`. [systems.md](systems.md) still opens on the flat mark list at `7920c85`. Its storage section still says it is undecided whether declining a recovery deletes the file. The interface, and the build, delete it on Discard.
