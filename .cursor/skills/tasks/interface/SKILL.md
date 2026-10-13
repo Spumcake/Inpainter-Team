@@ -17,7 +17,7 @@ If no suitable image-generation skill exists, stop and report that missing capab
 
 ## Map the experience
 
-Use the requested scope and existing product decisions to identify the smallest series that explains the central user journey. Distinguish pages from dialogs, panels, and important states. Include recovery or empty states when they change what the user can do; do not generate every conceivable state.
+When a feature has an approved scope and research brief, document the journeys they establish, including the steps, feedback, and recovery users expect; the brief's table stakes are not optional states. Use the requested scope and existing product decisions to identify the smallest series that explains the central user journey. Distinguish pages from dialogs, panels, and important states. Include recovery or empty states when they change what the user can do; do not generate every conceivable state.
 
 Keep a concise sitemap in INTERFACE.md: a small linked list or flow showing where the user starts, which action opens each view, and where it leads. Reuse an existing sufficient map. Give each planned view a short, stable, purpose-based name and explain its purpose in one or two sentences. Use that same name for its document heading, prompt filename, and generated view folder; sequence numbers may order prompt filenames but hashes must not be user-facing names. Use natural prose and lists, not tables or inventories of labeled fields. Do not invent product features to make a more impressive gallery.
 

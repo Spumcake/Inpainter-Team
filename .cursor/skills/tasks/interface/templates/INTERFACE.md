@@ -16,8 +16,8 @@
 
 [PLACEHOLDER: when images are requested, link the saved prompt, resulting image, and native generation record. Explain the base reference briefly and state any actual visual limitation. Repeat this section only for necessary views. Do not claim ungenerated images exist.]
 
-## Open decisions
+## Image defects
 
-[PLACEHOLDER: include only decisions or observed image defects that materially affect the requested experience. Omit this section if none.]
+[PLACEHOLDER: include only observed image defects that materially affect the requested experience. Omit this section if none. Decisions the owner has not made go to the coordinator as questions, not here.]
 
 [PLACEHOLDER: remove all template notes and unused sections. Use concise prose and lists, never tables. Documentation alone does not require images.]

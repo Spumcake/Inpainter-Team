@@ -1,9 +1,9 @@
 # [PLACEHOLDER: project] — delivery plan
 
-> Adapt only to agreed scope. Remove unused sections and this note. Replace placeholders; preserve explicit unknowns rather than inventing requirements.
+> Adapt only to agreed scope. Remove unused sections and this note. Replace placeholders. Bring unknowns to the owner through the coordinator rather than inventing requirements or listing open questions.
 
 **Sources:** [PLACEHOLDER: pitch, design if applicable, systems, and working instructions]
-**Objective and exclusions:** [PLACEHOLDER: smallest complete user/caller journey, release scope, and non-goals]
+**Objective and exclusions:** [PLACEHOLDER: the features in this release and its non-goals. Keep the list of features narrow and each feature complete for its users.]
 **Version convention:** [PLACEHOLDER: version scheme, proof-of-concept/prerelease status, compatibility, and intended release channel. Candidates need an agreed version and use `<version>-candidate.<n>`]
 
 ## Planning and execution
@@ -12,7 +12,7 @@
 
 ## Acceptance criteria
 
-[PLACEHOLDER: stable criterion IDs for observable outcomes in the agreed scope: starting state, action, expected result, and proportionate verification or human review. PLAN links these criteria to milestones; TODO links them to assignments.]
+[PLACEHOLDER: stable criterion IDs for observable outcomes in the agreed scope. For each feature: the approved journeys a person completes from start to finish and the behavior that makes the feature complete for its users, linking its research brief; then the rules that must hold, such as identity and stored data. Each gives the starting state, action, expected result, and proportionate verification or human review. PLAN links these criteria to milestones; TODO links them to assignments.]
 
 ## Development and preview
 
@@ -22,4 +22,4 @@
 
 [PLACEHOLDER: existing required checks and justified new checks; explain any real-service or human-review limits. Reference the testing skill when defining tests. Link the Verification-owned testing record for check levels and coverage rather than duplicating it.]
 
-[PLACEHOLDER: deliverable, done/deployed conditions, release prerequisites/authority, and unresolved decisions affecting the next increment. Link timestamped audits for actual results; do not duplicate their histories.]
+[PLACEHOLDER: deliverable, done/deployed conditions, and release prerequisites/authority. Link timestamped audits for actual results; do not duplicate their histories.]

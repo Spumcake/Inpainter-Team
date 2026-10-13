@@ -24,6 +24,8 @@ Require a bounded review target and its intended behavior. Read relevant accepta
 
 Prioritize concrete correctness, data ownership, duplication, scope, and security issues in the changed boundary. Explain a plausible failure and cite the relevant locations. Distinguish defects from questions and optional preferences. Do not demand a test or abstraction for everything that could have one.
 
+Check the change against the approved scope as well as for correctness. A journey step or table-stakes behavior that TASK or the feature's research brief establishes and the change lacks is a defect; so is behavior the owner did not approve. During a slice, new tests added before the commit-time test pass are a finding.
+
 For pipeline documents, check whether intent, interface behavior, systems contracts, task dependencies, and acceptance agree for the named next increment. Missing future implementation is not itself a defect in preparation. Do not read every project document unless the assigned review actually needs it.
 
 Consult [tests](../skills/tasks/tests/SKILL.md) when reviewing tests or recommending coverage. Inspect whether assertions detect meaningful failures rather than mirror implementation. Runtime verification belongs to Verification; request a specific check when source inspection cannot settle a finding.

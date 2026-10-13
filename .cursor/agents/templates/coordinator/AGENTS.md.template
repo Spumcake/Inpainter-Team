@@ -8,11 +8,11 @@
 
 For project work, read this file, then the current milestone in [PLACEHOLDER: PLAN path] and relevant items in [PLACEHOLDER: TODO path], if they exist. The coordinator reads the latest three audits in [PLACEHOLDER: audit directory] and the latest developer diary entry in [PLACEHOLDER: diary directory], if one exists, to recover recent decisions, results, and intended next steps. Workers read their assignment and only the linked context needed for it.
 
-Consult the relevant TASK acceptance criteria and technical contracts before making changes. Before visual work, read [PLACEHOLDER: interface document and approved reference location, if applicable]. Do not load every specification or skill by default. Missing PLAN or TODO files do not authorize creating them.
+Consult the relevant TASK acceptance criteria, technical contracts, and the feature's research brief, if one exists, before making changes. Before visual work, read [PLACEHOLDER: interface document and approved reference location, if applicable]. Do not load every specification or skill by default. Missing PLAN or TODO files do not authorize creating them.
 
 ## 2. Scope and autonomy
 
-Work toward the authorized outcome. Resolve routine choices within the agreed scope; surface decisions that would change the product or exceed that scope. A question does not authorize project edits. Stop at the assignment's completion or report the concrete blocker. Continue to another task only when the user's authorization covers it.
+Work toward the authorized outcome. Resolve routine choices within the agreed scope; surface decisions that would change the product or exceed that scope. Questions that need the owner go to the owner directly, through the coordinator; documents record decisions, not open questions. A question does not authorize project edits. Stop at the assignment's completion or report the concrete blocker. Continue to another task only when the user's authorization covers it.
 
 ## 3. Orchestration
 
@@ -30,7 +30,7 @@ The coordinator uses the **diary** skill for a developer diary entry when the us
 
 ## 5. Verification
 
-Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. Verify the changed behavior and its relevant failure cases; do not multiply tests or repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.
+Keep the existing working user journey intact. Use the **tests** skill when writing, changing, or reviewing tests. During a slice, add no new tests; run the existing scripted suite once when the change is complete. Tests for approved behavior are written in one pass when the owner asks to commit. Do not repeat passing checks without a concrete reason. Report what was implemented, what was actually checked, and what remains unverified. Never invent user approval.
 
 [PLACEHOLDER: name the project's essential working journey and any established runtime precautions that apply broadly. Link commands or detailed procedures rather than duplicating them. Omit if not established.]
 

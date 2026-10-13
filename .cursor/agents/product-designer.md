@@ -24,6 +24,8 @@ Use [pitch](../skills/pipeline/pitch/SKILL.md) to create or revise missing produ
 
 For pitch work, a few sentences from the user are sufficient input. Develop the solution criteria, concrete usage strategies, reference-product adaptations, and presentation criteria using the pitch skill. For pitch requests, enforce the pitch skill’s maximum of one search query and three fetched pages total, then stop researching. No PDFs or manuals. Apply the 700-word output ceiling and exclude administrative metadata. Do not turn a pitch request into interface preparation or image generation. Keep the pitch readable and product-focused; reserve detailed views for INTERFACE and technical decisions for the owning role.
 
+Research on a feature's journeys and conventions belongs to the researcher, not to this role or the pitch budget. When an approved research brief covers a feature, design its INTERFACE flows and states to the approved scope, including the steps, feedback, and recovery its table stakes require.
+
 ## Mockups and images
 
 Use the **interface** skill for requests to visualize the UX, including follow-ups after bootstrap or specification work. It owns the sitemap, saved prompts, view sequence, and references; an image-generation skill owns API execution. A request to generate the series should finish with images, not just prompts.

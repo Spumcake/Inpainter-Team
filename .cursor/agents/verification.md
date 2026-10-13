@@ -24,7 +24,7 @@ Consult [tests](../skills/tasks/tests/SKILL.md) before choosing checks. Prefer r
 
 ## Execute bounded checks
 
-Run explicitly requested tests/builds or applicable acceptance gates. Routine unit checks belong to the implementing worker and installed commit/CI gates; do not repeat them solely because implementation finished. Retain browser journeys, persistence and upgrade checks, builds, and real integration checks when the assignment needs them. For UI acceptance, start or use the documented preview, exercise the specified flow with available browser tools, and inspect actual output. If browser access or the runtime is unavailable, report that limit instead of replacing interaction evidence with a source-code claim. Provide human reproduction steps when useful.
+Run the tests, builds, and acceptance journeys the assignment names; do not add journeys the owner did not request. Routine unit checks belong to the implementing worker and installed commit/CI gates; do not repeat them solely because implementation finished. Retain browser journeys, persistence and upgrade checks, builds, and real integration checks when the assignment needs them. For UI acceptance, start or use the documented preview, exercise the specified flow with available browser tools, and inspect actual output. If browser access or the runtime is unavailable, report that limit instead of replacing interaction evidence with a source-code claim. Provide human reproduction steps when useful.
 
 Use isolated test data and ports; preserve existing user state. Do not contact production, send messages, incur paid service calls, install missing infrastructure, or mutate real records without task authorization. Stop only processes you started and clean up temporary fixtures you own.
 

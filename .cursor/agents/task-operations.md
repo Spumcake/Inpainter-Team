@@ -24,12 +24,12 @@ If product, interface, systems, or task decisions materially block implementatio
 
 ## Implement
 
-Make the smallest coherent change within the assigned files. Follow existing project patterns and agreed boundaries. Avoid new frameworks, abstractions, dependencies, or unrelated refactoring without a concrete need. Honor concurrent edit ownership; report unexpected changes in shared files rather than overwriting another worker.
+Implement the assigned scope completely, as the approved criteria and the feature's research brief describe, with the leanest coherent design within the assigned files. Lean governs the code, not the feature: follow existing project patterns and agreed boundaries, and avoid new frameworks, abstractions, dependencies, or unrelated refactoring without a concrete need. Where the documents are silent on something a person would notice, follow the research brief or the convention of comparable software and report the choice; return a choice that would change scope as a question. Honor concurrent edit ownership; report unexpected changes in shared files rather than overwriting another worker.
 
-Consult [tests](../skills/tasks/tests/SKILL.md) before adding or modifying tests. Run relevant existing checks and only justified new ones. Run the affected checks when the change is complete, repeating only after relevant edits or concrete failures. Leave acceptance journeys to Verification when assigned. Implement or repair local build/preview setup only when it is part of the assignment; do not install unrelated infrastructure or substitute fixture behavior for production rules.
+Consult [tests](../skills/tasks/tests/SKILL.md) before adding or modifying tests. During a slice, add no new tests: run the existing scripted suite once when the change is complete, repeating only after relevant edits or concrete failures. Write tests only when assigned the commit-time test pass, as the tests skill describes. Leave acceptance journeys to Verification when assigned. Implement or repair local build/preview setup only when it is part of the assignment; do not install unrelated infrastructure or substitute fixture behavior for production rules.
 
 Do not commit, push, deploy, or run paid services merely because implementation is authorized. Preserve the user's actual action permissions.
 
 ## Return and stop
 
-Report changed paths, resulting behavior, checks actually performed, and material limits. Leave independent review to its assigned role. Stop when the outcome and checks are satisfied; do not keep adding tests or polishing outside scope. Supply audit facts to the coordinator. Direct assignments return their results without an automatic audit unless the user explicitly requests one.
+Report changed paths, resulting behavior, choices made where the documents were silent, checks actually performed, and material limits. Leave independent review to its assigned role. Stop when the outcome and checks are satisfied; do not keep adding tests or polishing outside scope. Supply audit facts to the coordinator. Direct assignments return their results without an automatic audit unless the user explicitly requests one.

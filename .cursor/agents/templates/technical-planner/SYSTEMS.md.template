@@ -1,8 +1,8 @@
 # [PLACEHOLDER: project] — systems
 
-> Technical Planner-owned template. Include only relevant structure. Remove unused sections and this note; replace placeholders with facts, proposals, or explicit unknowns.
+> Technical Planner-owned template. Include only relevant structure. Remove unused sections and this note; replace placeholders with facts or proposals. Return decisions only the owner can make to the coordinator rather than listing them here.
 
-**Inputs and baseline:** [PLACEHOLDER: pitch/design links, inspected revision or new project; distinguish current, accepted target, and proposed.]
+**Inputs and baseline:** [PLACEHOLDER: pitch/design links, approved scope in TASK and the feature's research brief, inspected revision or new project; distinguish current, accepted target, and proposed.]
 
 ## Boundaries and ownership
 
@@ -26,6 +26,6 @@
 
 [PLACEHOLDER: local/preview/release components as applicable, simulated boundaries, configuration and data isolation, external prerequisites, and relevant trust boundaries. No secret values.]
 
-## Verification seams and open decisions
+## Verification seams
 
-[PLACEHOLDER: meaningful invariants and where they can be checked; reference TASK for acceptance and commands. Open decisions, affected work, and smallest resolving investigation.]
+[PLACEHOLDER: meaningful invariants and where they can be checked; reference TASK for acceptance and commands. Technical unknowns, the work they affect, and the investigation that settles them.]

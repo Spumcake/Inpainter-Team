@@ -18,7 +18,7 @@ Check whether existing coverage already addresses it. Prefer updating a relevant
 - User-visible behavior promised by the acceptance criteria, where automation reliably detects a regression.
 - Business rules with meaningful boundaries or invalid transitions: for example, a discount that starts at exactly 100, or preventing an already-returned loan from being returned twice.
 - Persistence, ownership, authorization, or integration behavior where failure could lose data, expose it, or break a key workflow.
-- A reproduced defect whose cause can be covered by a focused regression test.
+- A reproduced defect whose cause can be covered by a focused regression test, written in the commit-time pass, or at once when it could lose or corrupt stored data.
 
 Choose the level that exposes the failure. Use unit tests for isolated rules, integration tests for real boundaries, and end-to-end tests for a small number of important user flows when lower-level checks cannot establish the behavior. Do not test the same condition at every level by default.
 
@@ -45,8 +45,9 @@ Mock external boundaries only when needed to isolate the behavior under test. A 
 
 A check belongs at the cheapest level that reliably catches its failure. Do not run the same condition at several levels by default.
 
-- **After a change:** a single goal-based pass through the affected flow in the local preview. Use it for interaction, layout, and states that scripts cannot judge.
-- **Scripted tests for the change:** the tests for the changed behavior, run once when the change is complete and again only after a relevant edit.
+- **After a change:** the owner's look at the affected flow in the local preview, or a goal-based pass when one is requested. Use it for interaction, layout, and states that scripts cannot judge.
+- **During a slice:** add no new tests. Behavior under build and review is still changing, and a test written now pins a draft the owner may reject. Run the existing scripted suite once when the change is complete, and again only after a relevant edit, so behavior that already worked stays working. A defect that could lose or corrupt stored data is the exception: cover it when it is fixed.
+- **Commit-time test pass:** when the owner asks to commit work they have approved, add tests for the approved rules the every-commit checks should protect. Normally that is three to five for a slice, each naming the failure it catches. Prefer extending an existing test to adding one. Rewrite or remove existing tests whose behavior the slice deliberately changed, and report each removal and its reason.
 - **Every commit:** when configured, the local pre-commit hook runs the agreed fast deterministic suite against staged contents and blocks failures. Never bypass it. GitHub Actions runs these on pushes and pull requests to `dev` and `main`. They must be deterministic and fast, normally a few minutes. Include the build, established lint or type checks, and the unit and integration tests that protect TASK rules and stored data. Exclude browser exploration, paid or rate-limited services, model calls, and anything that needs a person to judge the result. List the commands in testing.md so the workflow and local runs agree.
 - **Release candidate:** an outside tester installs one tagged commit from a fresh clone and works through goal-based journeys, an upgrade with existing data where relevant, and a usability review. Use it for what the other levels cannot show: installing from the documents, first use, navigation, and fidelity to INTERFACE. It runs only when a candidate is tagged, never per commit.
 

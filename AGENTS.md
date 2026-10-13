@@ -8,11 +8,11 @@ Simple Sketch is a desktop app for sketching and annotating with a pressure-sens
 
 Read this file, the current milestone in `.project/documents/development/plan.md`, and the relevant items in `.project/documents/development/todo.md`. The coordinator also reads the latest three audits in `.project/documents/development/audits/` and the latest entry in `.project/documents/development/diary/`, if any. Workers read their assignment and only the context it links.
 
-Before a change, read the related criteria in `tasks.md` and the contracts in `.project/documents/development/systems.md`. Before visual work, read `INTERFACE.md` and the renders it lists in `.project/renders/ui/`. Intent is in `.project/documents/PITCH.md`. A missing plan or todo does not authorize creating one.
+Before a change, read the related criteria in `tasks.md`, the contracts in `.project/documents/development/systems.md`, and the feature's research brief in `.project/documents/development/research/`, if one exists. Before visual work, read `INTERFACE.md` and the renders it lists in `.project/renders/ui/`. Intent is in `.project/documents/PITCH.md`. A missing plan or todo does not authorize creating one.
 
 ## 2. Scope and autonomy
 
-Work toward the authorized outcome. Resolve routine choices inside that scope. Surface a decision that would change the product or go past it. A question does not authorize edits. Stop when the assignment is done, or name the blocker. Continue only when the user has authorized the next task.
+Work toward the authorized outcome. Resolve routine choices inside that scope. Surface a decision that would change the product or go past it, to the owner directly through the coordinator, never as an open question in a document. A feature in scope is built to what users of comparable tools expect; lean applies to how it is built, not to how complete it is. A question does not authorize edits. Stop when the assignment is done, or name the blocker. Continue only when the user has authorized the next task.
 
 ## 3. Orchestration
 
@@ -28,9 +28,9 @@ The plan is the milestone order. The todo list is the current queue. The coordin
 
 ## 5. Verification
 
-The first journey is a new sketch: draw a smoothed pressure-sensitive stroke on Canvas 1, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. Commands are in `tasks.md`. Check levels are in `.project/documents/development/testing.md`. Use the tests skill when writing, changing, or reviewing tests. Cover the failure that matters. Report what was checked and what was not.
+The first journey is a new sketch: draw a smoothed pressure-sensitive stroke on Canvas 1, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. Commands are in `tasks.md`. Check levels are in `.project/documents/development/testing.md`. Use the tests skill when writing, changing, or reviewing tests. During a slice, add no new tests and run the existing `cargo test` once when the change is complete. Tests for approved behavior are written in one pass when the owner asks to commit. Report what was checked and what was not.
 
-A preview judges the window against `INTERFACE.md`. A unit test judges session, document, registry, and schema rules. Do not snapshot meshes or treat the reference drawing as built-in content. Commits happen only when the user asks, and only the branch-manager changes Git state. No hook or workflow is installed. Verification runs a requested acceptance journey and does not repeat the unit suite as a routine. Document-only work needs no application run.
+A preview judges the window against `INTERFACE.md`. A unit test judges session, document, registry, and schema rules. Do not snapshot meshes or treat the reference drawing as built-in content. Commits happen only when the user asks, and only the branch-manager changes Git state. No hook or workflow is installed. Verification runs an acceptance journey only when the owner requests one and does not repeat the unit suite as a routine. Document-only work needs no application run.
 
 ## 6. Boundaries
 
