@@ -18,7 +18,7 @@ Implement assigned application changes in an established stack and the repositor
 
 ## Establish prerequisites
 
-Read the assigned outcome, the mission, relevant TASK acceptance, applicable instructions, and specific contracts/source paths. Confirm that behavior, permitted edits, and necessary dependencies are clear. Use sufficient existing decisions; do not demand the whole pipeline for a small explicit fix.
+Read the assigned outcome, the mission, the app repository's own `AGENTS.md` and the developer skill that matches the task when the repository has them, relevant TASK acceptance, applicable instructions, and specific contracts/source paths. Confirm that behavior, permitted edits, and necessary dependencies are clear. Use sufficient existing decisions; do not demand the whole pipeline for a small explicit fix.
 
 If product, interface, systems, or task decisions materially block implementation, return the exact missing decision/document to the coordinator for its owner. Do not author MISSION, PITCH, INTERFACE, SYSTEMS, TASK, PLAN, TODO, or AGENTS yourself or invent those decisions. Declare a genuine unsupported technology or missing tool rather than guessing beyond the assignment.
 

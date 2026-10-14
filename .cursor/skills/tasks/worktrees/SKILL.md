@@ -26,7 +26,7 @@ Cursor opens the project's **team repository**. It holds Pipeline, the working r
 ## Repositories
 
 - **The team repository** versions everything except the apps: Pipeline, AGENTS.md, TEAM.md, and the project documents. Record its URL in AGENTS.md and TEAM.md.
-- **Each app repository** holds only that app: source, tests, README, `.github/workflows/`, and its own configuration. Never put Pipeline files or project documents in it. Record each URL in AGENTS.md and TEAM.md.
+- **Each app repository** holds only that app: source, tests, README, `.github/workflows/`, and its own configuration. It may also hold its own developer guidance: an `AGENTS.md` and developer skills, such as `skills/<name>/SKILL.md`, that describe how to work on that app's code and change with it. Those belong to the app, not to Pipeline. Never put Pipeline files or project documents in it. Record each URL in AGENTS.md and TEAM.md.
 
 Existing projects may keep application code in their current repository until migration is explicitly authorized. Name that repository and its current working directory in assignments; do not pretend a separate app checkout exists. Preserve existing canonical document paths.
 
@@ -53,22 +53,30 @@ Paths such as `.project/documents/` are relative to the team repository's root. 
 1. **Start:** when a `work-*` worktree exists, the branch-manager checks for stale worktrees (see Cleanup). Otherwise skip this step.
 2. **Assign:** one worker for a repository works in `src/<repo>/worktrees/dev/`. With several assignments in one repository, the branch-manager creates one `work-<name>/` per assignment from the same `dev` commit. The assignment names the repository and the worktree.
 3. **Commit,** only when the user asks:
+   - First, the branch-manager runs the branch check below for the repository.
    - The branch-manager commits each worker's changes on its branch and merges it into `dev` with a merge commit. A single worker's changes are committed directly on `dev`.
    - When installed, the app's pre-commit hook runs the agreed deterministic suite on staged files and blocks a failing commit. Report a missing hook rather than claiming coverage. Never bypass it. A rejected commit goes back to the worker that owns the code.
    - If a merge conflicts, the branch-manager leaves the merge in progress in `src/<repo>/worktrees/dev/` and reports the files. The integration worker resolves them there, and the branch-manager completes the merge.
 4. **Record:** at a milestone, the audit names the app commit's short hash and subject line, and the agreed version, if any. Verification records acceptance results in testing.md against that commit.
 5. **Commit the team repository,** when the user asks: the branch-manager commits assigned pipeline and document changes. App-related documents carry `App-Commit: <short hash>` trailers identifying the relevant repositories; pipeline-only maintenance needs no app trailer.
-6. **Clean up:** remove merged worktrees and branches.
+6. **Clean up:** the branch check in step 3 has already removed integrated worktrees. Report any it left.
 7. **Push:** the owner pushes `dev` and the team repository. The branch-manager never pushes; report the commands for the owner.
+
+## Branch check
+
+Commits happen only when the owner asks, so concurrent work is often integrated into `dev` by copying it there, uncommitted, before any commit exists. A worktree can then hold drafts that are already in `dev` while its branch has no commits at all. The branch check settles every such worktree at a fixed point, instead of leaving it to judgment.
+
+The branch-manager runs it before every commit in an app repository, and at the start of a slice when a `work-*` worktree exists. In that repository's bare clone, run `git worktree list` and `git worktree prune`. Then classify each `work-*` worktree:
+
+1. **Integrated:** its branch has no commits that `dev` lacks (`git rev-list --count dev..work/<name>` is `0`), the Coordinator has said the integration worker brought this worktree into `dev`, and every file the worktree changed or added exists in `dev`. Remove it with `git worktree remove --force` and delete its branch with `git branch -d`. Force is allowed here only because the check has shown that nothing in it would be lost.
+2. **Merged:** its branch has commits that `dev` lacks and the slice being committed includes them. Merge the branch into `dev` with `--no-ff`, as in step 3, then remove the worktree and delete the branch.
+3. **Reported:** anything else, such as work that is not in `dev`, a branch outside the slice, or a file that `dev` lacks. Touch nothing. Report the worktree, its branch, and what is not in `dev`. It is removed only with the owner's approval.
+
+The branch check never merges `dev` into `main`. That happens only when the owner merges a release pull request on GitHub.
 
 ## Cleanup
 
-- **On merge:** remove the merged worktree with `git worktree remove`, and delete its branch with `git branch -d`.
-- **On abandonment:** when an assignment is cancelled or fails, remove its worktree once nothing in it is needed. An unmerged branch is deleted only with the owner's approval; otherwise report it.
-- **When a `work-*` worktree exists:** for each `src/*/worktrees/.bare` that exists:
-  - run `git worktree list` and `git worktree prune` in that bare clone;
-  - report any work worktree or branch that is merged, abandoned, or older than the current task;
-  - remove the merged ones.
+- **On abandonment:** when an assignment is cancelled or fails, its worktree is reported by the branch check and removed once the owner approves.
 - **`main`:** remove any `main` checkout when its purpose is done.
 
 ## Setting up a repository

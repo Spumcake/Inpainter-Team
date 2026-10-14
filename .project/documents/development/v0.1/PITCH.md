@@ -12,7 +12,7 @@ The window stays up when a sub-application stops or stops responding, and the ho
 
 Open Inpainter. The host window appears with Simple Sketch already started. The tab strip holds the open work, the tool area holds Simple Sketch's tools, and the panel holds its properties. Sketching happens in that window.
 
-The first slice loads an empty demo that declares nothing. The window, the tab strip and its new-tab control, the menu, and the tool area are still there. The demo declares the grid and the properties panel, so they appear too. The demo has nothing of its own to add.
+The first slice loads the template that declares nothing. The window, the tab strip and its new-tab control, the menu, and the tool area are still there. The template declares the grid and the properties panel, so they appear too. The template has nothing of its own to add.
 
 With no host, Simple Sketch is driven entirely through the protocol. The person does not launch Simple Sketch. They launch Inpainter, and the host starts the sub-application.
 
@@ -26,4 +26,4 @@ The host window is what appears first. The reference shows it light and compact.
 
 ## This version
 
-Version 0.1 separates the host from the sub-application. Simple Sketch runs inside the host, and it can also run with no host. The first slice is the host shell with an empty demo sub-application that declares nothing. The version continues past that slice to Simple Sketch inside the host. The assistant comes later, as a persistent chat panel on the left, about a quarter of the window's width. Any second creative app comes later as well. This version builds the shared shell and the first sub-application, on the way to many sub-applications in one window and an assistant that works across them.
+Version 0.1 separates the host from the sub-application. Simple Sketch runs inside the host, and it can also run with no host. The first slice is the host shell with the template sub-application. The version continues past that slice to Simple Sketch inside the host. The assistant comes later, as a persistent chat panel on the left, about a quarter of the window's width. Any second creative app comes later as well. This version builds the shared shell and the first sub-application, on the way to many sub-applications in one window and an assistant that works across them.

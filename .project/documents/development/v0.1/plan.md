@@ -2,9 +2,13 @@
 
 Version 0.1 separates the host from the sub-application, as the owner set on 2026-10-14. The owner agreed what the first slice shows on 2026-10-14, in [H-1](tasks.md), and on that day instructed that slice to be built.
 
-## Host shell with an empty demo
+## Host shell with the template
 
-This slice is built. The host opens on the demo and draws the common UI in the first-slice paragraph of [H-1](tasks.md): title Inpainter, one Demo tab, an empty toolbar, the shared grid, and a panel tab that opens and closes an empty column. The menu button, the plus, and the close mark do nothing. On 2026-10-14 the running window was checked against [shell-demo.png](../../../renders/ui/shell-demo.png). The record is [the audit](../../history/v0.1/audits/2026-10-14T15-30-08Z-first-slice-shell.md). The moves are the first-slice section of [reuse.md](reuse.md). The visible status when a sub-application has stopped is [H-2](tasks.md), in the next milestone.
+This slice is built. The host opens on the template and draws the common UI in the first-slice paragraph of [H-1](tasks.md): title Inpainter, one Template tab, an empty toolbar, the shared grid, and a panel tab that opens and closes an empty column. The menu button, the plus, and the close mark do nothing. On 2026-10-14 the running window was checked against [shell-demo.png](../../../renders/ui/shell-demo.png). The record is [the audit](../../history/v0.1/audits/2026-10-14T15-30-08Z-first-slice-shell.md). The moves are the first-slice section of [reuse.md](reuse.md). The visible status when a sub-application has stopped is [H-2](tasks.md), in the next milestone.
+
+## Scaffolding sub-applications
+
+The template is the smallest correct sub-application, and the host finds sub-applications by manifest. The Inpainter repository's **scaffolding** skill copies the template to start a new one. It is complete when a fresh agent can scaffold a sub-application with it alone, and Simple Sketch then starts as a scaffold.
 
 ## Simple Sketch inside the host
 

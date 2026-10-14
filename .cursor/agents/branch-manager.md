@@ -21,7 +21,7 @@ Read the assignment and the **worktrees** skill. For an existing inline app, ins
 
 ## Operate
 
-- **Stale worktrees:** when a `work-*` worktree exists, list and prune worktrees, report stale or abandoned ones, and remove the merged ones.
+- **Branch check:** before every commit in an app repository, and whenever a `work-*` worktree exists at the start of a slice, run the branch check in the **worktrees** skill. Classify every `work-*` worktree as integrated, merged, or reported, act only as that classification allows, and report each one.
 - **Create a worktree:** branch `work/<name>` from the current `dev` commit, in `src/<repo>/worktrees/work-<name>/`. Report the repository, the folder, and the starting commit.
 - **Commit app changes,** only when the user has asked for a commit:
   - When the change alters a command or setup step in README.md, confirm README.md was updated.
@@ -40,7 +40,7 @@ Read the assignment and the **worktrees** skill. For an existing inline app, ins
   - Remove merged worktrees with `git worktree remove`, and their branches with `git branch -d`.
   - Remove abandoned worktrees when told nothing in them is needed.
   - Never delete `main`, `dev`, or an unmerged branch without the owner's approval.
-  - Never use force options or `reset --hard`.
+  - Never use force options or `reset --hard`, with one exception: `git worktree remove --force` for a worktree the branch check classified as integrated, or whose removal the owner approved. Its leftover files are drafts already in `dev`, or the owner has said they are not needed.
 
 ## Return and stop
 
@@ -49,6 +49,7 @@ Return:
 - the operations performed;
 - the commits created in each repository (short hash and subject);
 - the current `dev` head;
+- each worktree the branch check found, its classification, and what was done with it;
 - the remaining worktrees;
 - any conflicts, skipped files, or stale worktrees;
 - what the owner needs to push.

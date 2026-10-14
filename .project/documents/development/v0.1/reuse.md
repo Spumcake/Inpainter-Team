@@ -2,7 +2,7 @@
 
 **Reference:** `src/simple-sketch` at `887f6f4d7813f0a2cf1114f496f6b7eb33f18c4f` (version 1.0.1, “Package Simple Sketch 1.0.1 as an AppImage and an installable tarball.”). That is the commit the mission names. It was read from the tree that is checked out. The owner instructed implementation of the first slice on 2026-10-14, so that section is the map to build. The rest of this map, from “Rest of 0.1” on, is not approved and is not part of this slice.
 
-**Scope:** Version 0.1 as the owner set on 2026-10-14, in `.project/documents/development/v0.1/tasks.md` (H-1 through H-5). The shell’s look is the chrome in `.project/.simple-sketch/INTERFACE.md`: window, tab strip and new-tab button, menu button, toolbar, and the properties panel that opens from a tab at its edge. The first slice is only that chrome, with an empty demo that declares nothing. Sketching-only tools, palettes, objects, and the grid stay out of that slice. The rest of this version carries Simple Sketch in as a sub-application. The assistant, any second creative app, and an app drawing its own view by sending paint commands are not mapped.
+**Scope:** Version 0.1 as the owner set on 2026-10-14, in `.project/documents/development/v0.1/tasks.md` (H-1 through H-5). The shell’s look is the chrome in `.project/.simple-sketch/INTERFACE.md`: window, tab strip and new-tab button, menu button, toolbar, and the properties panel that opens from a tab at its edge. The first slice is only that chrome, with the template that declares nothing. Sketching-only tools, palettes, objects, and the grid stay out of that slice. The rest of this version carries Simple Sketch in as a sub-application. The assistant, any second creative app, and an app drawing its own view by sending paint commands are not mapped.
 
 Destinations are paths in the Inpainter repository (https://github.com/Spumcake/Inpainter), which is not checked out. The future team-repo checkout is `src/inpainter/worktrees/dev/`.
 
@@ -10,7 +10,7 @@ The reference is one crate, `simple-sketch`, one program, `src/main.rs` calling 
 
 - `host/` — binary crate `inpainter`. The shell. It may depend on `draw` and `protocol`. It must not depend on anything under `apps/`.
 - `draw/` — library crate `draw`. Drawing, erasing, shapes, text, and ordering. The host links it and calls it in-process, so pen input stays in the host.
-- `apps/demo/` — binary crate `demo`. The empty sub-application for the first slice.
+- `apps/template/` — binary crate `template`. The empty sub-application for the first slice.
 - `apps/simple-sketch/` — binary crate `simple-sketch`. How a sketch is arranged, how it is saved, and its undo.
 - `protocol/` — library crate both programs may depend on. It is New. This map does not specify its messages.
 
@@ -18,7 +18,7 @@ A workspace `Cargo.toml` lists those members. No app crate appears in `host`’s
 
 ## First slice — into the host
 
-The host draws the areas. The demo fills none of them. Copy each file, then make only the edits named here. Strings, colors, sizes, and behavior of what is drawn stay as they are.
+The host draws the areas. The template fills none of them. Copy each file, then make only the edits named here. Strings, colors, sizes, and behavior of what is drawn stay as they are.
 
 ### Window
 
@@ -52,7 +52,7 @@ Assets and dependencies the window needs:
 - `tab_row`, `Tab`, `tab_chip`, `paint_tab`, `close_control`, `paint_close_mark`. Chip constants: `PAD_LEFT` 14, `PAD_RIGHT` 8, `CLOSE` 20, `MIN_WIDTH` 120, `MAX_LABEL` 180, label 13.5 points in `ICON`, gap 10 before the close control, corner radius 8, outline stroke 1 in `TAB_EDGE`. Close glyph `"xmark"` at 11 points; the unsaved dot has radius 4. Scroll area id `"tabs"`, scroll bar hidden. The row’s width is `available_width - 36`, at least 48. Middle-click closes. Double-click does not edit the title.
 - `finish_close`.
 
-Edit, as the owner set on 2026-10-14: the menu's rows are the commands declared by the sub-application of the selected tab. Each tab is a document its sub-application reports, labeled with the name of the file that sub-application manages or, when it manages no file, with the sub-application's own name. The demo reports one tab, `Demo`. It declares no menu rows and no new-tab command, and it has only that tab, so the menu button, the plus, and the tab's close mark are drawn as they are now, as in `.project/renders/ui/shell-demo.png`, and a click on any of them does nothing: no popup, no new tab, no close. `SketchId` is not used.
+Edit, as the owner set on 2026-10-14: the menu's rows are the commands declared by the sub-application of the selected tab. Each tab is a document its sub-application reports, labeled with the name of the file that sub-application manages or, when it manages no file, with the sub-application's own name. The template reports one tab, `Template`. It declares no menu rows and no new-tab command, and it has only that tab, so the menu button, the plus, and the tab's close mark are drawn as they are now, as in `.project/renders/ui/shell-demo.png`, and a click on any of them does nothing: no popup, no new tab, no close. `SketchId` is not used.
 
 Do not move, in this slice: `Chrome`’s confirm, quit, replace, recovery, and error fields, or `note_window_close`, `confirm`, `replace_dialog`, `recovery_dialog`, `error_dialog`, `recent_rows`, `RecentPick`. Those are the sketch’s save prompts. They are mapped below, when Simple Sketch is a sub-application.
 
@@ -66,7 +66,7 @@ Do not move, in this slice: `Chrome`’s confirm, quit, replace, recovery, and e
 - `MenuItem`, `MenuPick`, `menu_rows`, `menu_rows_with`. Constants: `MENU_MIN_W` 148, `MENU_INSET` 10, `MENU_ICON` 18, `MENU_ICON_GAP` 8, `MENU_CHEVRON` 14, `MENU_CHEVRON_ICON` `"nav-arrow-right"`, row height 28, row spacing y 2, highlight radius 4, divider 5 points in `BORDER`.
 - `drag_scroll_cursor`, `quiet`.
 
-Leave in the reference for this slice, and move them into this same host file when Simple Sketch’s declarations are drawn: `field`, `slider`, `slider_in`, `toggle`, `number_field`, `text_field`, `dropdown`, `segmented`, `dash_sample`, `cap_sample`, `NumberEdit`, `action_menu`, and `KNOB_RADIUS` 7, `FIELD_RADIUS` 6, `FIELD_PAD` 10. They draw tool and property values, which the demo does not declare.
+Leave in the reference for this slice, and move them into this same host file when Simple Sketch’s declarations are drawn: `field`, `slider`, `slider_in`, `toggle`, `number_field`, `text_field`, `dropdown`, `segmented`, `dash_sample`, `cap_sample`, `NumberEdit`, `action_menu`, and `KNOB_RADIUS` 7, `FIELD_RADIUS` 6, `FIELD_PAD` 10. They draw tool and property values, which the template does not declare.
 
 ### Tool area
 
@@ -85,7 +85,7 @@ Dependency: `iconflow = { version = "=2.1.0", default-features = false, features
 
 From `src/registry.rs`, moved into `host/src/icons.rs` because the command tables stay behind: `IconSpec`, `icon_spec`, `TURNED_ICONS` (`"flip-vertical"` is `"flip"` turned one quarter). `Key`, `Key::label`, `Chord`, `Chord::plain`, `Chord::ctrl`, `Chord::ctrl_shift`, `Chord::ctrl_any_shift`, `Chord::shift`, `Chord::label`, and `hover`. The panel shortcut moves with them: key `F4`, label `"F4"`, command label `"Properties"`, so the edge tab’s hover stays `"Properties (F4)"`.
 
-Edit: `show` does not call `swatches`, `file_commands`, `history_commands`, `canvas_commands`, `tools`, `context_actions`, `tool_bar`, or `zoom`. Those groups are declared commands and tools. The demo declares none, so the white bar is empty, with its hairline. The pin-to-the-right layout and the scroll stay, so a later declaration still pins its trailing group and scrolls the rest. `paint_drawn_icon` and `teardrop` do not move in this slice; they draw the brush, which is a sketching tool. `DRAWN_ICONS` stays with them.
+Edit: `show` does not call `swatches`, `file_commands`, `history_commands`, `canvas_commands`, `tools`, `context_actions`, `tool_bar`, or `zoom`. Those groups are declared commands and tools. The template declares none, so the white bar is empty, with its hairline. The pin-to-the-right layout and the scroll stay, so a later declaration still pins its trailing group and scrolls the rest. `paint_drawn_icon` and `teardrop` do not move in this slice; they draw the brush, which is a sketching tool. `DRAWN_ICONS` stays with them.
 
 Leave in `src/toolbar.rs` for this slice: `SWATCH_W` 28, `SWATCH_INSET` 2, `SIZE_W` 186, `BAR_SLIDER_W` 150, `CHEVRON_W` 14, `CHEVRON_ICON` `"nav-arrow-down"`, `swatches`, `swatch_dot`, `swatch_color`, `mix_white`, `command_button`, `tools`, `context_actions`, `context_menu`, `tool_bar`, `list_button`, `bar_slider`, `BarEdit`, `size_control`, `zoom`, `paint_drawn_icon`, `teardrop`.
 
@@ -107,9 +107,9 @@ Leave in `src/panel.rs` for this slice: `S`, `ROW`, `ROW_GAP`, `LABEL_W`, `NUMBE
 
 `src/canvas.rs` `paint_grid`, `screen_to_document`, and `document_to_screen`, with `GRID_SPACING` (`24.0`) from `src/document.rs` and the two lines of `Camera::centered` → `host/src/grid.rs`: move and edit. Stroke 1 in `Color32::from_rgb(234, 235, 238)`. As the owner set on 2026-10-14, the grid is a shared component of the host, drawn in a tab's contents area when that tab's sub-application declares it, so a later sub-application can use it too. Edit: it is drawn as the reference draws a new sketch, origin centered in the area and zoom 1, as `Camera::centered` sets it. Panning and zooming the grid are not part of this slice. `src/document.rs` keeps its own `GRID_SPACING` for snapping.
 
-### First slice — into the demo
+### First slice — into the template
 
-The demo is New. It is named with the New list. No reference file moves into `apps/demo/`. As the owner set on 2026-10-14, the demo reports one tab, `Demo`, because it manages no file, and declares the shared grid as that tab's contents and the properties panel on the right. It declares no tools, commands, menu rows, properties, or skills, so the toolbar and the panel stay empty, and nothing else happens.
+The template is New. It is named with the New list. No reference file moves into `apps/template/`. As the owner set on 2026-10-14, the template reports one tab, `Template`, because it manages no file, and declares the shared grid as that tab's contents and the properties panel on the right. It declares no tools, commands, menu rows, properties, or skills, so the toolbar and the panel stay empty, and nothing else happens.
 
 ## Rest of 0.1 — Simple Sketch inside the host
 
@@ -181,8 +181,8 @@ Not this version, so not mapped:
 ## New, awaiting the owner
 
 - The host/sub-application protocol, as a crate both sides can depend on. It is specified in systems and brought to the owner before the first slice is built. The reference is one process: `registry.rs` and `schema.rs` are in-memory tables the window reads directly, and `main` opens the window. There is no declaration passed between programs, and no way to drive the app with no window. H-5 needs that. This map does not define the messages, the ids, or the transport.
-- `apps/demo/`, a separate program that reports one tab, `Demo`, and declares only the shared grid and the properties panel. The reference has only Simple Sketch.
+- `apps/template/`, a separate program that reports one tab, `Template`, and declares only the shared grid and the properties panel. The reference has only Simple Sketch.
 - The host’s report when a sub-application stops or stops responding, drawn in the window the host already has. The reference has no child process. `install_panic_hook` writes a recovery file and then the window, which is the same process, comes down with the panic. The file-error dialog is a failed save or open, not a stopped program.
 - The workspace itself: root `Cargo.toml` and the crate boundaries above. The reference is a single package.
-- A host-side test that the empty demo’s declarations are empty and that the areas are still drawn. The reference’s tests construct `SketchApp`. They do not cover a second program. This waits until the owner asks to commit tests, as the delivery document says.
+- A host-side test that the template’s declarations are empty and that the areas are still drawn. The reference’s tests construct `SketchApp`. They do not cover a second program. This waits until the owner asks to commit tests, as the delivery document says.
 - One scripted test that starts the simple-sketch program with no host and drives one declared command. That is H-5. The reference has no such harness.
