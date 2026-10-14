@@ -8,7 +8,7 @@ Many sub-applications in one window, used by one agentic harness to carry out a 
 
 ## What is always true
 
-**The shell.** The person only ever launches the host; the host starts sub-applications for them. The host always draws its own common UI, whatever sub-application is loaded, even one that declares nothing: the window, a tab strip with a new-tab control, a menu, a tool area, a panel area, and the sub-application's status when it stops or stops responding. Once it exists, the assistant is a persistent chat panel on the left, about a quarter of the window's width. Sub-applications fill these areas; they never create or remove them.
+**The shell.** The person only ever launches the host; the host starts sub-applications for them. The host always draws its own common UI, whatever sub-application is loaded, even one that declares nothing: the window, a tab strip with a new-tab control, a menu, a tool area, and the sub-application's status when it stops or stops responding. Once it exists, the assistant is a persistent chat panel on the left, about a quarter of the window's width. Sub-applications fill these areas; they never create or remove them. The host also provides shared components that a sub-application chooses to use, such as the properties panel and the grid. The host draws a shared component, always the same way, only where a sub-application declares it; the sub-application declares whether it uses one, what it holds, and, for the panel, which side it sits on.
 
 **The boundaries.** The host and each sub-application are separate programs. The host cannot import an app, and apps never import each other. The code structure enforces this, with separate crates and programs, not documents alone. One process serves every tab of a sub-application, and if it crashes or hangs, the host stays up. A sub-application can run with no host and be driven entirely through the protocol.
 
@@ -33,3 +33,4 @@ A monolith that tries to do everything in one program. A general-purpose AI chat
 - **Artifact:** a piece of work a sub-application owns and saves.
 - **Declarations:** what a sub-application tells the host it offers, as data.
 - **Common UI:** what the host always shows, whatever sub-application is loaded.
+- **Shared component:** something the host draws the same way for any sub-application that declares it, such as the properties panel and the grid.
