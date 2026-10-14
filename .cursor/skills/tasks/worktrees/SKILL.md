@@ -12,7 +12,9 @@ Cursor opens the project's **team repository**. It holds Pipeline, the working r
   .cursor/                           Pipeline
   AGENTS.md                          project working rules
   TEAM.md                            for the outside team that handles and tests commits
-  .project/documents/development/v1.0/  pitch, systems, tasks, plan, todo, testing, audits, diary, archive
+  .project/documents/concept/        MISSION.md, the product's lasting identity, owned by the owner
+  .project/documents/development/<version>/  pitch, systems, tasks, plan, todo, testing, research
+  .project/documents/history/        diary, and each version's audits, archive, and post-mortem
   .gitignore                         includes /src/
   .cursorindexingignore              keeps duplicate checkouts out of Cursor's index
   src/<repo>/worktrees/              one app repository, ignored by the team repository

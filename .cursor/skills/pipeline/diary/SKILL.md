@@ -15,7 +15,7 @@ Write an entry when the user asks for one. At the end of a working session that 
 
 ## Gather what happened since the previous entry
 
-Find the latest entry in `.project/documents/development/v1.0/diary/` unless the project already has a canonical location. For another version, use that version's folder. Its timestamp is the start of this entry's span. With no previous entry, cover the project from its start, briefly, and say so.
+Find the latest entry in `.project/documents/history/diary/` unless the project already has a canonical location. The diary is one stream across versions. Its timestamp is the start of this entry's span. With no previous entry, cover the project from its start, briefly, and say so.
 
 Use only sources that already exist:
 
@@ -30,13 +30,13 @@ Do not rerun tests, relaunch the app, or reopen investigations to fill the entry
 
 Close the entry with the next steps from the conversation. Distinguish what the user agreed to, what was proposed and is awaiting a decision, and what is blocked and on whom. Name decisions that belong to the user. Recording a next step does not authorize it; TODO stays the work queue.
 
+Record ideas the owner has not adopted as proposals. When an entry is mostly such a discussion, say so in its first lines. An entry never makes something part of the mission or a version's scope; only the owner does, in the owning document.
+
 ## Write the entry
 
 Adapt [the template](templates/DIARY.md). Obtain the actual current UTC time from the environment and create:
 
-`<team>/.project/documents/development/<version>/diary/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
-
-For a project working toward version 1.0, `<version>` is `v1.0`.
+`<team>/.project/documents/history/diary/YYYY-MM-DDTHH-mm-ssZ-short-topic.md`
 
 Create the folder when needed. Use a numeric suffix on collision; never overwrite or edit an earlier entry. Link the previous entry. A correction to an earlier entry goes in the new one.
 

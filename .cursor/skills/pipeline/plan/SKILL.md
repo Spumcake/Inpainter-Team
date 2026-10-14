@@ -5,11 +5,11 @@ description: Create or update a concise prose implementation roadmap when planni
 
 # Write a readable implementation plan
 
-Use this skill when authorized work requires creating or revising an implementation roadmap. Installing pipeline resources, discussing an approach, or finding that PLAN.md is absent does not by itself call for creating it. Preserve an existing canonical location. For a project working toward version 1.0, the default is `.project/documents/development/v1.0/plan.md`. A project that starts from nothing is working toward version 1.0 unless the owner states otherwise. Version 1.0 is the full realization of the pitch.
+Use this skill when authorized work requires creating or revising an implementation roadmap. Installing pipeline resources, discussing an approach, or finding that PLAN.md is absent does not by itself call for creating it. Preserve an existing canonical location. The default is `.project/documents/development/<version>/plan.md`, with `v1.0` for a project working toward version 1.0. A project that starts from nothing is working toward version 1.0 unless the owner states otherwise. Version 1.0 is the full realization of the pitch.
 
 ## Preserve earlier work
 
-Routine progress updates stay in place. Before replacing the document for a new slice, substantially rewriting it, or clearing completed work, archive its exact existing contents under that version folder: `archive/YYYY-MM-DDTHH-mm-ssZ-short-purpose/`, keeping the original filename. Use the actual UTC time and a short descriptive purpose; when replacing PLAN and TODO together, use the same archive folder for both. Never overwrite an earlier archive; add a numeric suffix if needed.
+Routine progress updates stay in place. Before replacing the document for a new slice, substantially rewriting it, or clearing completed work, archive its exact existing contents under `.project/documents/history/<version>/archive/YYYY-MM-DDTHH-mm-ssZ-short-purpose/`, keeping the original filename. Use the actual UTC time and a short descriptive purpose; when replacing PLAN and TODO together, use the same archive folder for both. Never overwrite an earlier archive; add a numeric suffix if needed.
 
 Save and confirm the unchanged archive copy before replacing the active file. If archiving fails, leave the active document intact and report the blocker. Retain outstanding decisions and unfinished work in the replacement unless explicitly deferred or dropped; do not silently lose them. Add one short relative link to the previous version in the new document. An audit or Git history does not replace this archive. Do not archive or reset documents merely because a new slice starts if a small update is sufficient.
 

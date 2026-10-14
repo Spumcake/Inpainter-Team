@@ -9,9 +9,9 @@ Write `post-mortem.md` when a version's work is complete. It is a summary of the
 
 ## Where it goes
 
-`<team>/.project/documents/development/<version>/post-mortem.md`
+`<team>/.project/documents/history/<version>/post-mortem.md`
 
-A project that starts from nothing uses `v1.0` unless the owner stated otherwise. Version 1.0 is the full realization of the pitch. Do not overwrite an existing post-mortem.
+Honor an existing canonical location. A project that starts from nothing uses `v1.0` unless the owner stated otherwise. Version 1.0 is the full realization of its pitch. Do not overwrite an existing post-mortem.
 
 ## How long it took
 
@@ -20,3 +20,7 @@ Take the start and the end from the records and the environment. The start is th
 ## What to summarize
 
 Use the pitch, the task list, the audits, the diary, and the commit history. Cover what was built, what the owner decided, and what stayed outside the version. Link the pitch and the task list. Do not copy the audits. Usually 300–600 words. Name who confirmed the version was complete. An implementation by itself does not close the version.
+
+## Close the version
+
+After saving the post-mortem, move the version's working documents from `development/<version>/` into `history/<version>/`, beside its audits and archive, so `development/` holds only versions in progress. The mission stays where it is. Fix links that the move breaks in the moved documents. If other documents depend on the old paths, report them rather than leaving the version half moved.

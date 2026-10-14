@@ -13,7 +13,7 @@ Roles may be filled by people, agents, automation, or a mix. Recommend participa
 
 ## Advise on the team
 
-When the user asks what team a project needs, answer in conversation. Do not write TEAM.md unless that is authorized. Derive the roles from the project's actual needs, using PITCH, SYSTEMS, TASK, and TESTING where they exist. For each role, say:
+When the user asks what team a project needs, answer in conversation. Do not write TEAM.md unless that is authorized. Derive the roles from the project's actual needs, using MISSION, PITCH, SYSTEMS, TASK, and TESTING where they exist. For each role, say:
 
 - what it is responsible for;
 - how often it acts;

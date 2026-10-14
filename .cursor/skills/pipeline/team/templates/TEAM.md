@@ -75,8 +75,8 @@ Tests each release candidate once, as a careful first-time user, and reports wha
 The app repository holds the code, README.md for install and quick start, and the workflows. The team repository holds:
 
 - [PLACEHOLDER: TESTING path], for checks, the release-test brief, and the coverage record;
-- the project documents: [PLACEHOLDER: TASK, PITCH, INTERFACE, SYSTEMS, PLAN, TODO, archive, and audit paths that exist];
-- [PLACEHOLDER: developer diary path, normally `.project/documents/development/v1.0/diary/`, if it exists], a dated account of the work between entries and the next steps intended at the time.
+- the project documents: [PLACEHOLDER: MISSION, and the TASK, PITCH, INTERFACE, SYSTEMS, PLAN, TODO, archive, and audit paths that exist];
+- [PLACEHOLDER: developer diary path, normally `.project/documents/history/diary/`, if it exists], a dated account of the work between entries and the next steps intended at the time.
 
 The team repository has one branch and describes the current state of the project. App-related document commits name matching app revisions in `App-Commit:` trailers, identifying repositories when more than one is involved; pipeline-only commits need no app trailer. Audits name the app commit they verified. Use these to find the documents that match the candidate you are testing, and report any mismatch.
 

@@ -5,7 +5,7 @@ description: Research how comparable production software handles a requested fea
 
 # Research a feature's journeys and conventions
 
-A feature should meet the expectations of people who already use comparable tools. This skill establishes those expectations before scope and contracts are written, so a feature is not reduced to its thinnest reading. The brief is evidence. The owner decides scope, TASK records it, and SYSTEMS describes a lean implementation of it.
+When no reference covers a feature, it should meet the expectations of people who already use comparable tools. Where a reference covers it, the reference defines it, and this skill does not run unless the owner asks. This skill establishes those expectations before scope and contracts are written, so a feature is not reduced to its thinnest reading. The brief is evidence. The owner decides scope, TASK records it, and SYSTEMS describes a lean implementation of it.
 
 ## Choose references
 
@@ -30,13 +30,13 @@ Sort each behavior by the evidence:
 - **Table stakes:** nearly every reference has it, or its absence draws user complaints. Users are blocked or surprised without it.
 - **Common:** most references have it, and users notice when it is missing.
 - **Differentiators:** what sets one reference apart.
-- **Excluded by the product:** conflicts with the pitch's boundaries or a deliberate departure in the pitch. Name the boundary.
+- **Excluded by the product:** conflicts with the mission's or the pitch's boundaries, or a deliberate departure in the pitch. Name the boundary.
 
 Classification is a finding with evidence. It does not decide scope.
 
 ## Write the brief
 
-Adapt [the template](templates/RESEARCH.md). Honor an existing research location; otherwise save `<target>/.project/documents/development/v1.0/research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md`, using the actual UTC time and a short feature name. Never overwrite an earlier brief; a later investigation of the same feature is a new brief that links the earlier one.
+Adapt [the template](templates/RESEARCH.md). Honor an existing research location; otherwise save `<target>/.project/documents/development/<version>/research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md`, with `v1.0` for a new project, using the actual UTC time and a short feature name. Never overwrite an earlier brief; a later investigation of the same feature is a new brief that links the earlier one.
 
 Write natural prose and short lists, not tables. Aim for 600–1,200 words. The brief holds findings and sources only: no recommendations, suggestions, open questions, or proposed scope. Those return to the caller, who brings them to the owner.
 

@@ -20,6 +20,6 @@
 
 [PLACEHOLDER: information priority, easy access to main actions, clear states/feedback, and concrete presentation qualities.]
 
-## The first version
+## This version
 
-[PLACEHOLDER: a short scope boundary and supplied constraints. Include only a consequential open product choice if needed, in plain language.]
+[PLACEHOLDER: what this version delivers toward the mission, what it leaves for later versions, and supplied constraints. Include only a consequential open product choice if needed, in plain language.]

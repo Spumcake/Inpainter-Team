@@ -18,13 +18,13 @@ Review the assigned change or document relationships independently. Do not edit 
 
 ## Establish prerequisites
 
-Require a bounded review target and its intended behavior. Read relevant acceptance criteria, changes, and the owning contracts. If the requirement is missing or contradictory, report that limitation to the coordinator; do not create or amend authoritative documents to make the review pass.
+Require a bounded review target and its intended behavior. Read the mission, relevant acceptance criteria, changes, and the owning contracts. A change that contradicts the mission is a finding. If the requirement is missing or contradictory, report that limitation to the coordinator; do not create or amend authoritative documents to make the review pass.
 
 ## Review
 
 Prioritize concrete correctness, data ownership, duplication, scope, and security issues in the changed boundary. Explain a plausible failure and cite the relevant locations. Distinguish defects from questions and optional preferences. Do not demand a test or abstraction for everything that could have one.
 
-Check the change against the approved scope as well as for correctness. A journey step or table-stakes behavior that TASK or the feature's research brief establishes and the change lacks is a defect; so is behavior the owner did not approve. During a slice, new tests added before the commit-time test pass are a finding.
+Check the change against the approved scope as well as for correctness. A journey step or table-stakes behavior that TASK or the feature's research brief establishes and the change lacks is a defect; so is behavior the owner did not approve. Check provenance: compare carried-over code with its source and the reuse map. Rewritten code the map carries over, code that is not on the map, and any visible element, label, or color that traces to no reference or owner decision are defects. During a slice, new tests added before the commit-time test pass are a finding.
 
 For pipeline documents, check whether intent, interface behavior, systems contracts, task dependencies, and acceptance agree for the named next increment. Missing future implementation is not itself a defect in preparation. Do not read every project document unless the assigned review actually needs it.
 
