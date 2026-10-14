@@ -18,6 +18,14 @@ Many sub-applications in one window, used by one agentic harness to carry out a 
 
 **The stack.** Rust, egui through eframe, and Iconoir icons. No Electron, Tauri, or web target. Do not fork existing software, but reuse good components.
 
+## What it is, and what would fake it
+
+- **It is** a host that runs sub-applications it knows nothing about. **The fake** is a host with one sub-application's code built into it and a second process running alongside, so the boundary exists only in the dependency list. **The test:** a test-only sub-application, which the host was not written for, runs beside Simple Sketch in the same window and gets a working toolbar, menu, and panel purely from what it declares, with labels Simple Sketch does not use, and the host still builds with no sub-application's code in it.
+- **It is** a sub-application that owns its document. **The fake** is a host that keeps its own copy and history and mirrors them to the sub-application. **The test:** undo and saving happen only in the sub-application's process, and the host has no undo history of its own.
+- **It is** a shell whose toolbar, menu, and panel come from the selected tab's declarations. **The fake** is a shell drawn from one sub-application's internal state. **The test:** selecting a tab of a different sub-application changes those contents with no change to the host's code.
+- **It is** Simple Sketch's chrome, carried over. **The fake** is a new design, or a rewrite that only looks similar. **The test:** the host's chrome code matches the reference functions it came from, and a screenshot matches the references.
+- **It is** a sub-application that works with no host. **The fake** is a protocol that only works while the window is open. **The test:** a test with no host creates, edits, undoes, and saves through the protocol alone.
+
 ## References
 
 **Simple Sketch** (`src/simple-sketch`, version 1.0.1 at `887f6f4`) is the reference for the host shell and for sketching. The shell's look and behavior are Simple Sketch's chrome: its window, tab strip and new-tab button, menu button, toolbar, and the properties panel that opens from a tab at its edge. They are shown in `base-ui.png` and the other renders in `.project/.simple-sketch/renders/ui/`, described in the archived `.project/.simple-sketch/INTERFACE.md`, and implemented in its code, including `tabs.rs`, `toolbar.rs`, `widgets.rs`, and `panel.rs`. That code is carried over into the host and the Simple Sketch sub-application, not rewritten. The shell is that chrome without what belongs only to sketching.

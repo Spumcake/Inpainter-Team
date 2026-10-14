@@ -12,6 +12,10 @@
 
 [PLACEHOLDER: the lasting structure every version keeps, concrete enough to check: the parts of the product that are always present, the boundaries between its parts, and the agreed stack and its exclusions.]
 
+## What it is, and what would fake it
+
+[PLACEHOLDER: three to five things the product exists to prove. For each: **It is** what must be true; **The fake** is the cheapest version that would pass every check while missing the point; **The test** is how to tell them apart, a check that fails on the fake and passes on the real thing.]
+
 ## References
 
 [PLACEHOLDER: each reference codebase and visual reference the owner has given, with its path, and what it is the reference for. Work these cover is carried over or reproduced, not redesigned. Omit when there are none.]

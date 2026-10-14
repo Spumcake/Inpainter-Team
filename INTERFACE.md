@@ -1,6 +1,6 @@
 # Inpainter interface
 
-Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the pitch](.project/documents/development/v0.1/PITCH.md). The assistant's chat panel comes in a later version. These screens are the host's common UI.
+Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the pitch](.project/documents/development/v0.2/PITCH.md). The assistant's chat panel comes in a later version. These screens are the host's common UI.
 
 ## Journey and sitemap
 
@@ -43,7 +43,7 @@ The properties panel is a shared component of the host, as the owner set on 2026
 
 Each tab is a document its sub-application reports. Its label is the name of the file that sub-application manages or, when it manages no file, the sub-application's name. The menu's contents are the commands declared by the sub-application of the selected tab. The title always reads Inpainter, whatever tab is selected, as the owner set on 2026-10-14. The faint grid is a shared component the host draws in the contents area when the tab's sub-application declares it.
 
-When a sub-application stops or stops responding, the host stays up and shows that status. The cited renders do not show that status.
+When a sub-application stops or stops responding, the host stays up and shows that status, as Sub-application status below shows.
 
 ## Properties
 
@@ -54,3 +54,12 @@ The panel is a white column on the right, below the toolbar. A thin line runs do
 ## Template
 
 Template is Shell with the template loaded, as in [shell-demo.png](.project/renders/ui/shell-demo.png), as the owner set on 2026-10-14. The title bar reads Inpainter. The tab strip holds the menu button, one tab labeled Template with its close mark, and the plus, drawn as in the picture. The template declares no menu rows and no new-tab command and has only that tab, so clicking the menu button, the plus, or the close mark does nothing: no popup, no new tab, no close. The toolbar is the white bar, empty, with its hairline. The contents area shows the faint grid, which the template declares, and nothing draws on it. The template declares the properties panel on the right, so the panel tab sits at the right edge, and opening it shows the empty white column. Nothing else happens.
+
+## Sub-application status
+
+These two renders were generated on 2026-10-14. The owner approved both on 2026-10-14 as the visual reference for H-2. Only the status notice is taken from them: one line of medium-gray text centered in the contents area, reading "Simple Sketch has exited." or "Simple Sketch is not responding.", the second with a small ring before it, with no button, card, or dimming. Everything else in them stays as the carried-over chrome draws it. The name in the notice is the sub-application's name.
+
+Both are the same host window. **simple-sketch-exited** is that window after Simple Sketch has exited. **simple-sketch-not-responding** is that window after Simple Sketch has stopped responding. The host stays open, and the common UI can still be used. View the exited state first; the other was generated from it.
+
+- **simple-sketch-exited** — [prompt](.project/models/openai/gpt-image-2-5-sunburst/prompts/01-simple-sketch-exited.md), [image](.project/models/openai/gpt-image-2-5-sunburst/simple-sketch-exited/v001/image.png), [run record](.project/models/openai/gpt-image-2-5-sunburst/simple-sketch-exited/v001/status.json). Generated from [shell-demo.png](.project/renders/ui/shell-demo.png) and [update/brush-property-ui.png](.project/.simple-sketch/renders/ui/update/brush-property-ui.png).
+- **simple-sketch-not-responding** — [prompt](.project/models/openai/gpt-image-2-5-sunburst/prompts/02-simple-sketch-not-responding.md), [image](.project/models/openai/gpt-image-2-5-sunburst/simple-sketch-not-responding/v001/image.png), [run record](.project/models/openai/gpt-image-2-5-sunburst/simple-sketch-not-responding/v001/status.json). Generated from the simple-sketch-exited image, with only the status changed.

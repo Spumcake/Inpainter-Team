@@ -1,0 +1,15 @@
+# Inpainter 0.1 post-mortem
+
+The owner confirmed version 0.1 complete on 2026-10-14. The [pitch](PITCH.md) and the [task list](tasks.md) are the record of what the version set out to deliver.
+
+Work started on the evening of 13 October 2026, when the team repository was forked from the Simple Sketch pipeline and the first diary entry recorded Inpainter as a host with separate sub-applications. It closed on the afternoon of 14 October 2026, about a day later.
+
+The version that closed is the one the owner re-scoped that same day: the shared shell, the protocol, sub-applications found by manifest, the template, and the scaffolding skill. Simple Sketch running inside the host was the original aim and was moved to version 0.2 before this close.
+
+What was built is a host the person launches, and a template that is its own program. The host draws the window, the tab strip with its new-tab control, the menu, and the tool area. The template declares the shared grid and the properties panel on the right, so those appear too. The title is always Inpainter, and the application id is `io.github.spumcake.Inpainter`. The menu, the plus, and the tab close mark do nothing. The first running window was checked against the owner's shell picture. A later pass renamed the empty demo to the template, replaced the first line protocol with JSON Lines at protocol version 1, and taught the host to start a sub-application from `apps/<id>/manifest.json`. The Inpainter repository's scaffolding skill copies that template. Inpainter `dev` holds this as `8771bc8` and `a40e07c`. The team repository records it through `5502a30`. Both were pushed when the owner asked.
+
+The owner settled several boundaries while the shell was being built. The properties panel and the grid are host-drawn and appear only when a sub-application declares them; only the right side of the panel has a picture, so only that side was built. Drawing, erasing, shapes, text, and ordering stay in the host so pen input does not cross processes. A sub-application owns how its work is arranged, saved, and undone. The host keeps its preferences and recovery files in its own folder, not Simple Sketch's. Those decisions are written for version 0.2. They were not implemented here.
+
+Left outside this version, and still part of the product, are Simple Sketch as a sub-application, the host's visible status when a sub-application exits or stops responding, driving Simple Sketch through the protocol with no host running, and a check that the host and a sub-application cannot import each other. The assistant, and any second creative app, stay later as well. An app drawing its own view by sending the host paint commands stayed unproven and out of scope.
+
+The close mark was the one visible miss during the window check: a quieter color was tried and reverted because it no longer matched the picture. The first slice was also integrated by copying uncommitted worktrees into `dev`, because those branches had never been committed. Both leftover worktrees were removed when the owner approved it, before the push.

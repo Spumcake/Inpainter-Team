@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "identity": "b570cf96485358a78f6a2544412f931bcd2836a7b4107adb2a715a0ce9bbe607",
+  "view": "simple-sketch-not-responding",
+  "version": "v001",
+  "image": "image.png",
+  "sha256": "8c721ffc9143495dc57414c02ad378f5c443ae017f16c93a672efda2fef00736",
+  "usage": {
+    "prompt_tokens": 1741,
+    "completion_tokens": 1372,
+    "total_tokens": 3113,
+    "cost": 0.054473,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.054473,
+      "upstream_inference_prompt_cost": 0.013313,
+      "upstream_inference_completions_cost": 0.04116
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 1372
+    }
+  },
+  "response_id": null
+}
