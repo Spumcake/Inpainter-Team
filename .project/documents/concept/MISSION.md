@@ -28,7 +28,7 @@ Many sub-applications in one window, used by one agentic harness to carry out a 
 
 ## References
 
-**Simple Sketch** (`src/simple-sketch`, version 1.0.1 at `887f6f4`) is the reference for the host shell and for sketching. The shell's look and behavior are Simple Sketch's chrome: its window, tab strip and new-tab button, menu button, toolbar, and the properties panel that opens from a tab at its edge. They are shown in `base-ui.png` and the other renders in `.project/.simple-sketch/renders/ui/`, described in the archived `.project/.simple-sketch/INTERFACE.md`, and implemented in its code, including `tabs.rs`, `toolbar.rs`, `widgets.rs`, and `panel.rs`. That code is carried over into the host and the Simple Sketch sub-application, not rewritten. The shell is that chrome without what belongs only to sketching.
+**Simple Sketch** 1.0.1 (at `887f6f4`) is part of Inpainter. Its chrome is the host shell: the window, tab strip and new-tab button, menu button, toolbar, and the properties panel that opens from a tab at its edge, as `INTERFACE.md` describes and the renders in `.project/renders/ui/` show. Its sketching is the Simple Sketch sub-application. Both were carried over from its code, not rewritten, and the shell is that chrome without what belongs only to sketching.
 
 ## What it will never be
 
