@@ -40,4 +40,4 @@ A later preview of sketching uses the Simple Sketch preview — draw, erase, und
 
 Check levels and the release-test brief are in [testing.md](testing.md). H-4 is judged by looking at the running host, against the sentence the owner agrees for that slice and against the Simple Sketch reference. H-2 is judged the same way once a picture of the status exists. H-3 is a boundary check of the crates. Simple Sketch without a host is one scripted drive of the sub-application. During a slice, add no new tests. Tests for approved behavior are written in one pass when the owner asks to commit.
 
-No every-commit workflow is installed. Nothing is deployed. The owner pushes and tags. Commits happen only when the owner asks, and only the branch-manager changes Git state.
+No every-commit workflow is installed. Nothing is deployed. The owner pushes and tags. Commits happen only when the owner asks.
