@@ -1,2 +1,5 @@
 /src/
 .claude/settings.local.json
+# Image-generation API payloads: large, and the image and run record are kept instead.
+/.project/renders/models/**/request.json
+/.project/renders/models/**/response.json
