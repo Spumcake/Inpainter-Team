@@ -8,14 +8,16 @@ Done again on the reset tree, by the scaffolding skill: `cargo run -p inpainter 
 
 ## Simple Sketch with no host
 
-The shared `draw` crate, Simple Sketch's session and per-sketch record, and the protocol messages in systems. Complete when a test with no host sends a stroke, undoes, redoes, and saves a sketch that reads back, and the boundary check holds.
+Done on 2026-10-14, by Claude Code. Simple Sketch's real session was moved into the sub-application whole, with every edit through the record, and all 88 of its own tests pass. The no-host check passes: a separate process with no host creates a sketch, strokes, erases, changes the canvas padding, undoes, redoes, and saves through Simple Sketch's own file request, and every reply and the saved file equal an in-process session's. Shape and text gestures, the replace-file question, and recovery offers wait for the host in slice 2.
 
 ## Sketching from the host
 
 The host draws the canvas, toolbar, menu, panel, outliner, tabs, and dialogs from the selected tab's declarations, previews gestures, and runs several sub-applications at once. Complete when the window slice sentence in [tasks.md](tasks.md) holds and the two-sub-application, one-owner, and carried-over-chrome checks in [systems.md](systems.md) pass. This is H-4 and H-7.
 
+Built on 2026-10-15 by Claude Code and waiting for the owner's look. Run by hand on a virtual display: a stroke, an erase across it, undo, the panel, select, move, scale, a rectangle, text, zoom, fit, a new tab, closing an unsaved tab, quitting with an unsaved sketch, and Simple Sketch beside the template in one window. The scripted checks in systems are not written yet; they belong to the test pass.
+
 ## The host stays up
 
-H-2. The owner approved the two images in INTERFACE's Sub-application status on 2026-10-14.
+H-2. The owner approved the two images in INTERFACE's Sub-application status on 2026-10-14. Built on 2026-10-15 and waiting for the owner's look: pausing Simple Sketch's process shows the not-responding notice within three seconds, panning still works under it, and it clears when the process resumes; killing the process shows the exited notice.
 
 The owner approved [reuse.md](reuse.md) and [systems.md](systems.md) on 2026-10-14, as they stood, and accepted one residual risk: `draw` exports `apply` and `revert`, which the one-owner check catches. The intent review checks each slice at its first integration, and each finished slice.

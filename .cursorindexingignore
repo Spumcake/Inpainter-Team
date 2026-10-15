@@ -1,3 +1,5 @@
 src/*/worktrees/.bare/
 src/*/worktrees/work-*/
 src/*/worktrees/main/
+src/*/worktrees/*/target/
+src/*/target/
