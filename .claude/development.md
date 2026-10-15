@@ -91,4 +91,5 @@ The **worktrees** skill describes the layout: a team repository for documents an
 - Commit only when the owner asks, and push only when they ask. Before committing in an app repository, run the branch check in the worktrees skill.
 - Team-repository commits about app work carry an `App-Commit: <short hash> (<owner>/<repo>)` trailer.
 - Never force, rewrite history, tag, or change remotes. The owner tags releases and merges into `main` on GitHub.
+- When the owner asks for a build or a release, use the **build** skill, then the **release** skill.
 - Keep secrets, `.env` files, and large generated payloads out of commits; say what you left out.
