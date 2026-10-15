@@ -1,0 +1,7 @@
+{
+  "prompt": "/mnt/Hot/Source/inpainter-team/.project/models/openai/gpt-image-2-5-sunburst/prompts/01-simple-sketch-exited.md",
+  "references": [
+    "/mnt/Hot/Source/inpainter-team/.project/renders/ui/shell-demo.png",
+    "/mnt/Hot/Source/inpainter-team/.project/.simple-sketch/renders/ui/update/brush-property-ui.png"
+  ]
+}

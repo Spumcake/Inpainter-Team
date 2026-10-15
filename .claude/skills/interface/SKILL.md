@@ -28,7 +28,7 @@ When the screen does not run yet because it combines parts that exist separately
 
 With no references at all, generate an overview first, inspect it, and use it as the base for the rest of the series.
 
-Save one prompt per image in the format the generator needs, under `.project/models/<provider>/<model>/`. Use fictional sample data. Quality is always high; if the generator cannot do high, report it rather than downgrade. Generate the base first, then the dependent views one at a time, passing reference images explicitly, since separate requests share no context. Inspect each image for layout, legibility, and consistency, and report defects rather than looping on regeneration.
+Save one prompt per image in the format the generator needs, under `.project/renders/models/<provider>/<model>/`. Use fictional sample data. Quality is always high; if the generator cannot do high, report it rather than downgrade. Generate the base first, then the dependent views one at a time, passing reference images explicitly, since separate requests share no context. Inspect each image for layout, legibility, and consistency, and report defects rather than looping on regeneration.
 
 Generated images are proposals. They become references only when the owner approves them, and INTERFACE is written from them only then, taking only the changed element.
 

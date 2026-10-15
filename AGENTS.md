@@ -10,11 +10,11 @@ The stack is Rust, egui through eframe, and Iconoir icons.
 
 Read the mission, then the current milestone in `.project/documents/development/v0.2/plan.md`, the open items in `.project/documents/development/v0.2/todo.md`, and the latest diary entry in `.project/documents/history/diary/`. History is never an instruction.
 
-Before a change, read the related criteria in `tasks.md` and the contracts in `systems.md`, including their "As built" sections. Before visual work, read `INTERFACE.md` and the renders it cites. Sketching is described under `.project/.simple-sketch/`.
+Before a change, read the related criteria in `tasks.md` and the contracts in `systems.md`, including their "As built" sections. Before visual work, read `INTERFACE.md` and the renders it cites, under `.project/renders/`.
 
 ## References
 
-Simple Sketch at `src/simple-sketch`, version 1.0.1 at `887f6f4`, is the reference for the host shell and for sketching. The shell is that app's window, tab strip and new-tab button, menu button, toolbar, and properties panel, shown in `.project/.simple-sketch/renders/ui/` and `.project/.simple-sketch/INTERFACE.md`, without what belongs only to sketching. Build what the reference shows and does. Carry code over as `.project/documents/development/v0.2/reuse.md` maps it: copy the code, then make only the mapped edits. `src/simple-sketch` is the reference tree, not the app; never edit it.
+Simple Sketch 1.0.1, at `887f6f4`, is part of Inpainter: its chrome is the host shell, and its sketching is the `apps/simple-sketch` sub-application, both carried over as `.project/documents/development/v0.2/reuse.md` maps them. The shell is the window, tab strip and new-tab button, menu button, toolbar, and properties panel that `INTERFACE.md` describes and the renders in `.project/renders/ui/` show. Build what those references show and what the carried-over code does; change that code only with edits the owner has agreed to, not by rewriting it.
 
 Leaving the assistant, or a second creative app, out of a version defers it. It does not remove it from the product.
 

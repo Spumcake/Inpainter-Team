@@ -5,7 +5,7 @@
 
 ## Checks after each change
 
-The app repository is https://github.com/Spumcake/Inpainter, checked out at `src/inpainter/worktrees/dev`. A local preview uses `cargo run -p inpainter -- --app simple-sketch` from that worktree. There is no seed drawing and no network service. The reference tree `src/simple-sketch` is the reference for the shell and for sketching. Sentences for these checks are in [tasks.md](tasks.md).
+The app repository is https://github.com/Spumcake/Inpainter, checked out at `src/inpainter/worktrees/dev`. A local preview uses `cargo run -p inpainter -- --app simple-sketch` from that worktree. There is no seed drawing and no network service. Simple Sketch 1.0.1 at `887f6f4`, carried into the host and `apps/simple-sketch`, is the reference for the shell and for sketching. Sentences for these checks are in [tasks.md](tasks.md).
 
 During a slice, add no new tests. The implementing worker runs the existing scripted suite once when the change is complete. The suite's command is not named in the criteria. Tests for approved behavior are written in one pass when the owner asks to commit.
 
@@ -27,7 +27,7 @@ These instructions are for a tester working from a fresh clone of one candidate 
 
 **Journeys:** These wait until a candidate commit exists and a README can install and start Simple Sketch from the host. Each states a goal and what must be observable. The shell is Shell in the [interface](../../../../INTERFACE.md). Criteria are in [tasks.md](tasks.md).
 
-- H-4 — **Shell**, sketching from the host. From the host, on Canvas 1, draw a smoothed pressure-sensitive stroke, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. The common UI stays present. The person never launches Simple Sketch. Judge the running host against the sentence the owner agrees for that slice and against the Simple Sketch reference: the renders under `.project/.simple-sketch/renders/ui/` and [.project/.simple-sketch/INTERFACE.md](../../../.simple-sketch/INTERFACE.md). Criteria SS-1 through SS-10 in the [Simple Sketch delivery document](../../../.simple-sketch/documents/development/v1.0/tasks.md) still hold. Their coverage stays in the [Simple Sketch testing record](../../../.simple-sketch/documents/development/v1.0/testing.md).
+- H-4 — **Shell**, sketching from the host. From the host, on Canvas 1, draw a smoothed pressure-sensitive stroke, erase part of it without destroying the stroke, undo, then pan, zoom, and fit. The common UI stays present. The person never launches Simple Sketch. Judge the running host against the sentence the owner agrees for that slice and against the renders [INTERFACE.md](../../../../INTERFACE.md) cites. Criteria SS-1 through SS-10 of Simple Sketch 1.0.1 still hold. They and their coverage were in the Simple Sketch 1.0.1 documents, which the owner removed from the project on 2026-10-15 once Simple Sketch was part of Inpainter; they stay in the team repository's history up to `f0e146c`.
 
 - H-2 — **Shell.** With the host showing Simple Sketch, that program exits or stops responding. The host window stays open and shows the sub-application's status. The person can still use the host's common UI. Judge the status against the two images in the interface's Sub-application status, which the owner approved on 2026-10-14. How a tester makes the program exit or stop responding is unrecorded.
 

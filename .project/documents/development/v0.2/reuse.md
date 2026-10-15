@@ -1,6 +1,6 @@
 # Reuse map — 0.2
 
-**Reference:** `src/simple-sketch` at `887f6f4d7813f0a2cf1114f496f6b7eb33f18c4f` (version 1.0.1).
+**Reference:** Simple Sketch at `887f6f4d7813f0a2cf1114f496f6b7eb33f18c4f` (version 1.0.1), checked out at `src/simple-sketch` while this map was carried out. The paths below starting with `src/` are that tree's.
 **Scope:** [tasks.md](tasks.md): H-2, H-4, Simple Sketch without a host, and the H-3 boundary check.
 **Replaces:** the map the owner approved earlier on 2026-10-14, [archived](../../history/v0.2/archive/2026-10-14T21-42-33Z-shared-session/reuse.md). That map put Simple Sketch's whole session, registry, schema, store, and preferences in a library the host linked, so the host ran Simple Sketch itself and kept its own undo history. Its code is kept, never to merge, on the Inpainter branch `scrap/v0.2-shared-session`.
 
