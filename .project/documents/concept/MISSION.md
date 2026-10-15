@@ -1,10 +1,10 @@
 # Inpainter — mission
 
-Inpainter is a modular, AI-native desktop framework for creative work. One host application provides a shared shell. Separate sub-applications, each its own program, own one kind of creative work, and an assistant in the shell can read, understand, and change the work they own. Simple Sketch, a pressure-sensitive infinite-canvas sketching app, is the first sub-application.
+Inpainter is a modular, AI-native desktop framework for creative work. One host application provides a shared shell. Separate sub-applications, each its own program, own one kind of creative work. At the center of how a person uses Inpainter is the assistant, an agentic harness in the shell. Each sub-application provides skills that tell the assistant what it can do with that kind of work. The assistant discovers its capabilities from those skills, plans from the capabilities it knows it has, and carries out the plan by reading, understanding, and changing the work the sub-applications own. This is what sets Inpainter apart: a person asks for something, and the assistant works out how to make it with the apps at hand. Working with the assistant and working by hand are one seamless flow. Every sub-application works fully on its own, without the assistant. With it, the assistant's automated work amplifies what the person does by hand. Simple Sketch, a pressure-sensitive infinite-canvas sketching app, is the first sub-application.
 
 ## Where it is going
 
-Many sub-applications in one window, used by one agentic harness to carry out a sequence of tasks across them. For example, a person asks the assistant for a story with pictures: it writes the story in a writing app, turns the story's scenes into image prompts, and splits the resulting images into layers in a paint program. A later animatic app could arrange drawings in frames on a timeline. The assistant is part of the product even in a version that leaves it out.
+Many sub-applications in one window, and one agentic harness that plans a sequence of tasks across them from the skills they provide, then carries it out. For example, a person asks the assistant for a story with pictures: it writes the story in a writing app, turns the story's scenes into image prompts, and splits the resulting images into layers in a paint program. A later animatic app could arrange drawings in frames on a timeline. The assistant is part of the product even in a version that leaves it out.
 
 ## What is always true
 
@@ -25,6 +25,8 @@ Many sub-applications in one window, used by one agentic harness to carry out a 
 - **It is** a shell whose toolbar, menu, and panel come from the selected tab's declarations. **The fake** is a shell drawn from one sub-application's internal state. **The test:** selecting a tab of a different sub-application changes those contents with no change to the host's code.
 - **It is** Simple Sketch's chrome, carried over. **The fake** is a new design, or a rewrite that only looks similar. **The test:** the host's chrome code matches the reference functions it came from, and a screenshot matches the references.
 - **It is** a sub-application that works with no host. **The fake** is a protocol that only works while the window is open. **The test:** a test with no host creates, edits, undoes, and saves through the protocol alone.
+- **It is** an assistant that knows what it can do because the sub-applications told it. **The fake** is an assistant whose knowledge of each app is written into its prompts or code. **The test:** a test-only sub-application provides a skill the assistant was never told about, and when asked for something only that skill does, the assistant plans with it and uses it.
+- **It is** hand work and assistant work on the same piece of work. **The fake** is an assistant that works in a separate mode or on its own copy, or a sub-application that needs the assistant to work. **The test:** with the assistant off, every sub-application does all it did before. With it on, the person changes by hand what the assistant made, and the assistant continues from what the person did, in the same tab.
 
 ## References
 
