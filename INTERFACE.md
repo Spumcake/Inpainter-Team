@@ -1,6 +1,6 @@
 # Inpainter interface
 
-Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the pitch](.project/documents/development/v0.2/PITCH.md). The assistant's chat panel comes in a later version. These screens are the host's common UI.
+Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the version 0.2 pitch](.project/documents/history/v0.2/PITCH.md). The assistant's chat panel comes in a later version. These screens are the host's common UI.
 
 ## Journey and sitemap
 
