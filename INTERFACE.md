@@ -1,12 +1,13 @@
 # Inpainter interface
 
-Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the version 0.2 pitch](.project/documents/history/v0.2/PITCH.md). The assistant's chat panel comes in a later version. These screens are the host's common UI.
+Inpainter is the host a person launches for creative work. This document describes the host's common UI, the shell on screen whichever sub-application is loaded. Product intent is in [the version 0.3 pitch](.project/documents/history/v0.3/PITCH.md). Version 0.3 added the assistant's chat panel, described under Assistant. These screens are the host's common UI.
 
 ## Journey and sitemap
 
 The person launches the host and lands on **Shell**. This version stays in that window.
 
 - **Shell** is the host window: title bar, tab strip with its new-tab control, menu button, tool area, the area a sub-application fills, and that sub-application's status when it stops or stops responding.
+- **Assistant** is the chat panel on the left of Shell, present in every window from version 0.3. [agentic-harness-mockup.png](.project/renders/ui/agentic-harness-mockup.png) shows it in rough form. The logo at its top-left opens the **logo menu**, which assistant-logo-menu shows. Quitting, or opening or clearing a workspace, with unsaved workspace changes shows **Save this workspace?**, which workspace-save-prompt shows.
 - **Properties** is the properties panel open on the right of Shell, for a tab whose sub-application declares it. [shell-panel.png](.project/renders/ui/shell-panel.png) shows it, with a tab on the panel's left edge. [shell.png](.project/renders/ui/shell.png) is Shell with that column closed.
 
 The menu button is on Shell. [shell-menu.png](.project/renders/ui/shell-menu.png) shows its menu open.
@@ -20,7 +21,13 @@ The shell's appearance is Simple Sketch 1.0.1's chrome, carried into the host in
 - [shell-panel.png](.project/renders/ui/shell-panel.png) — Simple Sketch and the template in one window, with a stroke on Canvas 1 and the panel open on the brush's page.
 - [shell-menu.png](.project/renders/ui/shell-menu.png) — Simple Sketch's menu open from the menu button, with the select tool's toolbar and the panel open on Canvas 1's palette.
 
-These three were captured from the running host on 2026-10-15, after the owner tried that build. They replace the Simple Sketch 1.0.1 renders this document cited before, which the owner removed from the project on 2026-10-15 once Simple Sketch was part of Inpainter. They show the inside of the window; the title bar is the desktop's, and reads Inpainter.
+- [agentic-harness-mockup.png](.project/renders/ui/agentic-harness-mockup.png) — a generated picture of the shell with the assistant's chat panel on the left, supplied by the owner on 2026-10-15. As the owner set that day, it approximates layout and look only. Its features and behavior are not a reference: which controls the panel has is the owner's list under Assistant.
+
+- **assistant-logo-menu** — [prompt](.project/renders/models/openai/gpt-image-2-5-sunburst/prompts/03-assistant-logo-menu.md), [image](.project/renders/models/openai/gpt-image-2-5-sunburst/assistant-logo-menu/v001/image.png), [run record](.project/renders/models/openai/gpt-image-2-5-sunburst/assistant-logo-menu/v001/status.json). Generated on 2026-10-15 from the mockup, shell-menu.png, and the light logo, `.project/assets/logo-light.svg`. The owner approved it on 2026-10-15 as the reference for the logo, its menu, and the chat panel's conversation and input row. Its toolbar leaves out Simple Sketch's swatches and file commands; the toolbar stays as Simple Sketch declares it.
+- **workspace-save-prompt** — [prompt](.project/renders/models/openai/gpt-image-2-5-sunburst/prompts/04-workspace-save-prompt.md), [image](.project/renders/models/openai/gpt-image-2-5-sunburst/workspace-save-prompt/v001/image.png), [run record](.project/renders/models/openai/gpt-image-2-5-sunburst/workspace-save-prompt/v001/status.json). Generated on 2026-10-15 from assistant-logo-menu and shell-ask.png. The owner approved it on 2026-10-15 as the reference for the workspace's save question.
+- [shell-ask.png](.project/renders/ui/shell-ask.png) — the host's existing dialog, Simple Sketch's "Keep this sketch?", captured from the running host on 2026-10-15 on a virtual display.
+
+These three captures were taken from the running host on 2026-10-15, after the owner tried that build. They replace the Simple Sketch 1.0.1 renders this document cited before, which the owner removed from the project on 2026-10-15 once Simple Sketch was part of Inpainter. They show the inside of the window; the title bar is the desktop's, and reads Inpainter.
 
 ## Presentation
 
@@ -46,6 +53,24 @@ Each tab is a document its sub-application reports. Its label is the name of the
 
 When a sub-application stops or stops responding, the host stays up and shows that status, as Sub-application status below shows.
 
+## Assistant
+
+The assistant's chat panel is part of the host's common UI from version 0.3, present whatever sub-application is loaded. Its layout and look follow [agentic-harness-mockup.png](.project/renders/ui/agentic-harness-mockup.png) approximately. Its controls are the ones the owner listed on 2026-10-15: the conversation, the input box, an attachment button, the model picker, a microphone, and send.
+
+The panel is a white column at the left of the window, about a quarter of its width, running the window's full height. A thin vertical line separates it from the shell. The tab strip, toolbar, contents area, and properties panel sit to its right, unchanged.
+
+The conversation fills the panel from the top and scrolls. The person's messages are pale gray rounded bubbles on the right, with a small gray time under each. The assistant's replies are on the left in white rounded cards with a light border, also timed. A reply may hold short paragraphs and bulleted lines. When a message carried attachments, their file names show under its text.
+
+At the bottom is a rounded white box with a light border and a soft shadow. Its first line is the text field, with the placeholder "Ask the assistant…". Under it, from the left, are a plus button, the model picker, and, at the right, a microphone and a round black send button with a white upward arrow. The model picker is a quiet pill holding a lightning icon, the model's name, and a down chevron; clicking it opens a list of models. The plus opens a file dialog for pictures and text files; each chosen file shows as a small chip above the text field with its file name and a close mark. The microphone is shown and does nothing, as the owner set on 2026-10-15. While the assistant is working on a request, the send button shows a small white square instead of the arrow, and clicking it stops the assistant. Meanwhile the applications are locked, as the owner set on 2026-10-15: the toolbar, menu rows, and properties panel are drawn in their disabled, lighter look and do nothing, and drawing on the canvas does nothing. Panning, zooming, and switching tabs still work.
+
+When the assistant cannot answer, because no OpenRouter key is set, the network fails, or the model returns an error, the reason appears as the assistant's reply in the conversation, in the same card.
+
+At the panel's top-left, level with the tab strip, is the Inpainter logo, the light one in `.project/assets/logo-light.svg`, small, with a gray down chevron after it, as assistant-logo-menu shows. Nothing else is in that row. Clicking it opens the logo menu below it, in the menu look of shell-menu.png: a white rounded box with a thin border and a soft shadow, rows of plain text, and thin dividers. Its rows are New Window; then Open Workspace…, Recent Workspaces with a chevron to its submenu, Save Workspace, and Save Workspace As…; then Clear Workspace; then Quit; with no icons and no shortcuts, as the owner set on 2026-10-15.
+
+Save this workspace? is the host's dialog in the look of shell-ask.png, as workspace-save-prompt shows: the window dimmed, and a small white box with the title "Save this workspace?", the workspace's name in gray under it, and the buttons Save, Discard, and Cancel.
+
+The mockup's undo and redo at the panel's top, change card, and message buttons (copy, thumbs, share, more) are not built, as the owner chose on 2026-10-15.
+
 ## Properties
 
 Properties is the properties panel open, as in shell-panel.png and shell-menu.png. It is the host's, and it appears only for a tab whose sub-application declares it.
@@ -54,7 +79,7 @@ The panel is a white column on the right, below the toolbar. A thin line runs do
 
 ## Template
 
-Template is Shell with the template loaded, as in [shell-demo.png](.project/renders/ui/shell-demo.png), as the owner set on 2026-10-14. The title bar reads Inpainter. The tab strip holds the menu button, one tab labeled Template with its close mark, and the plus, drawn as in the picture. The template declares no menu rows and no new-tab command and has only that tab, so clicking the menu button, the plus, or the close mark does nothing: no popup, no new tab, no close. The toolbar is the white bar, empty, with its hairline. The contents area shows the faint grid, which the template declares, and nothing draws on it. The template declares the properties panel on the right, so the panel tab sits at the right edge, and opening it shows the empty white column. Nothing else happens.
+Template is Shell with the template loaded, as in [shell-demo.png](.project/renders/ui/shell-demo.png), as the owner set on 2026-10-14. The title bar reads Inpainter. The tab strip holds the menu button, one tab labeled Template with its close mark, and the plus, drawn as in the picture. The template declares no menu rows and no new-tab command and has only that tab, so clicking the menu button, the plus, or the close mark does nothing: no popup, no new tab, no close. The toolbar is the white bar, empty, with its hairline. The contents area shows the faint grid, which the template declares, and nothing draws on it. The template declares the properties panel on the right, so the panel tab sits at the right edge, and opening it shows the empty white column. Nothing else happens by hand. From version 0.3 the template also provides one skill to the assistant, as the owner agreed on 2026-10-15: asked to, the assistant can change the template tab's label. It is the mission's proof that the assistant learns what it can do from a sub-application it was never told about.
 
 ## Sub-application status
 

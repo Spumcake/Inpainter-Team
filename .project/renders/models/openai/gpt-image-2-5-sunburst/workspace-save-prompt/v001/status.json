@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "identity": "3426f4160911a96ebf12a2a9c47d733c5de2584b12e80d048903382faa840bce",
+  "view": "workspace-save-prompt",
+  "version": "v001",
+  "image": "image.png",
+  "sha256": "e7c5434499aebe3880e375542e2d626108f7813c3370ae0297d246a931a076e4",
+  "usage": {
+    "prompt_tokens": 2842,
+    "completion_tokens": 1372,
+    "total_tokens": 4214,
+    "cost": 0.062978,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.062978,
+      "upstream_inference_prompt_cost": 0.021818,
+      "upstream_inference_completions_cost": 0.04116
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 1372
+    }
+  },
+  "response_id": null
+}

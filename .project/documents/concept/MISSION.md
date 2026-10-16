@@ -14,6 +14,8 @@ Many sub-applications in one window, and one agentic harness that plans a sequen
 
 **The protocol.** Sub-applications declare their tools, commands, properties, views, and agent skills as data through one protocol. The host draws simple UI from those declarations. An app may draw its own custom view by running egui itself and sending the host what to paint; this stays unproven until an experiment shows that scrubbing a frame strip feels smooth.
 
+**The workspace.** Each sub-application owns its own files. A workspace file, owned by the host, keeps a set of those files together, as a code editor's workspace keeps a set of folders: which files are open in which sub-applications, the state of the tabs, and the assistant's chat history. It refers to the sub-applications' files and never holds their work. When the person closes Inpainter without saving the workspace, the host offers to save it.
+
 **Shared drawing.** Drawing, erasing, shapes, text, and ordering live in a shared library that the host uses for live editing, so pen input never crosses between processes. Each sub-application owns how its work is arranged, how it is saved, and its undo.
 
 **The stack.** Rust, egui through eframe, and Iconoir icons. No Electron, Tauri, or web target. Do not fork existing software, but reuse good components.
@@ -27,6 +29,7 @@ Many sub-applications in one window, and one agentic harness that plans a sequen
 - **It is** a sub-application that works with no host. **The fake** is a protocol that only works while the window is open. **The test:** a test with no host creates, edits, undoes, and saves through the protocol alone.
 - **It is** an assistant that knows what it can do because the sub-applications told it. **The fake** is an assistant whose knowledge of each app is written into its prompts or code. **The test:** a test-only sub-application provides a skill the assistant was never told about, and when asked for something only that skill does, the assistant plans with it and uses it.
 - **It is** hand work and assistant work on the same piece of work. **The fake** is an assistant that works in a separate mode or on its own copy, or a sub-application that needs the assistant to work. **The test:** with the assistant off, every sub-application does all it did before. With it on, the person changes by hand what the assistant made, and the assistant continues from what the person did, in the same tab.
+- **It is** a workspace that gathers files the sub-applications own. **The fake** is a workspace that keeps its own copy of the work, or one that only works for one sub-application. **The test:** a workspace saved with a Simple Sketch tab and a Template tab reopens both, in order, with the same tab selected and the same chat history. The workspace file holds the sketch's path, not the sketch, so a change saved to the sketch on its own shows when the workspace reopens.
 
 ## References
 
@@ -44,3 +47,4 @@ A monolith that tries to do everything in one program. A general-purpose AI chat
 - **Declarations:** what a sub-application tells the host it offers, as data.
 - **Common UI:** what the host always shows, whatever sub-application is loaded.
 - **Shared component:** something the host draws the same way for any sub-application that declares it, such as the properties panel and the grid.
+- **Workspace:** a file the host saves that keeps a set of sub-applications' files, their tabs, and the chat history together.
