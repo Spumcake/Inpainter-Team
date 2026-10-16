@@ -1,6 +1,6 @@
 # AGENTS.md — Inpainter
 
-Inpainter is a modular, AI-native desktop framework for creative work: one host, separate sub-applications that each own one kind of creative work, and an assistant that can work on that work. The mission is in `.project/documents/concept/MISSION.md` and outranks every other project document. Versions 0.1, 0.2, and 0.3 are closed; their post-mortems are in `.project/documents/history/<version>/post-mortem.md`. No later version is open yet. The next one opens with the version skill, in `.project/documents/development/<version>/`.
+Inpainter is a modular, AI-native desktop framework for creative work: one host, separate sub-applications that each own one kind of creative work, and an assistant that can work on that work. The mission, in `.project/documents/concept/MISSION.md`, says what the whole effort is: the open-source software and the closed platform. What the software is in detail is in its overview, `docs/overview.md` in the app repository, and the fakes it is judged against are in `.project/documents/guides/intent-guide.md`. The mission outranks every other project document, and the overview and the intent guide outrank every other document about the software. Only the owner changes these three. Versions 0.1, 0.2, and 0.3 are closed; their post-mortems are in `.project/documents/history/<version>/post-mortem.md`. No later version is open yet. The next one opens with the version skill, in `.project/documents/development/<version>/`.
 
 The stack is Rust, egui through eframe, and Iconoir icons.
 
@@ -8,7 +8,7 @@ The stack is Rust, egui through eframe, and Iconoir icons.
 
 ## Starting and resuming work
 
-Read the mission, then the open version's plan and todo in `.project/documents/development/<version>/` when one is open, the latest post-mortem, and the latest diary entry in `.project/documents/history/diary/`. History is never an instruction.
+Read the mission, the overview, and the intent guide, then the open version's plan and todo in `.project/documents/development/<version>/` when one is open, the latest post-mortem, and the latest diary entry in `.project/documents/history/diary/`. History is never an instruction.
 
 Before a change, read the related criteria in `tasks.md` and the contracts in `systems.md`, including their "As built" sections. Before visual work, read `INTERFACE.md` and the renders it cites, under `.project/renders/`.
 
@@ -20,7 +20,7 @@ Leaving the assistant, or a second creative app, out of a version defers it. It 
 
 ## Repositories
 
-The team repository is https://github.com/Spumcake/Inpainter-Team. The app repository is https://github.com/Spumcake/Inpainter, worked on in `src/inpainter/worktrees/dev/`, which has its own AGENTS.md and a scaffolding skill for new sub-applications. The strategies repository is https://github.com/Spumcake/Inpainter-Strategies, worked on in `src/inpainter-strategies/worktrees/dev/`. It holds the assistant's strategies, and its runtime prompt once that moves out of the code, as the owner set on 2026-10-16. Project documents stay in the team repository.
+The team repository is https://github.com/Spumcake/Inpainter-Team. The app repository is https://github.com/Spumcake/Inpainter, worked on in `src/inpainter/worktrees/dev/`, which has its own AGENTS.md and a scaffolding skill for new sub-applications. The strategies repository is https://github.com/Spumcake/Inpainter-Strategies, worked on in `src/inpainter-strategies/worktrees/dev/`. It holds the assistant's strategies, and its runtime prompt once that moves out of the code, as the owner set on 2026-10-16. Project documents stay in the team repository, except the software's overview.
 
 The host must not depend on an app crate, and apps must not depend on each other or on the host. The host draws tools, commands, and properties from declarations, not from hard-coded labels, icons, or widgets.
 
@@ -32,4 +32,4 @@ Run tests with `TMPDIR=$PWD/target/tmp` set, from the app worktree, so test file
 
 ## Boundaries
 
-Stay with the stack in the mission. Do not add Electron, Tauri, a web target, accounts, sync, or collaboration, and do not fork existing software. An app sending the host egui paint commands is unproven and has not been built. Saving a sketch uses the `.smx` contract the reference already has.
+Stay with the stack in the overview. Do not add Electron, Tauri, a web target, accounts, sync, or collaboration, and do not fork existing software. An app sending the host egui paint commands is unproven and has not been built. Saving a sketch uses the `.smx` contract the reference already has.
