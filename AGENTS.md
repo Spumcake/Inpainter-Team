@@ -20,7 +20,7 @@ Leaving the assistant, or a second creative app, out of a version defers it. It 
 
 ## Repositories
 
-The team repository is https://github.com/Spumcake/Inpainter-Team. The app repository is https://github.com/Spumcake/Inpainter, worked on in `src/inpainter/worktrees/dev/`, which has its own AGENTS.md and a scaffolding skill for new sub-applications. Project documents stay in the team repository.
+The team repository is https://github.com/Spumcake/Inpainter-Team. The app repository is https://github.com/Spumcake/Inpainter, worked on in `src/inpainter/worktrees/dev/`, which has its own AGENTS.md and a scaffolding skill for new sub-applications. The strategies repository is https://github.com/Spumcake/Inpainter-Strategies, worked on in `src/inpainter-strategies/worktrees/dev/`. It holds the assistant's strategies, and its runtime prompt once that moves out of the code, as the owner set on 2026-10-16. Project documents stay in the team repository.
 
 The host must not depend on an app crate, and apps must not depend on each other or on the host. The host draws tools, commands, and properties from declarations, not from hard-coded labels, icons, or widgets.
 
