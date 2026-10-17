@@ -5,7 +5,7 @@ description: Research how comparable production software handles a feature that 
 
 # Research a feature's journeys and conventions
 
-Where a reference covers a feature, the reference defines it and this research does not run unless the owner asks. For a feature with no reference, the research establishes what people who use comparable tools already expect, so the feature is not built to its thinnest reading. The brief is evidence; the owner decides scope. This research can fill a conversation, so it suits a subagent: give it this skill, the feature, and a link to the mission.
+Where a reference covers a feature, the reference defines it and this research does not run unless the owner asks. For a feature with no reference, the research establishes what people who use comparable tools already expect, so the feature is not built to its thinnest reading. The brief is evidence; the owner decides scope. This research can fill a conversation, so it suits a subagent: give it this skill, the feature, and links to the mission and the project's overview.
 
 ## Choose references
 
@@ -19,8 +19,8 @@ Stop when the references agree, normally within about twenty pages. Cite each cl
 
 ## Classify and write
 
-Sort each behavior: **table stakes** (nearly everyone has it, or its absence draws complaints), **common**, **differentiators**, and **excluded by the product** (conflicts with the mission or pitch, naming the boundary). Classification is a finding, not a scope decision.
+Sort each behavior: **table stakes** (nearly everyone has it, or its absence draws complaints), **common**, **differentiators**, and **excluded by the product** (conflicts with the mission, the overview, or the pitch, naming the boundary). Classification is a finding, not a scope decision.
 
-Adapt [the template](templates/RESEARCH.md) and save `.project/documents/development/<version>/research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md`, never overwriting an earlier brief. Aim for 600 to 1,200 words of findings and sources only.
+Adapt [the template](templates/RESEARCH.md) and save `research/YYYY-MM-DDTHH-mm-ssZ-<feature>.md` in the version's folder, never overwriting an earlier brief. Aim for 600 to 1,200 words of findings and sources only.
 
 Bring the owner, separately from the brief: the recommended scope, suggestions the research surfaced, and the decisions only they can make, each with options and a recommendation.

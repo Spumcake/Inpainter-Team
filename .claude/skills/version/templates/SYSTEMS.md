@@ -22,4 +22,4 @@
 
 ## Verification seams
 
-[PLACEHOLDER: the invariants that prove the boundaries hold, and where each can be checked, including a check that would fail on the fake the mission names.]
+[PLACEHOLDER: the invariants that prove the boundaries hold, and where each can be checked, including a check that would fail on each fake the intent guide names.]

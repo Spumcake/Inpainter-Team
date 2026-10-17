@@ -22,4 +22,4 @@
 
 ## This version
 
-[PLACEHOLDER: what this version delivers toward the mission, what it leaves for later versions, and supplied constraints. Include only a consequential open product choice if needed, in plain language.]
+[PLACEHOLDER: what this version delivers toward the project's overview, what it leaves for later versions, and supplied constraints. Include only a consequential open product choice if needed, in plain language.]

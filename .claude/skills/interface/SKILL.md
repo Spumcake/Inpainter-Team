@@ -7,7 +7,7 @@ description: Document views and user flows in INTERFACE.md from visual reference
 
 Two outcomes: interface documentation, or images showing how someone uses the product. A request for documentation does not authorize generating images. A request for images includes the prompts needed to produce them; do not stop at prompts.
 
-Read the mission, the pitch if there is one, INTERFACE.md, and the references the owner supplied. Every view keeps the lasting structure the mission names, such as the regions present on every screen.
+Read the mission, the project's overview, the pitch if there is one, INTERFACE.md, and the references the owner supplied. Every view keeps the lasting structure the overview names, such as the regions present on every screen.
 
 ## Documenting views
 
@@ -21,7 +21,7 @@ Find an image-generation skill in `.claude/skills/` and read its instructions be
 
 **Start from the closest real picture.** Base each new view on the closest existing picture of the screen it changes, built only from what exists:
 
-- a screenshot of the running product, or of the reference app the mission names;
+- a screenshot of the running product, or of the reference app the overview names;
 - approved references, such as the owner's mockups and the reference's renders.
 
 When the screen does not run yet because it combines parts that exist separately, such as one program's chrome around another's content, compose it from those references: name what each supplies and where it goes, and add nothing they do not show. When the new view adds an element of a kind that already exists, such as a dialog or a notice, include an existing one so the new element inherits its look. Each prompt describes only the change and says everything else stays as in the references. Never generate a screen from a description alone when references for it exist.

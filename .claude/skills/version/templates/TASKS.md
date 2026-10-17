@@ -2,7 +2,7 @@
 
 > Adapt only to agreed scope. Remove unused sections and this note. Ask the owner about unknowns rather than inventing requirements or listing open questions.
 
-**Sources:** [PLACEHOLDER: links to the mission, pitch, INTERFACE, systems, and reuse map that exist.]
+**Sources:** [PLACEHOLDER: links to the mission, overview, intent guide, pitch, INTERFACE, systems, and reuse map that exist.]
 **Objective and exclusions:** [PLACEHOLDER: the features in this version and what it leaves for later. Keep the list of features narrow and each feature complete for its users.]
 
 ## Acceptance criteria

@@ -1,27 +1,22 @@
 ---
 name: mission
-description: Draft a project's MISSION.md, or propose a change to it, for the owner's approval. The mission is the product's lasting identity across versions and outranks every other project document. Use when a project starts, when the owner asks for a mission, or when the owner wants an idea added to it.
+description: Draft the effort's MISSION.md, or propose a change to it, for the owner's approval. The mission says what the whole effort is, across every project and version, and outranks every other document. Use when an effort starts, when the owner asks for a mission, or when the owner wants an idea added to it. Not a project's overview (the documentation skill).
 ---
 
 # Draft or change the mission
 
-MISSION.md says what the product is, independent of any version. Every other document must agree with it. A version decides what it delivers; the mission decides what the product is.
-
-It lives at `.project/documents/concept/MISSION.md`, one file.
+MISSION.md says what the whole effort is, independent of any project's details or any version. It lives at `.project/documents/projects/<team>/MISSION.md`, one file in the team repository's own project folder. Every other document must agree with it. Each project's overview says what that project is in detail, and a version decides what it delivers.
 
 ## Draft from the owner's words
 
 Work from what the owner has said: the conversation, a founding brief, or diary entries they point to. Adapt [the template](templates/MISSION.md). Keep the owner's phrasing where it is clear. Do not research, invent goals, or add features. Where the owner's words leave something consequential open, ask.
 
-- Name each reference the owner has given, a codebase or an image, with its path and what it is the reference for.
-- For the few things the product exists to prove, write what it is, the fake that would pass every check while missing the point, and the test that tells them apart. The intent reviewer judges work against these.
-- State lasting structure concretely enough to check, such as the regions an interface always shows or the boundary between two programs.
-- A part a version leaves out is still part of the product; say so where it matters.
+- Say what the effort offers, for whom, and what sets it apart.
+- Name each project that makes up the effort, what it is in a sentence, and how the projects relate, such as what is open and what is commercial, and what works without the others.
+- A part a version leaves out is still part of the effort; say so where it matters.
 
-Plain prose and short lists, at most about 800 words. Leave out version scope, schedules, implementation details that may change, and history.
+Keep it short: usually under 400 words. Lasting structure, boundaries, the stack, references, and the fakes the intent reviewer judges against belong in each project's overview and intent guide, written with the **documentation** skill. Leave out version scope, schedules, implementation details, and history.
 
 ## Approval
 
-Show the owner the full draft or, for a change, the exact lines added, removed, or replaced, with one sentence on why. Save only after the owner explicitly agrees, and save exactly what they agreed to; if they edit the text, their text is what was agreed. Ideas from discussions, diary entries, or your own suggestions stay proposals until then. Never change the mission to make a version or an implementation fit.
-
-A change can make version documents wrong. List the ones that now conflict, and fix them only as a separate step the owner agrees to.
+The mission is the owner's. Follow the approval rule in development.md: show the full draft or the exact lines changed, and save only what the owner agrees to. Ideas from discussions, diary entries, or your own suggestions stay proposals until then. A change can make an overview or a version document wrong; list them, and fix them only as a separate step the owner agrees to.

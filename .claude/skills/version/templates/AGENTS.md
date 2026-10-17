@@ -1,6 +1,6 @@
 # AGENTS.md — [PLACEHOLDER: project name]
 
-[PLACEHOLDER: at most two sentences summarizing the mission: what is being built and for whom.] The mission is in `.project/documents/concept/MISSION.md` and outranks every other project document. The current version's scope and acceptance criteria are in [PLACEHOLDER: tasks path].
+[PLACEHOLDER: at most two sentences summarizing the mission: what is being built and for whom.] The mission is in `.project/documents/projects/<team>/MISSION.md` and outranks every other project document. What each project is in detail is in its overview, [PLACEHOLDER: each project's `docs/overview.md`], and the fakes it is judged against are in each project's `.project/documents/projects/<project>/guides/intent-guide.md`. Only the owner changes these. The current version's scope and acceptance criteria are in [PLACEHOLDER: tasks path].
 
 The stack is [PLACEHOLDER: the agreed stack, or remove this line].
 
@@ -8,11 +8,11 @@ The stack is [PLACEHOLDER: the agreed stack, or remove this line].
 
 ## Starting and resuming work
 
-Read the mission, then the current milestone in [PLACEHOLDER: plan path] and the latest diary entry in `.project/documents/history/diary/`, if one exists. Before a change, read its acceptance criteria and contracts. Before visual work, read `INTERFACE.md` and the references it cites.
+Read the mission, the overview, and the intent guide, then the current milestone in [PLACEHOLDER: plan path] and the latest diary entry in `.project/documents/diary/`, if one exists. Before a change, read its acceptance criteria and contracts. Before visual work, read `INTERFACE.md` and the references it cites.
 
 ## References
 
-[PLACEHOLDER: each reference the mission names, with its path and what it is the reference for, and the reuse map that governs carrying it over. Omit when none.]
+[PLACEHOLDER: each reference the overview names, with its path and what it is the reference for, and the reuse map that governs carrying it over. Omit when none.]
 
 ## Repositories
 

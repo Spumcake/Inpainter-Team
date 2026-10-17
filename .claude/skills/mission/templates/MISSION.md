@@ -1,29 +1,13 @@
-# [PLACEHOLDER: product name] — mission
+# [PLACEHOLDER: effort name] — mission
 
-> At most about 800 words. Plain prose and short lists, no tables. Use the owner's words; do not invent goals or features. Remove this note and any section with nothing established.
+> Usually under 400 words. Plain prose and short lists, no tables. Use the owner's words; do not invent goals or features. Each project's detail belongs in its overview. Remove this note and any section with nothing established.
 
-[PLACEHOLDER: one short paragraph: what the product is, who it is for, and the central benefit.]
+[PLACEHOLDER: one short paragraph: what the effort offers, who it is for, and what sets it apart.]
 
-## Where it is going
+[PLACEHOLDER: where the effort starts and where it is going, in a sentence or two.]
 
-[PLACEHOLDER: the end goal the product works toward across versions, with one or two concrete examples of what a person will eventually be able to do. Parts a version leaves out remain part of this direction.]
+[PLACEHOLDER: the projects that make up the effort, one line each: what it is, whether it is open or closed, and how it relates to the others, such as what works without them.]
 
-## What is always true
+[PLACEHOLDER: optional: what the effort will never be.]
 
-[PLACEHOLDER: the lasting structure every version keeps, concrete enough to check: the parts of the product that are always present, the boundaries between its parts, and the agreed stack and its exclusions.]
-
-## What it is, and what would fake it
-
-[PLACEHOLDER: three to five things the product exists to prove. For each: **It is** what must be true; **The fake** is the cheapest version that would pass every check while missing the point; **The test** is how to tell them apart, a check that fails on the fake and passes on the real thing.]
-
-## References
-
-[PLACEHOLDER: each reference codebase and visual reference the owner has given, with its path, and what it is the reference for. Work these cover is carried over or reproduced, not redesigned. Omit when there are none.]
-
-## What it will never be
-
-[PLACEHOLDER: what the product deliberately is not, and the directions it does not take.]
-
-## Words we use
-
-[PLACEHOLDER: the few terms every agent must use the same way, each with a one-line meaning.]
+Each project's overview says what it is in detail.

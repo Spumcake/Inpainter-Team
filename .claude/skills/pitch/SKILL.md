@@ -1,15 +1,15 @@
 ---
 name: pitch
-description: Write a short, public-readable pitch for one version of a product from a few sentences of intent, consistent with the mission. Covers what the version solves, how people use it, lessons from existing apps, and how it looks. Not the mission, architecture, or a research report.
+description: Write a short, public-readable pitch for one version of a product from a few sentences of intent, consistent with the mission and the project's overview. Covers what the version solves, how people use it, lessons from existing apps, and how it looks. Not the mission, architecture, or a research report.
 ---
 
 # Write a product pitch
 
-Turn the owner's brief into a clear explanation of the app for an ordinary person considering it, not for agents managing a project. Adapt [the template](templates/PITCH.md) and save `.project/documents/development/<version>/PITCH.md`.
+Turn the owner's brief into a clear explanation of the app for an ordinary person considering it, not for agents managing a project. Adapt [the template](templates/PITCH.md) and save `PITCH.md` in the version's folder, `.project/documents/projects/<project>/development/<version>/`.
 
-## The mission comes first
+## The mission and the overview come first
 
-The pitch explains what this version delivers toward the product the mission describes, and what it leaves for later. Do not narrow, rename, or redefine the product to fit the version. If the brief conflicts with the mission, ask the owner. Never edit the mission from here.
+The pitch explains what this version delivers toward the project its overview describes, within the mission, and what it leaves for later. Do not narrow, rename, or redefine the product to fit the version. If the brief conflicts with the mission or the overview, ask the owner. Never edit either from here.
 
 ## Content
 

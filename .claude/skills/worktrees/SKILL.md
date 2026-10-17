@@ -10,9 +10,9 @@ description: The workspace layout (a team repository for the pipeline and projec
   CLAUDE.md, AGENTS.md                  working instructions
   .claude/                              this pipeline
   INTERFACE.md
-  .project/documents/concept/           MISSION.md
-  .project/documents/development/<v>/   the version in progress
-  .project/documents/history/           diary, closed versions
+  .project/documents/diary/             the diary, for the whole effort
+  .project/documents/projects/<team>/   MISSION.md, and what spans projects
+  .project/documents/projects/<p>/      one project: guides/, development/<v>/, history/<v>/
   .gitignore                            includes /src/
   src/<repo>/worktrees/                 one app repository, ignored by the team repository
     .bare/                              bare clone
@@ -20,7 +20,7 @@ description: The workspace layout (a team repository for the pipeline and projec
     work-<name>/                        temporary checkout, on branch work/<name>
 ```
 
-- **The team repository** versions everything except the apps. **Each app repository** holds only its app: source, tests, README, workflows, and its own AGENTS.md and developer skills, which belong to the app. Never put pipeline files or project documents in an app repository. AGENTS.md records every repository's URL.
+- **The team repository** versions everything except the apps. **Each app repository** holds only its app: source, tests, workflows, its own AGENTS.md and developer skills, and its public documentation: the README and `docs/`, including its overview, as the **documentation** skill places them. Never put pipeline files or the team's development documents in an app repository. AGENTS.md records every repository's URL.
 - An existing project that keeps its app inline stays that way until the owner asks to migrate.
 - **`dev/`** is the only permanent checkout. Work happens and is integrated there.
 - **`work-<name>/`** folders exist only for parallel work: one per independent assignment, on branch `work/<name>` from the current `dev` commit. Use them only when assignments are truly independent; a single line of work stays in `dev/`.

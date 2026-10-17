@@ -5,7 +5,7 @@ description: Before specifying or building work that a reference codebase covers
 
 # Map what to carry over from a reference codebase
 
-When the mission or the owner names a codebase as a reference, the work is appropriation, not invention. The reference's code is the established behavior and look. New code is the exception, and each piece needs the owner's approval.
+When the overview or the owner names a codebase as a reference, the work is appropriation, not invention. The reference's code is the established behavior and look. New code is the exception, and each piece needs the owner's approval.
 
 Run this before writing contracts for work a reference codebase covers, and again before each slice that reaches further into it. It is not needed for a fix inside code already carried over.
 
@@ -27,7 +27,7 @@ Write each edit so it has one reading. "Commit through the record" can mean "app
 
 ## Write the reuse map
 
-Adapt [the template](templates/REUSE.md) and save it as `.project/documents/development/<version>/reuse.md`, updating it in place for later slices. Name the reference's path and commit. Group pieces by destination, each as source path → destination path, with its classification and edits. Put the New list last, each item with its reason. Plain prose and short lists.
+Adapt [the template](templates/REUSE.md) and save it as `reuse.md` in the version's folder, updating it in place for later slices. Name the reference's path and commit. Group pieces by destination, each as source path → destination path, with its classification and edits. Put the New list last, each item with its reason. Plain prose and short lists.
 
 ## Approval and use
 

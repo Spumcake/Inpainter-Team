@@ -13,7 +13,7 @@ Use it when the owner asks for a build, or when the **release** skill needs one.
 
 If the owner named targets, build those, and still report the evidence for each. When a named target has no record of the app running there, say so and ask before building it. Otherwise decide from the records, not from what the stack could compile:
 
-- **What the product is:** the mission, pitch, tasks, and INTERFACE say whether it is a desktop window, a phone app, a web page, or a service, and which platforms its boundaries exclude.
+- **What the product is:** the overview, pitch, tasks, and INTERFACE say whether it is a desktop window, a phone app, a web page, or a service, and which platforms its boundaries exclude.
 - **Where it actually ran:** the testing record, diary entries, and the owner's reviews say which systems, display servers, architectures, and devices it ran and was checked on.
 - **What the code assumes:** platform-specific code, input devices, dependencies that work only on some systems, and paths or services it expects.
 
