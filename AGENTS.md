@@ -22,6 +22,8 @@ Leaving the assistant, or a second creative app, out of a version defers it. It 
 
 The team repository is https://github.com/Spumcake/Inpainter-Team. The app repository is https://github.com/Spumcake/Inpainter-Studio, worked on in `src/inpainter-studio/worktrees/dev/`, which has its own AGENTS.md and a scaffolding skill for new sub-applications. The assistant's strategies, and its runtime prompt once that moves out of the code, live in that repository's `strategies/` folder, as the owner set on 2026-10-17; the latest strategies come from its source. Project documents stay in the team repository, except the software's overview. Everything public-facing that is not the Studio app, such as the inpainter.app website and the media-generation platform, belongs to the Inpainter Public team repository, https://github.com/Spumcake/inpainter-public.
 
+The [project map](.project/documents/project-map.md) records where every repository lives on disk and how to rebuild the workspace from GitHub; update it whenever a repository is added, moved, or renamed.
+
 The host must not depend on an app crate, and apps must not depend on each other or on the host. The host draws tools, commands, and properties from declarations, not from hard-coded labels, icons, or widgets.
 
 ## Verification

@@ -47,9 +47,21 @@ Before every commit in an app repository, and at the start of a slice when a `wo
 
 Never force anything else, reset `--hard`, rewrite history, or delete `main`, `dev`, or an unmerged branch without the owner's approval.
 
+## The project map
+
+The outermost team repository of a workspace keeps `.project/documents/project-map.md`: every repository on disk with its folder, its GitHub address, the branches it has checked out and on GitHub, how to rebuild the workspace from GitHub in order, and what GitHub does not hold, such as `.env` files, by name only. A nested team repository's AGENTS.md points to it instead of keeping its own.
+
+Check the map for drift at the start of a session that will touch repositories, before every commit, and after setting up, moving, or renaming a repository. List what is on disk:
+
+```bash
+find <workspace root> \( -name .git -o -name .bare \) -not -path '*/node_modules/*' -not -path '*/target/*' -prune | sort
+```
+
+For each result, compare its folder, `remote.origin.url`, and `git worktree list` with the map. A checkout listed as `prunable` has lost track of its bare clone after a move; `git -C <worktrees>/.bare worktree repair <checkout path>` reconnects it. A branch that exists only on this machine is drift too: name it to the owner. Fix the map in the same commit as the change that caused the drift, and report drift you find without a cause.
+
 ## Setting up a repository
 
-When the owner asks to add an app repository that has no worktrees yet:
+When the owner asks to add an app repository that has no worktrees yet, set it up as below, then add it to the project map:
 
 1. Make sure the team repository's `.gitignore` contains `/src/`.
 2. Clone it:

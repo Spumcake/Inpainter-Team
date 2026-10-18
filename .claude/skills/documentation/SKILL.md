@@ -18,7 +18,7 @@ Every fact has one home, and other documents link to it. A document's home follo
 
 **In the team repository,** for developing the effort:
 
-- the team's own documents in `.project/documents/`: the mission, `MISSION.md`, and the diary, `diary/`;
+- the team's own documents in `.project/documents/`: the mission, `MISSION.md`, the diary, `diary/`, and, in the outermost team repository, the project map, `project-map.md`;
 - for each project, in `.project/projects/<project>/documents/`: its guides in `guides/<subject>-guide.md`, the version in progress in `development/<version>/`, and its history in `history/<version>/`. Material that is not a document, such as presets, workflows, or scripts, sits beside `documents/` in the project's folder;
 - INTERFACE.md, renders and other references, and AGENTS.md.
 

@@ -18,6 +18,8 @@ Read the mission, the overview, and the intent guide, then the current milestone
 
 [PLACEHOLDER: the team repository URL, each app repository URL and its worktree path, and any dependency rules between the project's parts. Omit when the app lives in this repository.]
 
+The project map, `.project/documents/project-map.md` [PLACEHOLDER: or the outer team repository's map], records where every repository lives and how to rebuild the workspace.
+
 ## Verification
 
 [PLACEHOLDER: the agreed sentence for what running the current slice shows, the command that runs it, and where acceptance criteria live. Name the project's essential journey.]
