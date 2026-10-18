@@ -1,6 +1,6 @@
 # AGENTS.md — [PLACEHOLDER: project name]
 
-[PLACEHOLDER: at most two sentences summarizing the mission: what is being built and for whom.] The mission is in `.project/documents/projects/<team>/MISSION.md` and outranks every other project document. What each project is in detail is in its overview, [PLACEHOLDER: each project's `docs/overview.md`], and the fakes it is judged against are in each project's `.project/documents/projects/<project>/guides/intent-guide.md`. Only the owner changes these. The current version's scope and acceptance criteria are in [PLACEHOLDER: tasks path].
+[PLACEHOLDER: at most two sentences summarizing the mission: what is being built and for whom.] The mission is in `.project/documents/MISSION.md` and outranks every other project document. What each project is in detail is in its overview, [PLACEHOLDER: each project's `docs/overview.md`], and the fakes it is judged against are in each project's `.project/projects/<project>/documents/guides/intent-guide.md`. Only the owner changes these. The current version's scope and acceptance criteria are in [PLACEHOLDER: tasks path].
 
 The stack is [PLACEHOLDER: the agreed stack, or remove this line].
 

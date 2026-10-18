@@ -5,7 +5,7 @@ description: Draft the effort's MISSION.md, or propose a change to it, for the o
 
 # Draft or change the mission
 
-MISSION.md says what the whole effort is, independent of any project's details or any version. It lives at `.project/documents/projects/<team>/MISSION.md`, one file in the team repository's own project folder. Every other document must agree with it. Each project's overview says what that project is in detail, and a version decides what it delivers.
+MISSION.md says what the whole effort is, independent of any project's details or any version. It lives at `.project/documents/MISSION.md`, one file in the team repository. Every other document must agree with it. Each project's overview says what that project is in detail, and a version decides what it delivers.
 
 ## Draft from the owner's words
 

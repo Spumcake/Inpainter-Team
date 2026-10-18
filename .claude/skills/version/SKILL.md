@@ -5,7 +5,7 @@ description: Open a version of the product (its folder, tasks, systems, and plan
 
 # Open, run, and close a version
 
-A version is one step toward the mission, for the projects whose overviews describe it. Its working documents live in `.project/documents/projects/<project>/development/<version>/`, in the folder of the project it advances. A project that starts from nothing works toward `v1.0`, the full realization of its pitch, unless the owner says otherwise. Honor a project's existing paths and documents.
+A version is one step toward the mission, for the projects whose overviews describe it. Its working documents live in `.project/projects/<project>/documents/development/<version>/`, in the folder of the project it advances. A project that starts from nothing works toward `v1.0`, the full realization of its pitch, unless the owner says otherwise. Honor a project's existing paths and documents.
 
 ## Starting a project
 
@@ -37,4 +37,4 @@ When the owner says the version is finished, write `post-mortem.md` in the versi
 - What was built, what the owner decided, and what stayed outside the version, linking the pitch and tasks.
 - What went wrong and what was learned. Name who confirmed the version was complete.
 
-Usually 300 to 600 words. Then move the version's folder from the project's `development/` into its `history/<version>/`, fix links the move breaks, and report any other document that pointed at the old paths.
+Usually 300 to 600 words. Then move the version's folder from the project's `documents/development/` into its `documents/history/<version>/`, fix links the move breaks, and report any other document that pointed at the old paths.

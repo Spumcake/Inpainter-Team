@@ -5,7 +5,7 @@ description: Write a short, public-readable pitch for one version of a product f
 
 # Write a product pitch
 
-Turn the owner's brief into a clear explanation of the app for an ordinary person considering it, not for agents managing a project. Adapt [the template](templates/PITCH.md) and save `PITCH.md` in the version's folder, `.project/documents/projects/<project>/development/<version>/`.
+Turn the owner's brief into a clear explanation of the app for an ordinary person considering it, not for agents managing a project. Adapt [the template](templates/PITCH.md) and save `PITCH.md` in the version's folder, `.project/projects/<project>/documents/development/<version>/`.
 
 ## The mission and the overview come first
 

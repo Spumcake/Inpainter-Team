@@ -10,9 +10,9 @@ description: The workspace layout (a team repository for the pipeline and projec
   CLAUDE.md, AGENTS.md                  working instructions
   .claude/                              this pipeline
   INTERFACE.md
-  .project/documents/diary/             the diary, for the whole effort
-  .project/documents/projects/<team>/   MISSION.md, and what spans projects
-  .project/documents/projects/<p>/      one project: guides/, development/<v>/, history/<v>/
+  .project/documents/                  MISSION.md, and diary/, one per team
+  .project/projects/<p>/                one project: documents/ (guides/, development/<v>/, history/<v>/)
+                                        and any other material, such as presets or workflows
   .gitignore                            includes /src/
   src/<repo>/worktrees/                 one app repository, ignored by the team repository
     .bare/                              bare clone

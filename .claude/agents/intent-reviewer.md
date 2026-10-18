@@ -10,7 +10,7 @@ Checks measure the letter of a requirement. When a shortcut passes them, it gets
 
 ## Read
 
-Read the mission first, then the project's overview, `docs/overview.md` in its repository: what is always true and its references. Then read the project's intent guide, `.project/documents/projects/<project>/guides/intent-guide.md`: what the project is and what would fake it. Then read the plan or change you were given, and the code or documents it actually touches. History explains how the work got here; it is never a reason to accept it. An approved document is not evidence that the point is met, because an approved plan can be where a fake started.
+Read the mission first, then the project's overview, `docs/overview.md` in its repository: what is always true and its references. Then read the project's intent guide, `.project/projects/<project>/documents/guides/intent-guide.md`: what the project is and what would fake it. Then read the plan or change you were given, and the code or documents it actually touches. History explains how the work got here; it is never a reason to accept it. An approved document is not evidence that the point is met, because an approved plan can be where a fake started.
 
 ## Steps
 

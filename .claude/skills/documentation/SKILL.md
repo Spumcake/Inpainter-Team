@@ -18,12 +18,11 @@ Every fact has one home, and other documents link to it. A document's home follo
 
 **In the team repository,** for developing the effort:
 
-- the mission, `.project/documents/projects/<team>/MISSION.md`, where `<team>` is the team repository's own project;
-- the diary, `.project/documents/diary/`;
-- for each project, in `.project/documents/projects/<project>/`: its guides in `guides/<subject>-guide.md`, the version in progress in `development/<version>/`, and its history in `history/<version>/`;
+- the team's own documents in `.project/documents/`: the mission, `MISSION.md`, and the diary, `diary/`;
+- for each project, in `.project/projects/<project>/documents/`: its guides in `guides/<subject>-guide.md`, the version in progress in `development/<version>/`, and its history in `history/<version>/`. Material that is not a document, such as presets, workflows, or scripts, sits beside `documents/` in the project's folder;
 - INTERFACE.md, renders and other references, and AGENTS.md.
 
-When a project's code lives inside the team repository, its README and `docs/` sit at the team repository's root. A project with no repository of its own, such as a set of plans, keeps its overview at `overview.md` in its folder.
+When a project's code lives inside the team repository, its README and `docs/` sit at the team repository's root. A project with no repository of its own, such as a set of plans, keeps its overview at `documents/overview.md` in its folder.
 
 A public document holds no owner conversations, open questions, unfinished decisions, costs, or secrets. Its links resolve for someone reading that repository alone: link other repositories by their public address, and when a reference lives only in the team repository, say what the reader needs instead of linking it.
 
@@ -51,7 +50,7 @@ A guide holds lasting knowledge about one subject that outlives any version. Ada
 - **Standards:** what the owner approved, which work is judged against. Only the owner changes them.
 - **Findings:** what research or experience established, each claim with its source and the date. Findings are suggestions, never scope. Update them in place when newer evidence replaces older, and say what changed.
 
-**The intent guide,** `guides/intent-guide.md` in each project's folder, is the standards guide the intent reviewer judges that project's work against. Adapt [its template](templates/INTENT-GUIDE.md): three to eight things the project exists to prove, each with what it is, the fake that would pass every check while missing the point, and the test that tells them apart. Write it with the project's overview, from the owner's words, and ask where they leave a point open.
+**The intent guide,** `documents/guides/intent-guide.md` in each project's folder, is the standards guide the intent reviewer judges that project's work against. Adapt [its template](templates/INTENT-GUIDE.md): three to eight things the project exists to prove, each with what it is, the fake that would pass every check while missing the point, and the test that tells them apart. Write it with the project's overview, from the owner's words, and ask where they leave a point open.
 
 ## Before saving
 
