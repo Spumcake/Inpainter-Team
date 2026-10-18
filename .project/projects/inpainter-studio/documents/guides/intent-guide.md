@@ -1,8 +1,8 @@
-# Intent guide
+# Inpainter Studio — intent guide
 
-What Inpainter, the software, is in each of the points it exists to prove, the fake that would pass every check while missing the point, and the test that tells them apart. These are standards the owner approved, not research findings. The intent reviewer judges plans and finished work against them. Only the owner changes them. What the software is in full is in its [overview](https://github.com/Spumcake/Inpainter/blob/dev/docs/overview.md).
+**Kind:** Standards. The owner approved them, and only the owner changes them. The intent reviewer judges this project's plans and finished work against them.
 
-## What it is, and what would fake it
+What Studio is in full is in its [overview](https://github.com/Spumcake/Inpainter-Studio/blob/dev/docs/overview.md).
 
 - **It is** a host that runs sub-applications it knows nothing about. **The fake** is a host with one sub-application's code built into it and a second process running alongside, so the boundary exists only in the dependency list. **The test:** a test-only sub-application, which the host was not written for, runs beside Simple Sketch in the same window and gets a working toolbar, menu, and panel purely from what it declares, with labels Simple Sketch does not use, and the host still builds with no sub-application's code in it.
 - **It is** a sub-application that owns its document. **The fake** is a host that keeps its own copy and history and mirrors them to the sub-application. **The test:** undo and saving happen only in the sub-application's process, and the host has no undo history of its own.
