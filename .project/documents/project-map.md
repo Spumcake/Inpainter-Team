@@ -27,6 +27,9 @@ The workspace root is `/mnt/Hot/Source`. Every path below is relative to it.
                             ├── illustrious/worktrees/   illustrious
                             │   ├── .bare/               hooks: .githooks
                             │   └── dev/                 branch dev
+                            ├── hosted-llm/worktrees/    hosted-llm
+                            │   ├── .bare/
+                            │   └── dev/                 branch dev
                             └── runpod/worktrees/        runpod
                                 ├── .bare/
                                 └── main/                branch main
@@ -47,6 +50,7 @@ All are under https://github.com/Spumcake/.
 - **media-team**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/` on branch `main`. It is the internal studio's team repository.
 - **illustrious**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/illustrious/worktrees/`. It is a bare clone, with `dev` checked out, and `core.hooksPath` set to `.githooks`. Its branches on GitHub are `dev` and `main`.
 - **runpod**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/runpod/worktrees/`. It is a bare clone, with `main` checked out. Its only branch is `main`.
+- **hosted-llm**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/hosted-llm/worktrees/`. It is a bare clone, with `dev` checked out. Its branches on GitHub are `dev` and `main`. It is the terminal client for the Qwen model hosted on a self-deleting RunPod Pod, and reads its RunPod key from runpod's `.env`.
 
 ## Rebuilding
 
@@ -68,7 +72,7 @@ git -C "$W/.bare" fetch origin
 git -C "$W/.bare" worktree add "../$B" "$B"
 ```
 
-Do this for Inpainter-Studio, inpainter.app, and Inpainter-Docs with `B=dev`, for illustrious with `B=dev`, and for runpod with `B=main`. Then, for illustrious, `git -C "$W/.bare" config core.hooksPath .githooks`.
+Do this for Inpainter-Studio, inpainter.app, and Inpainter-Docs with `B=dev`, for illustrious and hosted-llm with `B=dev`, and for runpod with `B=main`. Then, for illustrious, `git -C "$W/.bare" config core.hooksPath .githooks`.
 
 When a folder is moved, its checkout loses track of its bare clone. `git -C <worktrees>/.bare worktree repair <path to the checkout>` reconnects it.
 
@@ -83,3 +87,4 @@ These stay on this machine by design, and a rebuild has to recreate them by hand
 - The untracked `.project/documents/` and `.project/presentation/` folders in the root, left from the pipeline's earlier history.
 - Build output, such as each Rust checkout's `target/`.
 - Model weights and ComfyUI storage, at `/mnt/Hot/Services/comfyui`, outside the workspace.
+- The local backup of hosted-llm's Qwen model, at `/mnt/Hot/Resources/Models/qwen-3.8-27B-uncensored/`, outside the workspace. Pods download their own copy from Hugging Face.
