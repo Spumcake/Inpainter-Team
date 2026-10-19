@@ -2,6 +2,15 @@
 
 How we build software in this project. It is project-agnostic: the project's own rules are in AGENTS.md, what the whole effort is lives in the mission, and what each project is lives in its overview. The person who owns the product and decides what it is, is the owner.
 
+## Source files and `.project`
+
+As the owner set on 2026-10-19, every repository, team or app, keeps two kinds of files apart.
+
+- **Source files** are the product itself: code, assets, and published artifacts, in the repository's own tree. Only they are built, released, or shared.
+- **`.project/`** holds what is about the source files but is not them: documents, plans, contracts, and guides, and the tools agents and developers use to build and use the source, such as strategies, presets, registries, and scripts. Its `artifacts/` folder holds working creative artifacts while they are iterated. An artifact worth keeping is published: it moves into a repository's source files, at the path the owner gives or the top level, and is committed there. Whatever stays in `.project/artifacts/` was not chosen, and is archived out of the repository on the owner's request.
+
+Nothing in `.project/` is a deliverable, and a source file never lives in `.project/`.
+
 ## Documents and their authority
 
 - **The mission,** `.project/documents/MISSION.md`, says what the whole effort is, across every project and version. It outranks every other document. The **mission** skill drafts it.
