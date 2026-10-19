@@ -30,6 +30,9 @@ The workspace root is `/mnt/Hot/Source`. Every path below is relative to it.
                             ├── hosted-llm/worktrees/    hosted-llm
                             │   ├── .bare/
                             │   └── dev/                 branch dev
+                            ├── remote-task/worktrees/   remote-task
+                            │   ├── .bare/
+                            │   └── dev/                 branch dev
                             └── runpod/worktrees/        runpod
                                 ├── .bare/
                                 └── main/                branch main
@@ -47,10 +50,11 @@ All are under https://github.com/Spumcake/.
 - **inpainter-public**, a private repository, is `projects/inpainter-team/src/inpainter-public/` on branch `main`. It is the team repository for everything public-facing.
 - **inpainter.app**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/inpainter.app/worktrees/`. It is a bare clone, with `dev` checked out. Its only branch on GitHub is `dev`.
 - **Inpainter-Docs**, a public repository, is `projects/inpainter-team/src/inpainter-public/src/inpainter-docs/worktrees/`. It is a bare clone, with `dev` checked out. Its branches on GitHub are `dev` and `main`.
-- **media-team**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/` on branch `main`. It is the internal studio's team repository.
+- **media-team**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/` on branch `main`. It is the internal studio's team repository. Its own map, `.project/documents/project-map.md` in media-team, lists every repository in its `src/`, including those not checked out yet.
 - **illustrious**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/illustrious/worktrees/`. It is a bare clone, with `dev` checked out, and `core.hooksPath` set to `.githooks`. Its branches on GitHub are `dev` and `main`.
 - **runpod**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/runpod/worktrees/`. It is a bare clone, with `main` checked out. Its only branch is `main`.
 - **hosted-llm**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/hosted-llm/worktrees/`. It is a bare clone, with `dev` checked out. Its branches on GitHub are `dev` and `main`. It is the terminal client for the Qwen model hosted on a self-deleting RunPod Pod, and reads its RunPod key from runpod's `.env`.
+- **remote-task**, a private repository, is `projects/inpainter-team/src/inpainter-public/src/media-team/src/remote-task/worktrees/`. It is a bare clone, with `dev` checked out. It sends a task to any OpenAI-compatible model endpoint named in media-team's endpoint registry and checks the answer's shape.
 
 ## Rebuilding
 
@@ -72,7 +76,7 @@ git -C "$W/.bare" fetch origin
 git -C "$W/.bare" worktree add "../$B" "$B"
 ```
 
-Do this for Inpainter-Studio, inpainter.app, and Inpainter-Docs with `B=dev`, for illustrious and hosted-llm with `B=dev`, and for runpod with `B=main`. Then, for illustrious, `git -C "$W/.bare" config core.hooksPath .githooks`.
+Do this for Inpainter-Studio, inpainter.app, and Inpainter-Docs with `B=dev`, for illustrious, hosted-llm, and remote-task with `B=dev`, and for runpod with `B=main`. Then, for illustrious, `git -C "$W/.bare" config core.hooksPath .githooks`.
 
 When a folder is moved, its checkout loses track of its bare clone. `git -C <worktrees>/.bare worktree repair <path to the checkout>` reconnects it.
 
